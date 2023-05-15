@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  params: count=countSql
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mybatis/mapper/**/*.xml

@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: cargo
+  ##mysql
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/ddd-sayi-db?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&nullCatalogMeansCurrent=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      initialSize: 10
+      minIdle: 10
+      maxActive: 20
+      maxWait: 6000
+      removeAbandoned: true
+      removeAbandonedTimeout: 180
+      logAbandoned: true
+      pool-prepared-statements: false
+      max-open-prepared-statements: 100
+      validation-query: SELECT 1 FROM DUAL
