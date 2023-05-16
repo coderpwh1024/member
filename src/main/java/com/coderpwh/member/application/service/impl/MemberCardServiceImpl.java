@@ -1,6 +1,4 @@
 package com.coderpwh.member.application.service.impl;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import javax.annotation.Resource;
 import com.coderpwh.member.application.dto.MemberCardDTO;
 import com.coderpwh.member.application.service.MemberCardService;
@@ -13,8 +11,6 @@ import cn.hutool.core.collection.CollUtil;
 import com.coderpwh.member.application.assembler.command.MemberCardAssembler;
 import com.coderpwh.member.domain.model.MemberCard;
 import org.springframework.stereotype.Service;
-import com.coderpwh.member.infrastructure.persistence.mapper.MemberCardMapper;
-import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
 import com.coderpwh.member.application.assembler.domain.MemberCardDTOAssembler;
 
 /**

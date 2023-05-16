@@ -1,14 +1,11 @@
 package com.coderpwh.member.application.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.coderpwh.member.application.command.MemberCardHistoryCommand;
 import com.coderpwh.member.application.service.MemberCardHistoryService;
 import com.coderpwh.member.common.database.PageUtils;
 import com.coderpwh.member.domain.model.MemberCardHistoryRepository;
 import javax.annotation.Resource;
-import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
 import com.coderpwh.member.domain.model.MemberCardHistory;
-import com.coderpwh.member.infrastructure.persistence.mapper.MemberCardHistoryMapper;
 import java.util.List;
 import cn.hutool.core.collection.CollUtil;
 import com.coderpwh.member.application.command.MemberCardHistoryQuery;

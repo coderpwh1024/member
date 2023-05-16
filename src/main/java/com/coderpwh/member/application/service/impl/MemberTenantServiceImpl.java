@@ -1,16 +1,13 @@
 package com.coderpwh.member.application.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.coderpwh.member.application.service.MemberTenantService;
 import com.coderpwh.member.common.database.PageUtils;
-import com.coderpwh.member.infrastructure.persistence.mapper.MemberTenantMapper;
 import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.model.MemberTenant;
 import javax.annotation.Resource;
 
 import com.coderpwh.member.application.assembler.command.MemberTenantAssembler;
 import com.coderpwh.member.application.command.MemberTenantCommand;
-import com.coderpwh.member.infrastructure.persistence.entity.MemberTenantDO;
 import java.util.List;
 import cn.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
