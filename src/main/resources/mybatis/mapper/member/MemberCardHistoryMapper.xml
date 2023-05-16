@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.MemberCardHistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO">
+        <id column="id" property="id" />
+        <result column="card_id" property="cardId" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="user_id" property="userId" />
+        <result column="status" property="status" />
+        <result column="order_number" property="orderNumber" />
+        <result column="partner_order_number" property="partnerOrderNumber" />
+        <result column="card_type" property="cardType" />
+        <result column="card_type_cn" property="cardTypeCn" />
+        <result column="effective_time" property="effectiveTime" />
+        <result column="expiration_time" property="expirationTime" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="operation_description" property="operationDescription" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,`card_id`,`tenant_id`,`user_id`,`status`,`order_number`,`partner_order_number`,`card_type`,`card_type_cn`,`effective_time`,`expiration_time`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`operation_description`
+    </sql>
+
+</mapper>

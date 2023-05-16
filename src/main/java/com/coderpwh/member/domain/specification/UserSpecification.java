@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
  * @date 2023/5/16 11:02
  */
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserSpecification extends AbstractSpecification<Integer> {
 
 
