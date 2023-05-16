@@ -28,7 +28,7 @@ import com.coderpwh.member.application.assembler.command.MemberUserAssembler;
  * @since 2023-05-16
  */
 @Service
-public class MemberUserServiceImpl extends ServiceImpl<MemberUserMapper, MemberUserDO> implements MemberUserService {
+public class MemberUserServiceImpl   implements MemberUserService {
 
     @Resource
     private MemberUserRepository memberUserRepository;

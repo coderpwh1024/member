@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
 import com.coderpwh.member.domain.model.MemberCardHistory;
 import com.coderpwh.member.infrastructure.persistence.mapper.MemberCardHistoryMapper;
-
 import java.util.List;
 import cn.hutool.core.collection.CollUtil;
 import com.coderpwh.member.application.command.MemberCardHistoryQuery;
@@ -27,7 +26,7 @@ import com.coderpwh.member.application.dto.MemberCardHistoryDTO;
  * @since 2023-05-16
  */
 @Service
-public class MemberCardHistoryServiceImpl extends ServiceImpl<MemberCardHistoryMapper, MemberCardHistoryDO> implements MemberCardHistoryService {
+public class MemberCardHistoryServiceImpl  implements MemberCardHistoryService {
 
     @Resource
     private MemberCardHistoryRepository memberCardHistoryRepository;

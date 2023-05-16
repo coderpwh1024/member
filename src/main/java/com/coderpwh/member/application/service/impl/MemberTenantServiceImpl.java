@@ -27,7 +27,7 @@ import com.coderpwh.member.application.command.MemberTenantQuery;
  * @since 2023-05-16
  */
 @Service
-public class MemberTenantServiceImpl extends ServiceImpl<MemberTenantMapper, MemberTenantDO> implements MemberTenantService {
+public class MemberTenantServiceImpl  implements MemberTenantService {
 
     @Resource
     private MemberTenantRepository memberTenantRepository;

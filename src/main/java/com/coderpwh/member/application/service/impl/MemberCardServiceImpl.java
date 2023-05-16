@@ -26,7 +26,7 @@ import com.coderpwh.member.application.assembler.domain.MemberCardDTOAssembler;
  * @since 2023-05-16
  */
 @Service
-public class MemberCardServiceImpl extends ServiceImpl<MemberCardMapper, MemberCardDO> implements MemberCardService {
+public class MemberCardServiceImpl  implements MemberCardService {
 
     @Resource
     private MemberCardRepository memberCardRepository;
