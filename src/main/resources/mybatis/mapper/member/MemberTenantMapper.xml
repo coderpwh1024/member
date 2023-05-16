@@ -4,27 +4,35 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberTenantDO">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="code" property="code" />
-        <result column="agent_number" property="agentNumber" />
-        <result column="secret" property="secret" />
-        <result column="card_prefix" property="cardPrefix" />
-        <result column="legal_benefit" property="legalBenefit" />
-        <result column="renew_url" property="renewUrl" />
-        <result column="visitor_url" property="visitorUrl" />
-        <result column="create_time" property="createTime" />
-        <result column="create_user" property="createUser" />
-        <result column="update_user" property="updateUser" />
-        <result column="update_time" property="updateTime" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="icon_img_url" property="iconImgUrl" />
-        <result column="udesk_url" property="udeskUrl" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="agent_number" property="agentNumber"/>
+        <result column="secret" property="secret"/>
+        <result column="card_prefix" property="cardPrefix"/>
+        <result column="legal_benefit" property="legalBenefit"/>
+        <result column="renew_url" property="renewUrl"/>
+        <result column="visitor_url" property="visitorUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="icon_img_url" property="iconImgUrl"/>
+        <result column="udesk_url" property="udeskUrl"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        `id`,`name`,`code`,`agent_number`,`secret`,`card_prefix`,`legal_benefit`,`renew_url`,`visitor_url`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`icon_img_url`,`udesk_url`
+        `id`
+        ,`name`,`code`,`agent_number`,`secret`,`card_prefix`,`legal_benefit`,`renew_url`,`visitor_url`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`icon_img_url`,`udesk_url`
     </sql>
+    <select id="selectByAgentNumber"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberTenantDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_tenant
+        where agent_number=#{agentNumber}
+    </select>
 
 </mapper>

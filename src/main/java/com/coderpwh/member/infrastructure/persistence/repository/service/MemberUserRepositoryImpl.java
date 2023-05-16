@@ -8,11 +8,15 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.coderpwh.member.domain.model.MemberUser;
 import com.coderpwh.member.domain.model.MemberUserRepository;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberUserDO;
+
 import javax.annotation.Resource;
+
 import com.github.pagehelper.PageHelper;
 import com.coderpwh.member.application.command.MemberUserQuery;
 import com.coderpwh.member.infrastructure.persistence.mapper.MemberUserMapper;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -43,49 +47,62 @@ public class MemberUserRepositoryImpl extends ServiceImpl<MemberUserMapper, Memb
     }
 
 
-
-
     @Override
-    public List<MemberUser> queryList(MemberUserQuery query){
+    public List<MemberUser> queryList(MemberUserQuery query) {
         List<MemberUserDO> doList = this.list(Wrappers.<MemberUserDO>lambdaQuery());
         List<MemberUser> list = memberUserConverter.toEntity(doList);
         return list;
     }
 
     @Override
-    public boolean saveBatch(List<MemberUser> list){
+    public boolean saveBatch(List<MemberUser> list) {
         List<MemberUserDO> saveList = memberUserConverter.toDTO(list);
         return super.saveBatch(saveList);
     }
 
     @Override
-    public boolean save(MemberUser memberUser){
+    public boolean save(MemberUser memberUser) {
         MemberUserDO saveDO = memberUserConverter.toDTO(memberUser);
         return super.save(saveDO);
     }
 
     @Override
-    public boolean deleteById(Integer id){
+    public boolean deleteById(Integer id) {
         return super.removeById(id);
     }
 
     @Override
-    public boolean updateById(MemberUser memberUser){
+    public boolean updateById(MemberUser memberUser) {
         MemberUserDO updateDO = memberUserConverter.toDTO(memberUser);
         return super.updateById(updateDO);
     }
 
     @Override
-    public MemberUser getById(Integer id){
+    public MemberUser getById(Integer id) {
         MemberUserDO entityDO = super.getById(id);
         return memberUserConverter.toEntity(entityDO);
     }
 
     @Override
-    public List<MemberUser> getByIds(List<Integer> ids){
+    public List<MemberUser> getByIds(List<Integer> ids) {
         List<MemberUserDO> entityList = this.list(Wrappers.<MemberUserDO>lambdaQuery()
                 .in(MemberUserDO::getId, ids));
         return memberUserConverter.toEntity(entityList);
     }
+
+
+    /***
+     * 通过外部用户id和租户id查询
+     * @param uniqueId
+     * @param tenantId
+     * @return
+     */
+    @Override
+    public MemberUser selectByUniqueIdAndTenantId(String uniqueId, Long tenantId) {
+        ;
+        MemberUserDO memberUserDO = baseMapper.selectByUniqueIdAndTenantId(uniqueId, tenantId);
+        return memberUserConverter.toEntity(memberUserDO);
+    }
+
 
 }

@@ -16,5 +16,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberTenantMapper extends BaseMapper<MemberTenantDO> {
 
 
-
+    /***
+     * 通过租户号查询
+     * @param agentNumber
+     * @return
+     */
+    MemberTenantDO selectByAgentNumber(String agentNumber);
 }
