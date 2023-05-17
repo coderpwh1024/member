@@ -2,12 +2,10 @@ package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.vo.UserLoginVO;
-import com.coderpwh.member.domain.model.MemberTenant;
-import com.coderpwh.member.domain.model.MemberTenantRepository;
-import com.coderpwh.member.domain.model.MemberUser;
-import com.coderpwh.member.domain.model.MemberUserRepository;
+import com.coderpwh.member.domain.model.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
 
@@ -25,8 +23,9 @@ public class DomainUserService {
 
     private MemberUserRepository memberUserRepository;
 
-
     private MemberTenantRepository memberTenantRepository;
+
+    private MemberCardRepository memberCardRepository;
 
 
     public DomainUserService() {
@@ -40,6 +39,7 @@ public class DomainUserService {
      * @return
      */
     public UserLoginVO login(UserLoginCommand command) {
+        UserLoginVO userLoginVO = new UserLoginVO();
 
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(command.getAgentNumber());
 
@@ -50,9 +50,14 @@ public class DomainUserService {
             memberUser.setTenantId(String.valueOf(memberTenant.getId()));
             memberUserRepository.save(memberUser);
         } else {
-
+            if (memberUser.getIsMember()) {
+                UserLogin userLogin = memberCardRepository.selectByUserId(memberUser.getId());
+                BeanUtils.copyProperties(userLoginVO, userLogin);
+            }
+            userLoginVO.setUserId(memberUser.getId());
+            userLoginVO.setIsMember(memberUser.getIsMember());
         }
-        return null;
+        return userLoginVO;
     }
 
 

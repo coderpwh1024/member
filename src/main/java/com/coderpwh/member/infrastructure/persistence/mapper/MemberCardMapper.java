@@ -2,6 +2,7 @@ package com.coderpwh.member.infrastructure.persistence.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.coderpwh.member.domain.model.UserLogin;
 import org.apache.ibatis.annotations.Mapper;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
 
@@ -17,5 +18,11 @@ import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
 public interface MemberCardMapper extends BaseMapper<MemberCardDO> {
 
 
+    /***
+     * 获取用户卡信息
+     * @param userId
+     * @return
+     */
+    UserLogin selectByUserId(Long userId);
 
 }

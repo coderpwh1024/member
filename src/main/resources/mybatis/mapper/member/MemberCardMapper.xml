@@ -4,23 +4,43 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO">
-        <id column="id" property="id" />
-        <result column="tenant_id" property="tenantId" />
-        <result column="user_id" property="userId" />
-        <result column="card_number" property="cardNumber" />
-        <result column="status" property="status" />
-        <result column="effective_time" property="effectiveTime" />
-        <result column="expiration_time" property="expirationTime" />
-        <result column="create_time" property="createTime" />
-        <result column="create_user" property="createUser" />
-        <result column="update_user" property="updateUser" />
-        <result column="update_time" property="updateTime" />
-        <result column="is_deleted" property="isDeleted" />
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="user_id" property="userId"/>
+        <result column="card_number" property="cardNumber"/>
+        <result column="status" property="status"/>
+        <result column="effective_time" property="effectiveTime"/>
+        <result column="expiration_time" property="expirationTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <resultMap id="userLogin" type="com.coderpwh.member.domain.model.UserLogin">
+        <result column="card_number" property="cardNumber"/>
+        <result column="card_type" property="cardType"/>
+        <result column="card_type_cn" property="cardTypeCn"/>
+        <result column="effective_time" property="effectiveTime"/>
+        <result column="expiration_time" property="expirationTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        `id`,`tenant_id`,`user_id`,`card_number`,`status`,`effective_time`,`expiration_time`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`
+        `id`
+        ,`tenant_id`,`user_id`,`card_number`,`status`,`effective_time`,`expiration_time`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`
     </sql>
+    <select id="selectByUserId" resultMap="userLogin">
+        select card.card_number,
+               card.effective_time,
+               card.expiration_time,
+               h.card_type,
+               h.card_type_cn
+        from tb_member_card card
+                 left join tb_member_card_history h on card.user_id = h.user_id and h.status = 1 and h.is_deleted = 0
+        where card.user_id = #{userId}
+          and card.is_deleted = 0
+    </select>
 
 </mapper>

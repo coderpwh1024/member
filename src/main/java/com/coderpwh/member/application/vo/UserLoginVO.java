@@ -15,7 +15,7 @@ public class UserLoginVO implements Serializable {
     /***
      * 用户id
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 是否会员
