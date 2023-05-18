@@ -78,7 +78,14 @@ public class DomainUserService {
      */
     public MemberInfoVO getMemberInfo(MemberInfoQuery query) {
         MemberInfoVO memberInfo = new MemberInfoVO();
-
+        MemberUser memberUser = memberUserRepository.selectByUniqueIdAndAgentNumber(query.getUniqueId(), query.getAgentNumber());
+        if (!memberUser.getIsMember()) {
+            return memberInfo;
+        }
+        UserLogin userLogin = memberCardRepository.selectByUserId(memberUser.getId());
+        BeanUtils.copyProperties(memberInfo, userLogin);
+        memberInfo.setUserId(memberUser.getId());
+        memberInfo.setIsMember(memberUser.getIsMember());
         return memberInfo;
     }
 

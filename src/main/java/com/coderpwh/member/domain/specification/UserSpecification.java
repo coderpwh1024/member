@@ -69,15 +69,12 @@ public class UserSpecification extends AbstractSpecification<Integer> {
      * @param uniqueId
      */
     public boolean isAgentNumberUniqueId(String agentNumber, String uniqueId) {
-
         MemberUser memberUser = memberUserRepository.selectByUniqueIdAndAgentNumber(uniqueId, agentNumber);
-
         if (Objects.nonNull(memberUser)) {
             return true;
         } else {
             log.error("当前用户不存在,合作方代理号:{},外部用户id为:{}", agentNumber, uniqueId);
             throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前用户不存在");
         }
-
     }
 }
