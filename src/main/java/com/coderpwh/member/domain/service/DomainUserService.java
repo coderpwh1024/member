@@ -5,11 +5,11 @@ import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.domain.util.DateUtils;
 import com.coderpwh.member.domain.util.JwtUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Objects;
 
@@ -25,6 +25,7 @@ import java.util.Objects;
 public class DomainUserService {
 
 
+    private String appSecret;
     private MemberUserRepository memberUserRepository;
 
     private MemberTenantRepository memberTenantRepository;
@@ -32,19 +33,16 @@ public class DomainUserService {
     private MemberCardRepository memberCardRepository;
 
 
-    @Value("${benefit.APP_SECRET}")
-    private String appSecret;
-
-
     public DomainUserService() {
 
     }
 
 
-    public DomainUserService(MemberUserRepository userRepository, MemberTenantRepository tenantRepository, MemberCardRepository cardRepository) {
+    public DomainUserService(MemberUserRepository userRepository, MemberTenantRepository tenantRepository, MemberCardRepository cardRepository, String appSecret) {
         this.memberUserRepository = userRepository;
         this.memberTenantRepository = tenantRepository;
-        this.memberCardRepository=cardRepository;
+        this.memberCardRepository = cardRepository;
+        this.appSecret = appSecret;
     }
 
     /***
@@ -66,7 +64,9 @@ public class DomainUserService {
         } else {
             if (memberUser.getIsMember()) {
                 UserLogin userLogin = memberCardRepository.selectByUserId(memberUser.getId());
-                BeanUtils.copyProperties(userLoginVO, userLogin);
+                BeanUtils.copyProperties(userLogin, userLoginVO);
+                userLoginVO.setEffectiveTime(DateUtils.getStringByDate(userLogin.getEffectiveTime()));
+                userLoginVO.setExpirationTime(DateUtils.getStringByDate(userLogin.getExpirationTime()));
             }
             userLoginVO.setUserId(memberUser.getId());
             userLoginVO.setIsMember(memberUser.getIsMember());
