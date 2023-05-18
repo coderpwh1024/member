@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         userSpecification.isAgentNumberUniqueId(query.getAgentNumber(), query.getUniqueId());
 
         // 领域层
-        DomainUserService domainUserService = new DomainUserService();
+        DomainUserService domainUserService = new DomainUserService(memberUserRepository, cardRepository);
         MemberInfoVO memberInfoVO = domainUserService.getMemberInfo(query);
 
         return memberInfoVO;

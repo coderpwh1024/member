@@ -45,6 +45,12 @@ public class DomainUserService {
         this.appSecret = appSecret;
     }
 
+    public DomainUserService(MemberUserRepository userRepository, MemberCardRepository cardRepository) {
+        this.memberUserRepository = userRepository;
+        this.memberCardRepository = cardRepository;
+    }
+
+
     /***
      *  用户登录领域层
      * @param command
@@ -89,7 +95,9 @@ public class DomainUserService {
             return memberInfo;
         }
         UserLogin userLogin = memberCardRepository.selectByUserId(memberUser.getId());
-        BeanUtils.copyProperties(memberInfo, userLogin);
+        BeanUtils.copyProperties(userLogin, memberInfo);
+        memberInfo.setEffectiveTime(DateUtils.getStringByDate(userLogin.getEffectiveTime()));
+        memberInfo.setExpirationTime(DateUtils.getStringByDate(userLogin.getExpirationTime()));
         memberInfo.setUserId(memberUser.getId());
         memberInfo.setIsMember(memberUser.getIsMember());
         return memberInfo;

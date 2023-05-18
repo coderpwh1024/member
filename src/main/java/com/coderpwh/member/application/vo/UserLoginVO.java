@@ -55,10 +55,4 @@ public class UserLoginVO implements Serializable {
      * 用户token
      */
     private String token;
-
-
-    /***
-     * 用户一次性token
-     */
-    private String onceToken;
 }
