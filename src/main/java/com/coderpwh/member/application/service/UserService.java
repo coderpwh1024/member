@@ -1,6 +1,8 @@
 package com.coderpwh.member.application.service;
 
+import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 
 /**
@@ -18,5 +20,13 @@ public interface UserService {
      * @return
      */
     UserLoginVO login(UserLoginCommand command);
+
+
+    /***
+     * 获取会员信息
+     * @param query
+     * @return
+     */
+    MemberInfoVO getMemberInfo(MemberInfoQuery query);
 
 }

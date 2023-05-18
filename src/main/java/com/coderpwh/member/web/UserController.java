@@ -1,8 +1,10 @@
 package com.coderpwh.member.web;
 
 import com.coderpwh.member.application.command.CargoBookCommand;
+import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
+import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.common.util.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +39,17 @@ public class UserController {
     public Result userLogin(@RequestBody @Valid UserLoginCommand command) {
         UserLoginVO userLoginVo = userService.login(command);
         return Result.ok(userLoginVo);
+    }
+
+
+    /***
+     *  查询会员信息
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/memberInfo", method = RequestMethod.POST)
+    public Result getMemberInfo(@RequestBody @Valid MemberInfoQuery query) {
+        MemberInfoVO memberInfo = userService.getMemberInfo(query);
+        return Result.ok(memberInfo);
     }
 }
