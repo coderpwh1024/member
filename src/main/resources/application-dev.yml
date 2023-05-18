@@ -22,3 +22,9 @@ spring:
       pool-prepared-statements: false
       max-open-prepared-statements: 100
       validation-query: SELECT 1 FROM DUAL
+
+benefit:
+  #md5密钥
+  APP_SECRET: zjKkye4PN59B2wriTjtVCo3BOYoD1Bdfsdf564156512sd1fsdf5sdf5s1
+  #JWT过期时间 1000 * 60 * 60 * 4 = 14400000
+  JWT_EXPIRE: 14400000
