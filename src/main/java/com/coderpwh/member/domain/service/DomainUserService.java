@@ -41,6 +41,12 @@ public class DomainUserService {
     }
 
 
+    public DomainUserService(MemberUserRepository userRepository, MemberTenantRepository tenantRepository, MemberCardRepository cardRepository) {
+        this.memberUserRepository = userRepository;
+        this.memberTenantRepository = tenantRepository;
+        this.memberCardRepository=cardRepository;
+    }
+
     /***
      *  用户登录领域层
      * @param command

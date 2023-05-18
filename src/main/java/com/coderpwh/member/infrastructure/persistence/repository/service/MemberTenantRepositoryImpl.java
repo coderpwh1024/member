@@ -96,9 +96,8 @@ public class MemberTenantRepositoryImpl extends ServiceImpl<MemberTenantMapper, 
 
     @Override
     public MemberTenant selectByAgentNumber(String agentNumber) {
-
         MemberTenantDO memberTenantDO = memberTenantMapper.selectByAgentNumber(agentNumber);
-        return null;
+        return memberTenantConverter.toEntity(memberTenantDO);
     }
 
 }

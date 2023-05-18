@@ -5,6 +5,7 @@ import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
+import com.coderpwh.member.domain.model.MemberCardRepository;
 import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.model.MemberUserRepository;
 import com.coderpwh.member.domain.service.DomainUserService;
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private MemberUserRepository memberUserRepository;
 
+    @Resource
+    private MemberCardRepository cardRepository;
+
 
     /***
      * 用户登录
@@ -42,7 +46,7 @@ public class UserServiceImpl implements UserService {
         userSpecification.isAgentNumber(command.getAgentNumber());
 
         // 获取领域层
-        DomainUserService domainUserService = new DomainUserService();
+        DomainUserService domainUserService = new DomainUserService(memberUserRepository, memberTenantRepository, cardRepository);
         UserLoginVO userLoginVO = domainUserService.login(command);
         return userLoginVO;
     }
