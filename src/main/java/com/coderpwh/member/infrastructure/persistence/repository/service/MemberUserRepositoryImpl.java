@@ -99,8 +99,19 @@ public class MemberUserRepositoryImpl extends ServiceImpl<MemberUserMapper, Memb
      */
     @Override
     public MemberUser selectByUniqueIdAndTenantId(String uniqueId, Long tenantId) {
-        ;
         MemberUserDO memberUserDO = baseMapper.selectByUniqueIdAndTenantId(uniqueId, tenantId);
+        return memberUserConverter.toEntity(memberUserDO);
+    }
+
+    /***
+     * 通过uniqueId和agentNumber查询
+     * @param uniqueId
+     * @param agentNumber
+     * @return
+     */
+    @Override
+    public MemberUser selectByUniqueIdAndAgentNumber(String uniqueId, String agentNumber) {
+        MemberUserDO memberUserDO = baseMapper.selectByUniqueIdAndAgentNumber(uniqueId, agentNumber);
         return memberUserConverter.toEntity(memberUserDO);
     }
 

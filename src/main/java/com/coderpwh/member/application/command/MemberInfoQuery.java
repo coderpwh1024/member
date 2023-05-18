@@ -17,7 +17,7 @@ public class MemberInfoQuery implements Serializable {
      * 合作方代理号
      */
     @NotBlank(message = "合作方代理号不能为空")
-    private String agenutNumber;
+    private String agentNumber;
 
 
     /***

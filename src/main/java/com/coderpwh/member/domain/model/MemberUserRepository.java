@@ -85,5 +85,21 @@ public interface MemberUserRepository extends IService<MemberUserDO> {
     List<MemberUser> getByIds(List<Integer> ids);
 
 
+    /***
+     * 通过 uniqueId和tenantId查询
+     * @param uniqueId
+     * @param tenantId
+     * @return
+     */
     MemberUser selectByUniqueIdAndTenantId(String uniqueId, Long tenantId);
+
+
+    /***
+     * 通过uniqueId和agentNumber查询
+     * @param uniqueId
+     * @param agentNumber
+     * @return
+     */
+    MemberUser selectByUniqueIdAndAgentNumber(String uniqueId, String agentNumber);
+
 }

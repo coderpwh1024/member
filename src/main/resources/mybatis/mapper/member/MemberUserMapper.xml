@@ -32,5 +32,26 @@
         where unique_id=#{uniqueId} and tenant_id=#{tenantId}
         and is_deleted=0
     </select>
+    <select id="selectByUniqueIdAndAgentNumber"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberUserDO">
+        select u.`id`
+             , u.`tenant_id`
+             , u.`unique_id`
+             , u.`source`
+             , u.`phone`
+             , u.`activation_phone`
+             , u.`create_time`
+             , u.`is_member`
+             , u.`update_user`
+             , u.`update_time`
+             , u.`is_deleted`
+             , u.`create_user`
+             , u.`remark`
+        from tb_member_user u
+                 left join tb_member_tenant t on u.tenant_id = t.id
+        where u.unique_id = #{uniqueId}
+          and t.agent_number = #{agentNumber}
+          and u.is_deleted = 0
+    </select>
 
 </mapper>

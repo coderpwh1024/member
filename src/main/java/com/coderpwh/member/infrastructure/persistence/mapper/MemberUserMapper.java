@@ -24,4 +24,14 @@ public interface MemberUserMapper extends BaseMapper<MemberUserDO> {
      * @return
      */
     MemberUserDO selectByUniqueIdAndTenantId(@Param("uniqueId") String uniqueId, @Param("tenantId") Long tenantId);
+
+
+    /***
+     * 通过uniqueId和agentNumber查询
+     * @param uniqueId
+     * @param agentNumber
+     * @return
+     */
+    MemberUserDO selectByUniqueIdAndAgentNumber(@Param("uniqueId") String uniqueId, @Param("agentNumber") String agentNumber);
+
 }

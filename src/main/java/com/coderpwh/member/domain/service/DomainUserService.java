@@ -1,6 +1,8 @@
 package com.coderpwh.member.domain.service;
 
+import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.util.JwtUtils;
@@ -68,5 +70,16 @@ public class DomainUserService {
         return userLoginVO;
     }
 
+
+    /***
+     *  查询用户会员信息
+     * @param query
+     * @return
+     */
+    public MemberInfoVO getMemberInfo(MemberInfoQuery query) {
+        MemberInfoVO memberInfo = new MemberInfoVO();
+
+        return memberInfo;
+    }
 
 }
