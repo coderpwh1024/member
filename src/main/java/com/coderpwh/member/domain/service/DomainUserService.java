@@ -3,9 +3,11 @@ package com.coderpwh.member.domain.service;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.domain.util.JwtUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Objects;
 
@@ -26,6 +28,10 @@ public class DomainUserService {
     private MemberTenantRepository memberTenantRepository;
 
     private MemberCardRepository memberCardRepository;
+
+
+    @Value("${benefit.APP_SECRET}")
+    private String appSecret;
 
 
     public DomainUserService() {
@@ -57,6 +63,8 @@ public class DomainUserService {
             userLoginVO.setUserId(memberUser.getId());
             userLoginVO.setIsMember(memberUser.getIsMember());
         }
+        String token = JwtUtils.getJwtToken(memberUser.getId(), appSecret);
+        userLoginVO.setToken(token);
         return userLoginVO;
     }
 
