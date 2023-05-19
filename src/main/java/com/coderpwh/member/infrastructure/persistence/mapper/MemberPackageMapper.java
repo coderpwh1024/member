@@ -1,6 +1,7 @@
 package com.coderpwh.member.infrastructure.persistence.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import com.coderpwh.member.domain.model.MemberPackage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -20,11 +21,20 @@ import com.coderpwh.member.application.command.MemberPackageQuery;
 public interface MemberPackageMapper extends BaseMapper<MemberPackageDO> {
 
     /**
-    * 根据 实体不为空的数据查询
-    *
-    * @param query 查询对象
-    * @return 检索后的集合
-    */
+     * 根据 实体不为空的数据查询
+     *
+     * @param query 查询对象
+     * @return 检索后的集合
+     */
     List<MemberPackage> findListByEntity(MemberPackageQuery query);
+
+
+    /***
+     * 通过tenantId与packageCode查询
+     * @param tenantId
+     * @param packageCode
+     * @return
+     */
+    MemberPackageDO selectByPackageCode(@Param("tenantId") String tenantId, @Param("packageCode") String packageCode);
 
 }

@@ -43,4 +43,12 @@
           and card.is_deleted = 0
     </select>
 
+    <select id="selectByUserIdAndTenantId"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_card
+        where user_id=#{userId} and tenant_id=#{tenantId} and is_deleted=0
+    </select>
+
 </mapper>

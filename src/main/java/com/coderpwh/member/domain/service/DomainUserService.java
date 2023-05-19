@@ -2,15 +2,20 @@ package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.util.DateUtils;
 import com.coderpwh.member.domain.util.JwtUtils;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberPackageDO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
+import java.lang.reflect.Member;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -31,6 +36,9 @@ public class DomainUserService {
     private MemberTenantRepository memberTenantRepository;
 
     private MemberCardRepository memberCardRepository;
+
+
+    private MemberPackageRepository memberPackageRepository;
 
 
     public DomainUserService() {
@@ -103,4 +111,44 @@ public class DomainUserService {
         return memberInfo;
     }
 
+
+    /***
+     *
+     * @param userId
+     * @param tenantId
+     * @param packageCode
+     * @return
+     */
+    public MemberCheckRenewalVO getCheckRenewal(MemberUser memberUser, String packageCode) {
+
+        MemberCheckRenewalVO memberCheckRenewalVO = new MemberCheckRenewalVO();
+
+        MemberPackage memberPackage = memberPackageRepository.selectByPackageCode(memberUser.getTenantId(), packageCode);
+        if (Objects.nonNull(memberPackage) && !memberUser.getIsMember()) {
+            memberCheckRenewalVO.setIsRenewal(true);
+            return memberCheckRenewalVO;
+        } else if (Objects.isNull(memberPackage)) {
+            memberCheckRenewalVO.setIsRenewal(false);
+            return memberCheckRenewalVO;
+        }
+
+        MemberCard memberCard = memberCardRepository.selectByUserIdAndTenantId(memberUser.getId(), memberUser.getTenantId());
+        if (Objects.isNull(memberCard)) {
+            memberCheckRenewalVO.setIsRenewal(true);
+            return memberCheckRenewalVO;
+        }
+
+        if (memberUser.getIsMember()) {
+            Date expirationTime = DateUtils.DateOperationByEndDay(memberCard.getExpirationTime(), memberPackage.getDay());
+            //计算用户会员剩余有效天数
+            if (null == memberPackage.getMinRenewalInterval() || memberPackage.getMinRenewalInterval() > DateUtils.daysBetween(new Date(), expirationTime)) {
+                memberCheckRenewalVO.setIsRenewal(true);
+                return memberCheckRenewalVO;
+            }
+        }
+        memberCheckRenewalVO.setIsRenewal(false);
+        return memberCheckRenewalVO;
+
+
+    }
 }

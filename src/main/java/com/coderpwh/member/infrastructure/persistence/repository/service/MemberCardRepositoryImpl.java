@@ -86,15 +86,34 @@ public class MemberCardRepositoryImpl extends ServiceImpl<MemberCardMapper, Memb
 
     @Override
     public List<MemberCard> getByIds(List<Integer> ids) {
-        List<MemberCardDO> entityList = this.list(Wrappers.<MemberCardDO>lambdaQuery()
-                .in(MemberCardDO::getId, ids));
+        List<MemberCardDO> entityList = this.list(Wrappers.<MemberCardDO>lambdaQuery().in(MemberCardDO::getId, ids));
         return memberCardConverter.toEntity(entityList);
     }
 
+
+    /***
+     * 根据用户id查询
+     * @param userId
+     * @return
+     */
     @Override
     public UserLogin selectByUserId(Long userId) {
         UserLogin userLogin = baseMapper.selectByUserId(userId);
         return userLogin;
     }
+
+
+    /***
+     * 根据用户id跟tenantId查询
+     * @param userId
+     * @param tenantId
+     * @return
+     */
+    @Override
+    public MemberCard selectByUserIdAndTenantId(Long userId, String tenantId) {
+        MemberCardDO memberCardDO = baseMapper.selectByUserIdAndTenantId(userId, tenantId);
+        return memberCardConverter.toEntity(memberCardDO);
+    }
+
 
 }

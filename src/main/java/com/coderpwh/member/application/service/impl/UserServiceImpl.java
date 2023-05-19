@@ -9,6 +9,7 @@ import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.MemberCardRepository;
 import com.coderpwh.member.domain.model.MemberTenantRepository;
+import com.coderpwh.member.domain.model.MemberUser;
 import com.coderpwh.member.domain.model.MemberUserRepository;
 import com.coderpwh.member.domain.service.DomainUserService;
 import com.coderpwh.member.domain.specification.UserSpecification;
@@ -92,7 +93,19 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public MemberCheckRenewalVO getCheckRenewal(String packageCode) {
-        return null;
+
+        Long userId = 81171L;
+        String tenantId = "12";
+
+        MemberUser memberUser = new MemberUser();
+        memberUser.setId(userId);
+        memberUser.setTenantId(tenantId);
+        memberUser.setIsMember(true);
+
+        DomainUserService domainUserService = new DomainUserService();
+        MemberCheckRenewalVO memberCheckRenewalVO = domainUserService.getCheckRenewal(memberUser, packageCode);
+
+        return memberCheckRenewalVO;
     }
 
 

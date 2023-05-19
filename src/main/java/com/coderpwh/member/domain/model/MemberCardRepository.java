@@ -90,4 +90,16 @@ public interface MemberCardRepository extends IService<MemberCardDO> {
      * @return
      */
     UserLogin selectByUserId(Long id);
+
+
+    /**
+     * 根据用户id跟tenantId查询
+     *
+     * @param userId
+     * @param tenantId
+     * @return
+     */
+    MemberCard selectByUserIdAndTenantId(Long userId, String tenantId);
+
+
 }

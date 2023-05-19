@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.coderpwh.member.domain.model.UserLogin;
 import org.apache.ibatis.annotations.Mapper;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -24,5 +25,14 @@ public interface MemberCardMapper extends BaseMapper<MemberCardDO> {
      * @return
      */
     UserLogin selectByUserId(Long userId);
+
+
+    /***
+     * 根据用户id和tenantId查询
+     * @param userId
+     * @param tenantId
+     * @return
+     */
+    MemberCardDO selectByUserIdAndTenantId(@Param("userId") Long userId, @Param("tenantId") String tenantId);
 
 }

@@ -25,4 +25,11 @@
         `id`
         ,`tenant_id`,`name`,`code`,`expiration_method`,`day`,`face_value`,`price`,`min_renewal_interval`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`
     </sql>
+    <select id="selectByPackageCode"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_package
+        where tenant_id=#{tenantId} and `code`=#{packageCode} and is_deleted=0
+    </select>
 </mapper>
