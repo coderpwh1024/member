@@ -4,6 +4,7 @@ import com.coderpwh.member.application.command.CargoBookCommand;
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
+import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.common.util.result.Result;
@@ -52,4 +53,17 @@ public class UserController {
         MemberInfoVO memberInfo = userService.getMemberInfo(query);
         return Result.ok(memberInfo);
     }
+
+
+    /***
+     * 检查用户是否可以续费
+     * @param packageCode
+     * @return
+     */
+    @RequestMapping(value = "/checkRenewal", method = RequestMethod.GET)
+    public Result getCheckRenewal(String packageCode) {
+        MemberCheckRenewalVO memberCheckRenewalVO = userService.getCheckRenewal(packageCode);
+        return Result.ok(memberCheckRenewalVO);
+    }
+
 }

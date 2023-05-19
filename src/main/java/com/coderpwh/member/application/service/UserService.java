@@ -2,6 +2,7 @@ package com.coderpwh.member.application.service;
 
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 
@@ -28,5 +29,14 @@ public interface UserService {
      * @return
      */
     MemberInfoVO getMemberInfo(MemberInfoQuery query);
+
+
+    /***
+     * 检查用户是否可以续费
+     * @param packageCode
+     * @return
+     */
+    MemberCheckRenewalVO getCheckRenewal(String packageCode);
+
 
 }

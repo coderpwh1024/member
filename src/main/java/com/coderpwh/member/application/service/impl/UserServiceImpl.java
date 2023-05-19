@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
+import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.MemberCardRepository;
@@ -70,6 +71,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public MemberInfoVO getMemberInfo(MemberInfoQuery query) {
+        log.info("查询用户会员信息,入参为:{}", JSON.toJSONString(query));
 
         // 校验层(校验合作方代理号与外部用户id是否合法)
         UserSpecification userSpecification = new UserSpecification(memberTenantRepository, memberUserRepository);
@@ -81,5 +83,17 @@ public class UserServiceImpl implements UserService {
 
         return memberInfoVO;
     }
+
+
+    /***
+     * 检查用户是否可以续费
+     * @param packageCode
+     * @return
+     */
+    @Override
+    public MemberCheckRenewalVO getCheckRenewal(String packageCode) {
+        return null;
+    }
+
 
 }
