@@ -4,6 +4,7 @@ package com.coderpwh.member.domain.model;
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.common.database.PageUtils;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberUserDO;
 import com.coderpwh.member.application.command.MemberUserQuery;
@@ -101,5 +102,13 @@ public interface MemberUserRepository extends IService<MemberUserDO> {
      * @return
      */
     MemberUser selectByUniqueIdAndAgentNumber(String uniqueId, String agentNumber);
+
+
+    /***
+     * 通过用户id查询
+     * @param userId
+     * @return
+     */
+    MemberUser selectByUserId(Long userId);
 
 }

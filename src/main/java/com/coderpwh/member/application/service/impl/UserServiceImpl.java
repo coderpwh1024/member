@@ -1,11 +1,14 @@
 package com.coderpwh.member.application.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.coderpwh.member.application.assembler.domain.MemberUserDTOAssembler;
+import com.coderpwh.member.application.assembler.vo.MemberUserVOAssembler;
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
+import com.coderpwh.member.application.vo.MemberUserVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.MemberCardRepository;
 import com.coderpwh.member.domain.model.MemberTenantRepository;
@@ -42,6 +45,12 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private MemberCardRepository cardRepository;
+
+    @Resource
+    private MemberUserDTOAssembler memberUserDTOAssembler;
+
+    @Resource
+    private MemberUserVOAssembler memberUserVOAssembler;
 
 
     /***
@@ -106,6 +115,18 @@ public class UserServiceImpl implements UserService {
         MemberCheckRenewalVO memberCheckRenewalVO = domainUserService.getCheckRenewal(memberUser, packageCode);
 
         return memberCheckRenewalVO;
+    }
+
+
+    /***
+     * 通过用户id查询
+     * @param userId
+     * @return
+     */
+    @Override
+    public MemberUserVO getMemberUser(Long userId) {
+        DomainUserService domainUserService = new DomainUserService(memberUserRepository, memberUserDTOAssembler, memberUserVOAssembler);
+        return domainUserService.getMemberUser(userId);
     }
 
 

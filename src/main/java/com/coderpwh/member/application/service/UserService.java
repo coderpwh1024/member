@@ -4,6 +4,7 @@ import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
+import com.coderpwh.member.application.vo.MemberUserVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 
 /**
@@ -37,6 +38,14 @@ public interface UserService {
      * @return
      */
     MemberCheckRenewalVO getCheckRenewal(String packageCode);
+
+
+    /***
+     *  获取用户信息
+     * @param userId
+     * @return
+     */
+    MemberUserVO getMemberUser(Long userId);
 
 
 }

@@ -115,5 +115,16 @@ public class MemberUserRepositoryImpl extends ServiceImpl<MemberUserMapper, Memb
         return memberUserConverter.toEntity(memberUserDO);
     }
 
+    /***
+     * 通过用户id查询
+     * @param userId
+     * @return
+     */
+    @Override
+    public MemberUser selectByUserId(Long userId) {
+        MemberUserDO memberUserDO = baseMapper.selectById(userId);
+        return memberUserConverter.toEntity(memberUserDO);
+    }
+
 
 }

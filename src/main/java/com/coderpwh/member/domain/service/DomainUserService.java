@@ -1,15 +1,20 @@
 package com.coderpwh.member.domain.service;
 
+import com.coderpwh.member.application.assembler.domain.MemberUserDTOAssembler;
+import com.coderpwh.member.application.assembler.vo.MemberUserVOAssembler;
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
+import com.coderpwh.member.application.vo.MemberUserVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.util.DateUtils;
 import com.coderpwh.member.domain.util.JwtUtils;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPackageDO;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberUserDO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -37,12 +42,23 @@ public class DomainUserService {
 
     private MemberCardRepository memberCardRepository;
 
-
     private MemberPackageRepository memberPackageRepository;
+
+    private MemberUserDTOAssembler memberUserDTOAssembler;
+
+
+    private MemberUserVOAssembler memberUserVOAssembler;
 
 
     public DomainUserService() {
 
+    }
+
+
+    public DomainUserService(MemberUserRepository memberUserRepository, MemberUserDTOAssembler memberUserDTOAssembler, MemberUserVOAssembler memberUserVOAssembler) {
+        this.memberUserRepository = memberUserRepository;
+        this.memberUserDTOAssembler = memberUserDTOAssembler;
+        this.memberUserVOAssembler = memberUserVOAssembler;
     }
 
 
@@ -114,8 +130,7 @@ public class DomainUserService {
 
     /***
      *
-     * @param userId
-     * @param tenantId
+     * @param MemberUser
      * @param packageCode
      * @return
      */
@@ -150,5 +165,20 @@ public class DomainUserService {
         return memberCheckRenewalVO;
 
 
+    }
+
+
+    /***
+     * 获取用户信息
+     * @param userId
+     * @return
+     */
+    public MemberUserVO getMemberUser(Long userId) {
+        MemberUser memberUser = memberUserRepository.selectByUserId(userId);
+
+        MemberUserDTO memberUserDTO = memberUserDTOAssembler.toDTO(memberUser);
+
+        MemberUserVO memberUserVO = memberUserVOAssembler.toDTO(memberUserDTO);
+        return memberUserVO;
     }
 }
