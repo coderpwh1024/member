@@ -135,7 +135,7 @@ public class DomainUserService {
 
     /***
      *
-     * @param MemberUser
+     * @param memberUser
      * @param packageCode
      * @return
      */
@@ -168,8 +168,6 @@ public class DomainUserService {
         }
         memberCheckRenewalVO.setIsRenewal(false);
         return memberCheckRenewalVO;
-
-
     }
 
 
