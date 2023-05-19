@@ -2,6 +2,7 @@ package com.coderpwh.member.application.service;
 
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.MemberUserVO;
@@ -45,7 +46,7 @@ public interface UserService {
      * @param userId
      * @return
      */
-    MemberUserVO getMemberUser(Long userId);
+    MemberUserDTO getMemberUser(Long userId);
 
 
 }

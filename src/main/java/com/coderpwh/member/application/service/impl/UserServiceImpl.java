@@ -5,6 +5,7 @@ import com.coderpwh.member.application.assembler.domain.MemberUserDTOAssembler;
 import com.coderpwh.member.application.assembler.vo.MemberUserVOAssembler;
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
+import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.UserService;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
@@ -16,6 +17,7 @@ import com.coderpwh.member.domain.model.MemberUser;
 import com.coderpwh.member.domain.model.MemberUserRepository;
 import com.coderpwh.member.domain.service.DomainUserService;
 import com.coderpwh.member.domain.specification.UserSpecification;
+import com.coderpwh.member.domain.util.LoginUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -103,13 +105,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public MemberCheckRenewalVO getCheckRenewal(String packageCode) {
 
-        Long userId = 81171L;
-        String tenantId = "12";
-
-        MemberUser memberUser = new MemberUser();
-        memberUser.setId(userId);
-        memberUser.setTenantId(tenantId);
-        memberUser.setIsMember(true);
+        MemberUserDTO memberUser = LoginUtil.loginUser();
 
         DomainUserService domainUserService = new DomainUserService();
         MemberCheckRenewalVO memberCheckRenewalVO = domainUserService.getCheckRenewal(memberUser, packageCode);
@@ -124,7 +120,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public MemberUserVO getMemberUser(Long userId) {
+    public MemberUserDTO getMemberUser(Long userId) {
         DomainUserService domainUserService = new DomainUserService(memberUserRepository, memberUserDTOAssembler, memberUserVOAssembler);
         return domainUserService.getMemberUser(userId);
     }

@@ -134,7 +134,7 @@ public class DomainUserService {
      * @param packageCode
      * @return
      */
-    public MemberCheckRenewalVO getCheckRenewal(MemberUser memberUser, String packageCode) {
+    public MemberCheckRenewalVO getCheckRenewal(MemberUserDTO memberUser, String packageCode) {
 
         MemberCheckRenewalVO memberCheckRenewalVO = new MemberCheckRenewalVO();
 
@@ -173,12 +173,12 @@ public class DomainUserService {
      * @param userId
      * @return
      */
-    public MemberUserVO getMemberUser(Long userId) {
+    public MemberUserDTO getMemberUser(Long userId) {
         MemberUser memberUser = memberUserRepository.selectByUserId(userId);
 
         MemberUserDTO memberUserDTO = memberUserDTOAssembler.toDTO(memberUser);
 
-        MemberUserVO memberUserVO = memberUserVOAssembler.toDTO(memberUserDTO);
-        return memberUserVO;
+
+        return memberUserDTO;
     }
 }
