@@ -54,6 +54,11 @@ public class DomainUserService {
 
     }
 
+    public DomainUserService(MemberPackageRepository memberPackageRepository, MemberCardRepository memberCardRepository) {
+        this.memberPackageRepository = memberPackageRepository;
+        this.memberCardRepository = memberCardRepository;
+    }
+
 
     public DomainUserService(MemberUserRepository memberUserRepository, MemberUserDTOAssembler memberUserDTOAssembler, MemberUserVOAssembler memberUserVOAssembler) {
         this.memberUserRepository = memberUserRepository;
@@ -177,7 +182,6 @@ public class DomainUserService {
         MemberUser memberUser = memberUserRepository.selectByUserId(userId);
 
         MemberUserDTO memberUserDTO = memberUserDTOAssembler.toDTO(memberUser);
-
 
         return memberUserDTO;
     }

@@ -11,10 +11,7 @@ import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
 import com.coderpwh.member.application.vo.MemberUserVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
-import com.coderpwh.member.domain.model.MemberCardRepository;
-import com.coderpwh.member.domain.model.MemberTenantRepository;
-import com.coderpwh.member.domain.model.MemberUser;
-import com.coderpwh.member.domain.model.MemberUserRepository;
+import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.service.DomainUserService;
 import com.coderpwh.member.domain.specification.UserSpecification;
 import com.coderpwh.member.domain.util.LoginUtil;
@@ -53,6 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private MemberUserVOAssembler memberUserVOAssembler;
+
+    @Resource
+    private MemberPackageRepository memberPackageRepository;
 
 
     /***
@@ -104,10 +104,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public MemberCheckRenewalVO getCheckRenewal(String packageCode) {
+        log.info("查询用户是否可以续费,入参packageCode为:{}", packageCode);
 
+        // 获取登录用户
         MemberUserDTO memberUser = LoginUtil.loginUser();
 
-        DomainUserService domainUserService = new DomainUserService();
+        // 领域层
+        DomainUserService domainUserService = new DomainUserService(memberPackageRepository, cardRepository);
         MemberCheckRenewalVO memberCheckRenewalVO = domainUserService.getCheckRenewal(memberUser, packageCode);
 
         return memberCheckRenewalVO;
