@@ -1,6 +1,7 @@
 package com.coderpwh.member.web;
 
 import com.coderpwh.member.application.command.MemberInfoQuery;
+import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
@@ -64,5 +65,9 @@ public class UserController {
         MemberCheckRenewalVO memberCheckRenewalVO = userService.getCheckRenewal(packageCode);
         return Result.ok(memberCheckRenewalVO);
     }
+
+
+
+
 
 }
