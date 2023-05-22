@@ -1,5 +1,8 @@
 package com.coderpwh.member.domain.service;
 
+import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.vo.MemberSaveVO;
+
 /**
  * 会员领域层
  *
@@ -14,4 +17,13 @@ public class DomainMemberService {
     }
 
 
+    /***
+     * 开通会员
+     * @param command
+     * @return
+     */
+    public MemberSaveVO saveMember(MemberJoinCommand command) {
+        return null;
+
+    }
 }

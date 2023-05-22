@@ -12,6 +12,7 @@ import com.coderpwh.member.domain.specification.MemberSpecification;
 import com.coderpwh.member.domain.util.LoginUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -37,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public MemberSaveVO saveMember(MemberJoinCommand command) {
         log.info("开通会员,合作方订单号:{},入参为:{}", command.getPartnerOrderNumber(), JSON.toJSONString(command));
 
@@ -51,10 +53,10 @@ public class MemberServiceImpl implements MemberService {
 
 
         // 领域层
-      /*  DomainMemberService domainMemberService = new DomainMemberService();
-        MemberSaveVO memberSaveVO = domainMemberService.saveMember(command);*/
+        DomainMemberService domainMemberService = new DomainMemberService();
+        MemberSaveVO memberSaveVO = domainMemberService.saveMember(command);
 
-        return new MemberSaveVO();
+        return memberSaveVO;
     }
 
 }
