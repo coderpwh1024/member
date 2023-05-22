@@ -26,6 +26,11 @@ public class MemberController {
     private MemberService memberService;
 
 
+    /***
+     * 开通会员
+     * @param command
+     * @return
+     */
     @RequestMapping(value = "/saveMember", method = RequestMethod.POST)
     public Result saveMember(@RequestBody MemberJoinCommand command) {
         return Result.ok(memberService.saveMember(command));
