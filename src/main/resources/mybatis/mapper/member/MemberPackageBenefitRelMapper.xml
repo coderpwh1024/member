@@ -3,28 +3,37 @@
 <mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.MemberPackageBenefitRelMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageBenefitRelDO">
-        <id column="id" property="id" />
-        <result column="tenant_id" property="tenantId" />
-        <result column="benefit_id" property="benefitId" />
-        <result column="package_id" property="packageId" />
-        <result column="sub_title" property="subTitle" />
-        <result column="title" property="title" />
-        <result column="reserved_points" property="reservedPoints" />
-        <result column="available_points" property="availablePoints" />
-        <result column="xf_reserved_points" property="xfReservedPoints" />
-        <result column="xf_available_points" property="xfAvailablePoints" />
-        <result column="create_user" property="createUser" />
-        <result column="create_time" property="createTime" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="update_user" property="updateUser" />
-        <result column="update_time" property="updateTime" />
+    <resultMap id="BaseResultMap"
+               type="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageBenefitRelDO">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="benefit_id" property="benefitId"/>
+        <result column="package_id" property="packageId"/>
+        <result column="sub_title" property="subTitle"/>
+        <result column="title" property="title"/>
+        <result column="reserved_points" property="reservedPoints"/>
+        <result column="available_points" property="availablePoints"/>
+        <result column="xf_reserved_points" property="xfReservedPoints"/>
+        <result column="xf_available_points" property="xfAvailablePoints"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        `id`,`tenant_id`,`benefit_id`,`package_id`,`sub_title`,`title`,`reserved_points`,`available_points`,`xf_reserved_points`,`xf_available_points`,`create_user`,`create_time`,`is_deleted`,`update_user`,`update_time`
+        `id`
+        ,`tenant_id`,`benefit_id`,`package_id`,`sub_title`,`title`,`reserved_points`,`available_points`,`xf_reserved_points`,`xf_available_points`,`create_user`,`create_time`,`is_deleted`,`update_user`,`update_time`
     </sql>
+    <select id="selectByTenantIdAndPackageId"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageBenefitRelDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_package_benefit_rel
+        where is_deleted=0 and tenant_id=#{tenantId} and package_id=#{packageId}
+    </select>
 
 
 </mapper>

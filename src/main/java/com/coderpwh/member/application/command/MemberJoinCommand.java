@@ -2,6 +2,7 @@ package com.coderpwh.member.application.command;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -17,12 +18,14 @@ public class MemberJoinCommand implements Serializable {
     /***
      *  产品类型
      */
+    @NotBlank(message = "产品类型不能为空")
     private String productType;
 
 
     /***
      * 产品编码
      */
+    @NotBlank(message = "产品编码不嫩为空")
     private String productCode;
 
 
@@ -35,6 +38,7 @@ public class MemberJoinCommand implements Serializable {
     /***
      * 合作方订单号
      */
+    @NotBlank(message = "合作方订单不能为空")
     private String partnerOrderNumber;
 
     /***
@@ -45,6 +49,7 @@ public class MemberJoinCommand implements Serializable {
     /***
      *  合作方代理号
      */
+    @NotBlank(message = "合作方代理号不能为空")
     private String agentNumber;
 
 
@@ -57,11 +62,13 @@ public class MemberJoinCommand implements Serializable {
     /**
      * 时间戳
      */
+    @NotBlank(message = "时间戳不能为空")
     private String timestamp;
 
 
     /***
      * 签名
      */
+    @NotBlank(message = "签名不能为空")
     private String sign;
 }
