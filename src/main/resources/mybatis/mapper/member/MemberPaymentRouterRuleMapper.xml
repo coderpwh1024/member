@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.MemberPaymentRouterRuleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO">
+        <id column="id" property="id" />
+        <result column="payment_id" property="paymentId" />
+        <result column="cashier_type" property="cashierType" />
+        <result column="radio" property="radio" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="channel_mch_no" property="channelMchNo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,`payment_id`,`cashier_type`,`radio`,`create_user`,`create_time`,`update_user`,`update_time`,`is_deleted`,`channel_mch_no`
+    </sql>
+    <!--批量添加-->
+    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        INSERT INTO `tb_member_payment_router_rule` (`id`,`payment_id`,`cashier_type`,`radio`,`create_user`,`create_time`,`update_user`,`update_time`,`is_deleted`,`channel_mch_no`)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+                (#{item.id},#{item.paymentId},#{item.cashierType},#{item.radio},#{item.createUser},#{item.createTime},#{item.updateUser},#{item.updateTime},#{item.isDeleted},#{item.channelMchNo})
+        </foreach>
+    </insert>
+    <!--添加一条数据-->
+    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        insert into `tb_member_payment_router_rule`(`id`,`payment_id`,`cashier_type`,`radio`,`create_user`,`create_time`,`update_user`,`update_time`,`is_deleted`,`channel_mch_no`)
+        values(#{id},#{paymentId},#{cashierType},#{radio},#{createUser},#{createTime},#{updateUser},#{updateTime},#{isDeleted},#{channelMchNo})
+    </insert>
+
+    <!--根据id修改-->
+    <update id="updateById">
+        update `tb_member_payment_router_rule` set
+        payment_id=#{paymentId},cashier_type=#{cashierType},radio=#{radio},create_user=#{createUser},create_time=#{createTime},update_user=#{updateUser},update_time=#{updateTime},is_deleted=#{isDeleted},channel_mch_no=#{channelMchNo}
+        where `id`=#{id}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteById">
+        delete from `tb_member_payment_router_rule`
+        where `id`=#{id}
+    </delete>
+
+    <!--根据id查询对象-->
+    <select id="getMemberPaymentRouterRuleDOById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `tb_member_payment_router_rule`
+        WHERE `id`=#{id}
+    </select>
+</mapper>

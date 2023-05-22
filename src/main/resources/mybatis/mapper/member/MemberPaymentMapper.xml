@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.MemberPaymentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentDO">
+        <id column="id" property="id" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="type" property="type" />
+        <result column="env" property="env" />
+        <result column="tips" property="tips" />
+        <result column="icon_img_url" property="iconImgUrl" />
+        <result column="is_show" property="isShow" />
+        <result column="create_time" property="createTime" />
+        <result column="rank" property="rank" />
+        <result column="update_user" property="updateUser" />
+        <result column="create_user" property="createUser" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="update_time" property="updateTime" />
+        <result column="cashier_type" property="cashierType" />
+        <result column="category" property="category" />
+        <result column="is_router" property="isRouter" />
+        <result column="is_center_cashier" property="isCenterCashier" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,`tenant_id`,`name`,`code`,`type`,`env`,`tips`,`icon_img_url`,`is_show`,`create_time`,`rank`,`update_user`,`create_user`,`is_deleted`,`update_time`,`cashier_type`,`category`,`is_router`,`is_center_cashier`
+    </sql>
+    <!--批量添加-->
+    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        INSERT INTO `tb_member_payment` (`id`,`tenant_id`,`name`,`code`,`type`,`env`,`tips`,`icon_img_url`,`is_show`,`create_time`,`rank`,`update_user`,`create_user`,`is_deleted`,`update_time`,`cashier_type`,`category`,`is_router`,`is_center_cashier`)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+                (#{item.id},#{item.tenantId},#{item.name},#{item.code},#{item.type},#{item.env},#{item.tips},#{item.iconImgUrl},#{item.isShow},#{item.createTime},#{item.rank},#{item.updateUser},#{item.createUser},#{item.isDeleted},#{item.updateTime},#{item.cashierType},#{item.category},#{item.isRouter},#{item.isCenterCashier})
+        </foreach>
+    </insert>
+    <!--添加一条数据-->
+    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        insert into `tb_member_payment`(`id`,`tenant_id`,`name`,`code`,`type`,`env`,`tips`,`icon_img_url`,`is_show`,`create_time`,`rank`,`update_user`,`create_user`,`is_deleted`,`update_time`,`cashier_type`,`category`,`is_router`,`is_center_cashier`)
+        values(#{id},#{tenantId},#{name},#{code},#{type},#{env},#{tips},#{iconImgUrl},#{isShow},#{createTime},#{rank},#{updateUser},#{createUser},#{isDeleted},#{updateTime},#{cashierType},#{category},#{isRouter},#{isCenterCashier})
+    </insert>
+
+    <!--根据id修改-->
+    <update id="updateById">
+        update `tb_member_payment` set
+        tenant_id=#{tenantId},name=#{name},code=#{code},type=#{type},env=#{env},tips=#{tips},icon_img_url=#{iconImgUrl},is_show=#{isShow},create_time=#{createTime},rank=#{rank},update_user=#{updateUser},create_user=#{createUser},is_deleted=#{isDeleted},update_time=#{updateTime},cashier_type=#{cashierType},category=#{category},is_router=#{isRouter},is_center_cashier=#{isCenterCashier}
+        where `id`=#{id}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteById">
+        delete from `tb_member_payment`
+        where `id`=#{id}
+    </delete>
+
+    <!--根据id查询对象-->
+    <select id="getMemberPaymentDOById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `tb_member_payment`
+        WHERE `id`=#{id}
+    </select>
+</mapper>
