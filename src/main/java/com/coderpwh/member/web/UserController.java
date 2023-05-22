@@ -1,6 +1,5 @@
 package com.coderpwh.member.web;
 
-import com.coderpwh.member.application.command.CargoBookCommand;
 import com.coderpwh.member.application.command.MemberInfoQuery;
 import com.coderpwh.member.application.command.UserLoginCommand;
 import com.coderpwh.member.application.service.UserService;
