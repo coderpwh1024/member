@@ -32,4 +32,20 @@
         from tb_member_package
         where tenant_id=#{tenantId} and `code`=#{packageCode} and is_deleted=0
     </select>
+    <select id="selectByAgentNumberAndCode"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageDO">
+        select package.*, tenant.icon_img_url
+        from tb_member_package package
+        left join tb_member_tenant tenant
+        on tenant.id = package.tenant_id and package.is_deleted = 0 and tenant.is_deleted = 0
+        <where>
+            tenant.agent_number=#{agentNumber}
+            <if test="productType!=null and productType!=''">
+                and package.code=#{productType}
+            </if>
+            and package.is_deleted=0
+        </where>
+
+
+    </select>
 </mapper>

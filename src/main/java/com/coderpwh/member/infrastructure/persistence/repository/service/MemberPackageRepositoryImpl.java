@@ -85,8 +85,7 @@ public class MemberPackageRepositoryImpl extends ServiceImpl<MemberPackageMapper
 
     @Override
     public List<MemberPackage> getByIds(List<Integer> ids) {
-        List<MemberPackageDO> entityList = this.list(Wrappers.<MemberPackageDO>lambdaQuery()
-                .in(MemberPackageDO::getId, ids));
+        List<MemberPackageDO> entityList = this.list(Wrappers.<MemberPackageDO>lambdaQuery().in(MemberPackageDO::getId, ids));
         return memberPackageConverter.toEntity(entityList);
     }
 
@@ -102,5 +101,20 @@ public class MemberPackageRepositoryImpl extends ServiceImpl<MemberPackageMapper
         MemberPackageDO memberPackageDO = baseMapper.selectByPackageCode(tenantId, packageCode);
         return memberPackageConverter.toEntity(memberPackageDO);
     }
+
+
+    /***
+     *  通过agentNumber跟productType查询
+     * @param agentNumber
+     * @param productType
+     * @return
+     */
+    @Override
+    public MemberPackage selectByAgentNumberAndCode(String agentNumber, String productType) {
+        MemberPackageDO memberPackageDO = baseMapper.selectByAgentNumberAndCode(agentNumber, productType);
+
+        return null;
+    }
+
 
 }

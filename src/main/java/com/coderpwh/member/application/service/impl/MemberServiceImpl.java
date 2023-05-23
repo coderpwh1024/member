@@ -42,7 +42,6 @@ public class MemberServiceImpl implements MemberService {
     public MemberSaveVO saveMember(MemberJoinCommand command) {
         log.info("开通会员,合作方订单号:{},入参为:{}", command.getPartnerOrderNumber(), JSON.toJSONString(command));
 
-
         // 获取登录用户
         MemberUserDTO memberUser = LoginUtil.loginUser();
 

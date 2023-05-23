@@ -37,4 +37,14 @@ public interface MemberPackageMapper extends BaseMapper<MemberPackageDO> {
      */
     MemberPackageDO selectByPackageCode(@Param("tenantId") String tenantId, @Param("packageCode") String packageCode);
 
+
+    /***
+     *  通过agentNumber跟productType查询
+     * @param agentNumber
+     * @param productType
+     * @return
+     */
+    MemberPackageDO selectByAgentNumberAndCode(@Param("agentNumber") String agentNumber, @Param("productType") String productType);
+
+
 }
