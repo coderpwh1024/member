@@ -65,6 +65,11 @@ public class DomainMemberService {
         Integer orderType = OrderTypeEnum.getOrderType(Integer.valueOf(type)).val();
 
         List<MemberSettlementRule> list = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
+
+        if (list == null || list.size() <= 0) {
+            List<MemberSettlementRule> RuleList = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
+        }
+
     }
 
 
