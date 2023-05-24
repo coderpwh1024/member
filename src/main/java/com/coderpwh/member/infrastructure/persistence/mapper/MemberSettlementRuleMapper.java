@@ -30,13 +30,14 @@ public interface MemberSettlementRuleMapper extends BaseMapper<MemberSettlementR
 
 
     /***
-     *  通过packageId和cashierType查询
+     *packageId和cashierType查询
      * @param tenantId
      * @param packageId
+     * @param orderType
      * @param cashierType
      * @return
      */
-    List<MemberSettlementRuleDO> selectByPackageIdAndCashierType(@Param("tenantId") Long tenantId, @Param("packageId") Long packageId, @Param("cashierType") String cashierType);
+    List<MemberSettlementRuleDO> selectByPackageIdAndCashierType(@Param("tenantId") Long tenantId, @Param("packageId") Long packageId, @Param("orderType") Integer orderType, @Param("cashierType") String cashierType);
 
 
 }

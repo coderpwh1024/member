@@ -29,25 +29,6 @@
         `id`
         ,`tenant_id`,`package_id`,`rule`,`price`,`ratio`,`order_type`,`is_share_benefit`,`account_type`,`account`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`share_ratio`,`cashier_type`,`extra_price`
     </sql>
-    <!--批量添加-->
-    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `tb_member_settlement_rule`
-        (`id`,`tenant_id`,`package_id`,`rule`,`price`,`ratio`,`order_type`,`is_share_benefit`,`account_type`,`account`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`share_ratio`,`cashier_type`,`extra_price`)
-        VALUES
-        <foreach collection="list" item="item" separator=",">
-            (#{item.id},#{item.tenantId},#{item.packageId},#{item.rule},#{item.price},#{item.ratio},#{item.orderType},#{item.isShareBenefit},#{item.accountType},#{item.account},#{item.createTime},#{item.createUser},#{item.updateUser},#{item.updateTime},#{item.isDeleted},#{item.shareRatio},#{item.cashierType},#{item.extraPrice})
-        </foreach>
-    </insert>
-    <!--添加一条数据-->
-    <insert id="save" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
-        insert into `tb_member_settlement_rule`(`id`, `tenant_id`, `package_id`, `rule`, `price`, `ratio`, `order_type`,
-                                                `is_share_benefit`, `account_type`, `account`, `create_time`,
-                                                `create_user`, `update_user`, `update_time`, `is_deleted`,
-                                                `share_ratio`, `cashier_type`, `extra_price`)
-        values (#{id}, #{tenantId}, #{packageId}, #{rule}, #{price}, #{ratio}, #{orderType}, #{isShareBenefit},
-                #{accountType}, #{account}, #{createTime}, #{createUser}, #{updateUser}, #{updateTime}, #{isDeleted},
-                #{shareRatio}, #{cashierType}, #{extraPrice})
-    </insert>
 
     <!--根据id修改-->
     <update id="updateById">
@@ -79,19 +60,14 @@
         where `id` = #{id}
     </delete>
 
-    <!--根据id查询对象-->
-    <select id="getMemberSettlementRuleDOById" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM `tb_member_settlement_rule`
-        WHERE `id`=#{id}
-    </select>
 
     <select id="selectByPackageIdAndCashierType"
             resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO">
         select
         <include refid="Base_Column_List"/>
         from tb_member_settlement_rule
-        where tenant_id=#{tenantId} and package_id=#{packageId} and cashier_type=#{cashierType} and is_deleted=0
+        where tenant_id=#{tenantId} and package_id=#{packageId}
+        and order_type=#{orderType} and cashier_type=#{cashierType}
+        and is_deleted=0
     </select>
 </mapper>

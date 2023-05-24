@@ -2,6 +2,7 @@ package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.vo.MemberSaveVO;
+import com.coderpwh.member.domain.enums.OrderTypeEnum;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO;
@@ -60,8 +61,10 @@ public class DomainMemberService {
      */
     public void revenue(Long tenantId, String cashierType, Integer type, Long packageId) {
 
+        // 订单类型
+        Integer orderType = OrderTypeEnum.getOrderType(Integer.valueOf(type)).val();
 
-        List<MemberSettlementRule> list = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, cashierType);
+        List<MemberSettlementRule> list = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
     }
 
 

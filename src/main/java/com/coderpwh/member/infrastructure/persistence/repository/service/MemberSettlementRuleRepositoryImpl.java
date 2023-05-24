@@ -101,8 +101,8 @@ public class MemberSettlementRuleRepositoryImpl extends ServiceImpl<MemberSettle
      * @return
      */
     @Override
-    public List<MemberSettlementRule> selectByPackageIdAndCashierType(Long tenantId, Long packageId, String cashierType) {
-        List<MemberSettlementRuleDO> list = baseMapper.selectByPackageIdAndCashierType(tenantId, packageId, cashierType);
+    public List<MemberSettlementRule> selectByPackageIdAndCashierType(Long tenantId, Long packageId, Integer orderType, String cashierType) {
+        List<MemberSettlementRuleDO> list = baseMapper.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
         return memberSettlementRuleConverter.toEntity(list);
     }
 
