@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.MemberSettlementRuleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO">
+        <id column="id" property="id" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="package_id" property="packageId" />
+        <result column="rule" property="rule" />
+        <result column="price" property="price" />
+        <result column="ratio" property="ratio" />
+        <result column="order_type" property="orderType" />
+        <result column="is_share_benefit" property="isShareBenefit" />
+        <result column="account_type" property="accountType" />
+        <result column="account" property="account" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="share_ratio" property="shareRatio" />
+        <result column="cashier_type" property="cashierType" />
+        <result column="extra_price" property="extraPrice" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,`tenant_id`,`package_id`,`rule`,`price`,`ratio`,`order_type`,`is_share_benefit`,`account_type`,`account`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`share_ratio`,`cashier_type`,`extra_price`
+    </sql>
+    <!--批量添加-->
+    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        INSERT INTO `tb_member_settlement_rule` (`id`,`tenant_id`,`package_id`,`rule`,`price`,`ratio`,`order_type`,`is_share_benefit`,`account_type`,`account`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`share_ratio`,`cashier_type`,`extra_price`)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+                (#{item.id},#{item.tenantId},#{item.packageId},#{item.rule},#{item.price},#{item.ratio},#{item.orderType},#{item.isShareBenefit},#{item.accountType},#{item.account},#{item.createTime},#{item.createUser},#{item.updateUser},#{item.updateTime},#{item.isDeleted},#{item.shareRatio},#{item.cashierType},#{item.extraPrice})
+        </foreach>
+    </insert>
+    <!--添加一条数据-->
+    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        insert into `tb_member_settlement_rule`(`id`,`tenant_id`,`package_id`,`rule`,`price`,`ratio`,`order_type`,`is_share_benefit`,`account_type`,`account`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`share_ratio`,`cashier_type`,`extra_price`)
+        values(#{id},#{tenantId},#{packageId},#{rule},#{price},#{ratio},#{orderType},#{isShareBenefit},#{accountType},#{account},#{createTime},#{createUser},#{updateUser},#{updateTime},#{isDeleted},#{shareRatio},#{cashierType},#{extraPrice})
+    </insert>
+
+    <!--根据id修改-->
+    <update id="updateById">
+        update `tb_member_settlement_rule` set
+        tenant_id=#{tenantId},package_id=#{packageId},rule=#{rule},price=#{price},ratio=#{ratio},order_type=#{orderType},is_share_benefit=#{isShareBenefit},account_type=#{accountType},account=#{account},create_time=#{createTime},create_user=#{createUser},update_user=#{updateUser},update_time=#{updateTime},is_deleted=#{isDeleted},share_ratio=#{shareRatio},cashier_type=#{cashierType},extra_price=#{extraPrice}
+        where `id`=#{id}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteById">
+        delete from `tb_member_settlement_rule`
+        where `id`=#{id}
+    </delete>
+
+    <!--根据id查询对象-->
+    <select id="getMemberSettlementRuleDOById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `tb_member_settlement_rule`
+        WHERE `id`=#{id}
+    </select>
+</mapper>
