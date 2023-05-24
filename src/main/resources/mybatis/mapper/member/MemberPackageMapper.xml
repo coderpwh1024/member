@@ -34,7 +34,7 @@
     </select>
     <select id="selectByAgentNumberAndCode"
             resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageDO">
-        select package.*, tenant.icon_img_url
+        select package.*
         from tb_member_package package
         left join tb_member_tenant tenant
         on tenant.id = package.tenant_id and package.is_deleted = 0 and tenant.is_deleted = 0

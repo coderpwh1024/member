@@ -112,8 +112,7 @@ public class MemberPackageRepositoryImpl extends ServiceImpl<MemberPackageMapper
     @Override
     public MemberPackage selectByAgentNumberAndCode(String agentNumber, String productType) {
         MemberPackageDO memberPackageDO = baseMapper.selectByAgentNumberAndCode(agentNumber, productType);
-
-        return null;
+        return memberPackageConverter.toEntity(memberPackageDO);
     }
 
 
