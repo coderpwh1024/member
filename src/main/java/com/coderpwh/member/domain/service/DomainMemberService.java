@@ -2,10 +2,10 @@ package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.vo.MemberSaveVO;
-import com.coderpwh.member.domain.model.MemberPackage;
-import com.coderpwh.member.domain.model.MemberPackageRepository;
-import com.coderpwh.member.domain.model.MemberTenant;
-import com.coderpwh.member.domain.model.MemberTenantRepository;
+import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
+
+import java.util.List;
 
 /**
  * 会员领域层
@@ -20,6 +20,11 @@ public class DomainMemberService {
 
 
     private MemberTenantRepository memberTenantRepository;
+
+
+    private MemberPaymentRouterRuleRepository memberPaymentRouterRuleRepository;
+
+
 
 
     public DomainMemberService() {
@@ -43,4 +48,19 @@ public class DomainMemberService {
         return null;
 
     }
+
+
+    /***
+     * 计算分润
+     * @param tenantId
+     * @param cashierType
+     * @param type
+     */
+    public void revenue(Long tenantId, String cashierType, Integer type, Long packageId) {
+
+
+
+    }
+
+
 }

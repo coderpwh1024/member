@@ -5,6 +5,7 @@ import com.coderpwh.member.application.command.MemberPaymentRouterRuleQuery;
 import com.coderpwh.member.domain.model.MemberPaymentRouterRule;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,5 +27,7 @@ public interface MemberPaymentRouterRuleMapper extends BaseMapper<MemberPaymentR
      * @return 检索后的集合
      */
     List<MemberPaymentRouterRule> findListByEntity(MemberPaymentRouterRuleQuery query);
+
+
 
 }
