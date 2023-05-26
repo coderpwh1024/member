@@ -1,13 +1,16 @@
 package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.dto.MemberSharePriceDTO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.enums.CashierTypeEnum;
 import com.coderpwh.member.domain.enums.MemberSettlementRuleEnum;
 import com.coderpwh.member.domain.enums.OrderTypeEnum;
 import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -20,6 +23,7 @@ import java.util.Objects;
  * @author coderpwh
  * @date 2023/5/22 16:08
  */
+@Slf4j
 public class DomainMemberService {
 
 
@@ -33,6 +37,9 @@ public class DomainMemberService {
 
 
     private MemberSettlementRuleRepository memberSettlementRuleRepository;
+
+
+    private MemberPaymentRepository memberPaymentRepository;
 
 
     public DomainMemberService() {
@@ -64,13 +71,13 @@ public class DomainMemberService {
      * @param cashierType
      * @param type
      */
-    public void revenue(Long tenantId, String cashierType, Integer type, Long packageId, String partnerPrice) {
+    public MemberSharePriceDTO doRevenue(Long tenantId, String cashierType, Integer type, Long packageId, String partnerPrice) {
+        MemberSharePriceDTO memberSharePrice = new MemberSharePriceDTO();
 
         MemberSettlementRule settlementRule = new MemberSettlementRule();
 
         // 订单类型
         Integer orderType = OrderTypeEnum.getOrderType(Integer.valueOf(type)).val();
-
         List<MemberSettlementRule> list = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
 
         if (list == null || list.size() <= 0) {
@@ -100,7 +107,29 @@ public class DomainMemberService {
                 price = StringUtils.isBlank(partnerPrice) ? 0 : bigDecimalPrice.intValue();
             }
 
+            String revenue = new BigDecimal(price).multiply(new BigDecimal(ratio)).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
+            memberSharePrice.setRevenue(revenue);
+            memberSharePrice.setShareRatio(settlementRule.getShareRatio());
+            memberSharePrice.setIsShareBenefit(settlementRule.getIsShareBenefit());
+            memberSharePrice.setAccountType(settlementRule.getAccountType());
+            memberSharePrice.setBenefitAccount(settlementRule.getAccount());
+            return memberSharePrice;
+        } else {
+            log.error("不存在对应的分润规则,租户id为:{}", tenantId);
+            return null;
+        }
+    }
 
+
+    /***
+     *  设置支付方式及其路由
+     */
+    public void doPayPayment(Long tenantId, String payType, String category) {
+
+        String env = "";
+
+        MemberPayment memberPayment = memberPaymentRepository.selectByPayType(tenantId, payType, env, category);
+        if (Objects.isNull(memberPayment)) {
         }
 
 
