@@ -3,11 +3,14 @@ package com.coderpwh.member.domain.service;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.enums.CashierTypeEnum;
+import com.coderpwh.member.domain.enums.MemberSettlementRuleEnum;
 import com.coderpwh.member.domain.enums.OrderTypeEnum;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO;
+import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,7 +64,7 @@ public class DomainMemberService {
      * @param cashierType
      * @param type
      */
-    public void revenue(Long tenantId, String cashierType, Integer type, Long packageId) {
+    public void revenue(Long tenantId, String cashierType, Integer type, Long packageId, String partnerPrice) {
 
         MemberSettlementRule settlementRule = new MemberSettlementRule();
 
@@ -90,6 +93,12 @@ public class DomainMemberService {
             Float ratio = settlementRule.getRatio();
             Integer price = 0;
 
+            if (settlementRule.getRule() == MemberSettlementRuleEnum.AMOUNT_RULE.val()) {
+                price = Objects.isNull(settlementRule.getPrice()) ? 0 : settlementRule.getPrice();
+            } else if (settlementRule.getRule() == MemberSettlementRuleEnum.ORDER_AMOUNT_RULE.val()) {
+                BigDecimal bigDecimalPrice = new BigDecimal(partnerPrice);
+                price = StringUtils.isBlank(partnerPrice) ? 0 : bigDecimalPrice.intValue();
+            }
 
 
         }
