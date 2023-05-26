@@ -2,12 +2,14 @@ package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.vo.MemberSaveVO;
+import com.coderpwh.member.domain.enums.CashierTypeEnum;
 import com.coderpwh.member.domain.enums.OrderTypeEnum;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 会员领域层
@@ -61,14 +63,27 @@ public class DomainMemberService {
      */
     public void revenue(Long tenantId, String cashierType, Integer type, Long packageId) {
 
+        MemberSettlementRule settlementRule = new MemberSettlementRule();
+
         // 订单类型
         Integer orderType = OrderTypeEnum.getOrderType(Integer.valueOf(type)).val();
 
         List<MemberSettlementRule> list = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
 
         if (list == null || list.size() <= 0) {
-            List<MemberSettlementRule> RuleList = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, cashierType);
+            List<MemberSettlementRule> ruleList = memberSettlementRuleRepository.selectByPackageIdAndCashierType(tenantId, packageId, orderType, String.valueOf(CashierTypeEnum.CASHIER_NO_PAY.getType()));
+            if (ruleList != null && ruleList.size() > 0) {
+                settlementRule = ruleList.get(0);
+            }
+        } else {
+            settlementRule = list.get(0);
         }
+
+
+        if (Objects.isNull(settlementRule)) {
+
+        }
+
 
     }
 
