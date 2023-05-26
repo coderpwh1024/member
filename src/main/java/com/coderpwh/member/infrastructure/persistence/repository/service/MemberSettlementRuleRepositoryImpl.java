@@ -107,4 +107,18 @@ public class MemberSettlementRuleRepositoryImpl extends ServiceImpl<MemberSettle
     }
 
 
+    /***
+     * 通过tenantId和orderType和packageId
+     * @param tenantId
+     * @param orderType
+     * @param packageId
+     * @return
+     */
+    @Override
+    public List<MemberSettlementRule> selectByOrderTypeAndPackageId(Long tenantId, Integer orderType, Long packageId) {
+        List<MemberSettlementRuleDO> list = baseMapper.selectByOrderTypeAndPackageId(tenantId, orderType, packageId);
+        return memberSettlementRuleConverter.toEntity(list);
+    }
+
+
 }

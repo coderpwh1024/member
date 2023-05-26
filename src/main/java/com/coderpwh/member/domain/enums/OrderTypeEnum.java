@@ -6,6 +6,9 @@ package com.coderpwh.member.domain.enums;
  */
 public enum OrderTypeEnum {
 
+
+    ZERO(0, "ZERO"),
+
     API(1, "api"),
 
     CASHIER(2, "收银台"),

@@ -70,4 +70,12 @@
         and order_type=#{orderType} and cashier_type=#{cashierType}
         and is_deleted=0
     </select>
+    <select id="selectByOrderTypeAndPackageId"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_settlement_rule
+        where tenant_id=#{tenantId} and package_id=#{packageId}
+        and order_type=#{orderType} and is_deleted=0
+    </select>
 </mapper>

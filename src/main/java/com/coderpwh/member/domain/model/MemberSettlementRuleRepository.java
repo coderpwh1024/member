@@ -93,4 +93,14 @@ public interface MemberSettlementRuleRepository extends IService<MemberSettlemen
      */
     List<MemberSettlementRule> selectByPackageIdAndCashierType(Long tenantId, Long packageId, Integer orderType, String cashierType);
 
+
+    /***
+     * 通过tenantId和orderType和packageId查询
+     * @param tenantId
+     * @param orderType
+     * @param packageId
+     * @return
+     */
+    List<MemberSettlementRule> selectByOrderTypeAndPackageId(Long tenantId, Integer orderType, Long packageId);
+
 }

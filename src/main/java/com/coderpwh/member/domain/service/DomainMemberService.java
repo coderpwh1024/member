@@ -79,8 +79,18 @@ public class DomainMemberService {
             settlementRule = list.get(0);
         }
 
-
         if (Objects.isNull(settlementRule)) {
+            List<MemberSettlementRule> ruleList = memberSettlementRuleRepository.selectByOrderTypeAndPackageId(tenantId, OrderTypeEnum.ZERO.val(), packageId);
+            if (ruleList != null && ruleList.size() > 0) {
+                settlementRule = ruleList.get(0);
+            }
+        }
+
+        if (settlementRule != null && settlementRule.getRule() != null) {
+            Float ratio = settlementRule.getRatio();
+            Integer price = 0;
+
+
 
         }
 
