@@ -86,4 +86,20 @@ public interface OrderOrderRepository extends IService<OrderOrderDO> {
 
     List<OrderOrder> getUnpaidOrder(String productType, String productCode, String type);
 
+
+    /***
+     *  通过合作方订单号查询
+     * @param partnerOrderNumber
+     * @return
+     */
+    OrderOrder selectByPartnerOrderNumber(String partnerOrderNumber);
+
+
+    /***
+     * 通过订单号查询
+     * @param orderNumber
+     * @return
+     */
+    OrderOrder selectByOrderNumber(String orderNumber);
+
 }

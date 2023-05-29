@@ -97,4 +97,18 @@
         where product_type=#{productType} and
         product_code=#{productCode} and type=#{type} and is_deleted=0;
     </select>
+
+    <select id="selectByPartnerOrderNumber"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_order_order where partner_order_number =#{partnerOrderNumber} and is_deleted=0
+    </select>
+    <select id="selectByOrderNumber"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO">
+        select *
+        from tb_order_order
+        where order_number = #{orderNumber}
+          and is_deleted = 0;
+    </select>
 </mapper>

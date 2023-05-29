@@ -96,4 +96,29 @@ public class OrderOrderRepositoryImpl extends ServiceImpl<OrderOrderMapper, Orde
         return orderOrderConverter.toEntity(entityList);
     }
 
+
+    /***
+     *  通过合作方订单号查询
+     * @param partnerOrderNumber
+     * @return
+     */
+    @Override
+    public OrderOrder selectByPartnerOrderNumber(String partnerOrderNumber) {
+        OrderOrderDO orderOrderDO = baseMapper.selectByPartnerOrderNumber(partnerOrderNumber);
+        return orderOrderConverter.toEntity(orderOrderDO);
+    }
+
+
+    /***
+     * 通过订单号查询
+     * @param orderNumber
+     * @return
+     */
+    @Override
+    public OrderOrder selectByOrderNumber(String orderNumber) {
+        OrderOrderDO orderOrderDO = baseMapper.selectByOrderNumber(orderNumber);
+        return orderOrderConverter.toEntity(orderOrderDO);
+    }
+
+
 }

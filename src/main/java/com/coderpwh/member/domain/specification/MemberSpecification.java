@@ -7,7 +7,9 @@ import com.coderpwh.member.common.util.enums.SysReturnCode;
 import com.coderpwh.member.common.util.exception.BusinessException;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
+import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -33,9 +35,17 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
     private MemberPaymentRouterRuleRepository memberPaymentRouterRuleRepository;
 
 
+    private OrderOrderRepository orderOrderRepository;
+
+
     public MemberSpecification(MemberPackageRepository memberPackageRepository, MemberPackageBenefitRelRepository memberPackageBenefitRelRepository) {
         this.memberPackageRepository = memberPackageRepository;
         this.memberPackageBenefitRelRepository = memberPackageBenefitRelRepository;
+    }
+
+
+    public MemberSpecification(OrderOrderRepository orderOrderRepository) {
+        this.orderOrderRepository = orderOrderRepository;
     }
 
 
@@ -109,6 +119,42 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
             }
             return true;
         }
+    }
+
+
+    /***
+     * 会员退款校验
+     * @param orderNumber
+     * @param partnerOrderNumber
+     * @return
+     */
+    public boolean isMemberRefund(String orderNumber, String partnerOrderNumber) {
+
+        if (StringUtils.isBlank(orderNumber) && StringUtils.isBlank(partnerOrderNumber)) {
+            throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "订单号与合作方订单号都为空");
+        }
+
+        if (StringUtils.isNotBlank(partnerOrderNumber)) {
+            OrderOrder order = orderOrderRepository.selectByPartnerOrderNumber(partnerOrderNumber);
+            if (Objects.isNull(order)) {
+                log.error("当前合作方订单号不存在,尚未查询到订单,合作方订单号为:{}", partnerOrderNumber);
+                throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前合作方订单号不存在,尚未查询到订单");
+            } else {
+                return true;
+            }
+        }
+
+        if (StringUtils.isNotBlank(orderNumber)) {
+            OrderOrder order = orderOrderRepository.selectByOrderNumber(orderNumber);
+            if (Objects.isNull(order)) {
+                log.error("当前订单号不存在,尚未查询到订单,订单号为:{}", partnerOrderNumber);
+                throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前订单号不存在,尚未查询到订单");
+            } else {
+                return true;
+            }
+        }
+
+        return true;
     }
 
 

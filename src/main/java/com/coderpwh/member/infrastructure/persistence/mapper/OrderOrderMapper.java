@@ -39,4 +39,19 @@ public interface OrderOrderMapper extends BaseMapper<OrderOrderDO> {
     List<OrderOrderDO> getUnpaidOrder(@Param("productCode") String productCode, @Param("productType") String productType, @Param("type") String type);
 
 
+    /***
+     *  通过合作方订单号查询
+     * @param partnerOrderNumber
+     * @return
+     */
+    OrderOrderDO selectByPartnerOrderNumber(@Param("partnerOrderNumber") String partnerOrderNumber);
+
+
+    /***
+     * 通过订单号查询
+     * @param orderNumber
+     * @return
+     */
+    OrderOrderDO selectByOrderNumber(@Param("orderNumber") String orderNumber);
+
 }

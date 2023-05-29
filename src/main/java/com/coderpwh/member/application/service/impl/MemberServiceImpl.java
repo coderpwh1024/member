@@ -8,6 +8,7 @@ import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.model.MemberPackageBenefitRelRepository;
 import com.coderpwh.member.domain.model.MemberPackageRepository;
+import com.coderpwh.member.domain.model.OrderOrderRepository;
 import com.coderpwh.member.domain.service.DomainMemberService;
 import com.coderpwh.member.domain.specification.MemberSpecification;
 import com.coderpwh.member.domain.util.LoginUtil;
@@ -31,6 +32,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     private MemberPackageBenefitRelRepository memberPackageBenefitRelRepository;
+
+
+    @Resource
+    private OrderOrderRepository orderOrderRepository;
 
 
     /***
@@ -67,6 +72,15 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public String refundMember(MemberRefundCommand command) {
+        // 获取登录用户
+        MemberUserDTO memberUser = LoginUtil.loginUser();
+
+        // 校验用户登录与参数
+        MemberSpecification memberSpecification = new MemberSpecification(orderOrderRepository);
+        memberSpecification.isUserLogin(memberUser);
+        memberSpecification.isMemberRefund(command.getOrderNumber(), command.getPartnerOrderNumber());
+
+
         return null;
     }
 
