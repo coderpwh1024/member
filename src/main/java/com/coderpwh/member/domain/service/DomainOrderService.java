@@ -1,6 +1,7 @@
 package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberOrderCommand;
+import com.coderpwh.member.application.vo.MemberOrderVO;
 import com.coderpwh.member.domain.model.OrderOrder;
 import com.coderpwh.member.domain.model.OrderOrderRepository;
 import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
@@ -24,16 +25,20 @@ public class DomainOrderService {
     /***
      * 会员下单
      */
-    public void saveOrderByOrder(MemberOrderCommand command) {
+    public MemberOrderVO saveOrderByOrder(MemberOrderCommand command) {
 
         List<OrderOrder> list = orderOrderRepository.getUnpaidOrder(command.getProductType(), command.getProductCode(), command.getType());
         if (list != null && list.size() > 0) {
             //  TODO  返回参数整理
             log.info("当前存在待支付订单,订单号为:{}");
-            return;
+            return null;
         }
 
+        // TODO
+        OrderOrder order = new OrderOrder();
+        orderOrderRepository.save(order);
 
+        return null;
     }
 
 
