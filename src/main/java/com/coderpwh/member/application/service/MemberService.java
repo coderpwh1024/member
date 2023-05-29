@@ -2,6 +2,7 @@ package com.coderpwh.member.application.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberRefundCommand;
+import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 
 /**
@@ -24,7 +25,7 @@ public interface MemberService {
      * @param command
      * @return
      */
-    String refundMember(MemberRefundCommand command);
+    MemberRefundVO refundMember(MemberRefundCommand command);
 
 
 }

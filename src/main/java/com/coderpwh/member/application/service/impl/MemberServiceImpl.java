@@ -5,6 +5,7 @@ import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.MemberService;
+import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.model.MemberPackageBenefitRelRepository;
 import com.coderpwh.member.domain.model.MemberPackageRepository;
@@ -71,7 +72,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
-    public String refundMember(MemberRefundCommand command) {
+    public MemberRefundVO refundMember(MemberRefundCommand command) {
         // 获取登录用户
         MemberUserDTO memberUser = LoginUtil.loginUser();
 
@@ -80,8 +81,11 @@ public class MemberServiceImpl implements MemberService {
         memberSpecification.isUserLogin(memberUser);
         memberSpecification.isMemberRefund(command.getOrderNumber(), command.getPartnerOrderNumber());
 
+        // 领域层
+        DomainMemberService domainMemberService = new DomainMemberService();
+        MemberRefundVO memberRefundVO = domainMemberService.refundMember(command);
 
-        return null;
+        return memberRefundVO;
     }
 
 }

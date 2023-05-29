@@ -1,7 +1,9 @@
 package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberSharePriceDTO;
+import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.enums.CashierTypeEnum;
 import com.coderpwh.member.domain.enums.MemberSettlementRuleEnum;
@@ -134,5 +136,15 @@ public class DomainMemberService {
 
     }
 
+
+    /***
+     * 会员注销
+     * @param command
+     * @return
+     */
+    public MemberRefundVO refundMember(MemberRefundCommand command) {
+
+        return null;
+    }
 
 }
