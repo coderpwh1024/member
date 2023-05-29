@@ -5,11 +5,10 @@ import com.coderpwh.member.common.ddd.AbstractSpecification;
 import com.coderpwh.member.common.util.enums.DddEnum;
 import com.coderpwh.member.common.util.enums.SysReturnCode;
 import com.coderpwh.member.common.util.exception.BusinessException;
-import com.coderpwh.member.domain.model.MemberPackage;
-import com.coderpwh.member.domain.model.MemberPackageBenefitRel;
-import com.coderpwh.member.domain.model.MemberPackageBenefitRelRepository;
-import com.coderpwh.member.domain.model.MemberPackageRepository;
+import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +27,10 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
 
 
     private MemberPackageBenefitRelRepository memberPackageBenefitRelRepository;
+
+    private MemberPaymentRepository memberPaymentRepository;
+
+    private MemberPaymentRouterRuleRepository memberPaymentRouterRuleRepository;
 
 
     public MemberSpecification(MemberPackageRepository memberPackageRepository, MemberPackageBenefitRelRepository memberPackageBenefitRelRepository) {
@@ -83,6 +86,29 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
             throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "开通会员套餐权益配置为空");
         }
 
+    }
+
+    public boolean isPaymentAndPayRule(Long tenantId, String payType, String category, String env) {
+        if (StringUtils.isBlank(env)) {
+            env = "default";
+        }
+
+        MemberPayment memberPayment = memberPaymentRepository.selectByPayType(tenantId, payType, env, category);
+        if (Objects.isNull(memberPayment)) {
+            log.error("尚未配置支付方式,租户id:{},支付类型:{},订单类型:{}", tenantId, payType, category);
+            throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "尚未配置支付方式,请联系管理员");
+        } else {
+            if (memberPayment.getIsRouter()) {
+                MemberPaymentRouterRule memberPaymentRouterRule = memberPaymentRouterRuleRepository.selectByPaymentId(memberPayment.getId());
+                if (Objects.isNull(memberPaymentRouterRule)) {
+                    log.error("尚未配置支付路由,租户id:{},支付类型:{},订单类型:{}", tenantId, payType, category);
+                    throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "尚未配置支付路由,请联系管理员");
+                }
+            } else {
+                return true;
+            }
+            return true;
+        }
     }
 
 

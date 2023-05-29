@@ -29,5 +29,12 @@ public interface MemberPaymentRouterRuleMapper extends BaseMapper<MemberPaymentR
     List<MemberPaymentRouterRule> findListByEntity(MemberPaymentRouterRuleQuery query);
 
 
+    /***
+     * 通过paymentId查询
+     * @param paymentId
+     * @return
+     */
+    MemberPaymentRouterRuleDO selectByPaymentId(Long paymentId);
+
 
 }

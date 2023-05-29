@@ -44,6 +44,13 @@
         from `tb_member_payment_router_rule`
         where `id` = #{id}
     </delete>
+    <select id="selectByPaymentId"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_payment_router_rule
+        where payment_id=#{paymentId} and is_deleted=0
+    </select>
 
 
 </mapper>

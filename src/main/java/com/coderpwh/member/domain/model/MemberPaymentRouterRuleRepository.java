@@ -85,7 +85,5 @@ public interface MemberPaymentRouterRuleRepository extends IService<MemberPaymen
     List<MemberPaymentRouterRule> getByIds(List<Integer> ids);
 
 
-
-
-
+    MemberPaymentRouterRule selectByPaymentId(Long paymentId);
 }

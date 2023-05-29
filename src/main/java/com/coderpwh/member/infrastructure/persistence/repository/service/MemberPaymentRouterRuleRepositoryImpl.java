@@ -90,7 +90,11 @@ public class MemberPaymentRouterRuleRepositoryImpl extends ServiceImpl<MemberPay
         return memberPaymentRouterRuleConverter.toEntity(entityList);
     }
 
-
+    @Override
+    public MemberPaymentRouterRule selectByPaymentId(Long paymentId) {
+        MemberPaymentRouterRuleDO memberPaymentRouterRuleDO = baseMapper.selectByPaymentId(paymentId);
+        return  memberPaymentRouterRuleConverter.toEntity(memberPaymentRouterRuleDO);
+    }
 
 
 }
