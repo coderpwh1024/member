@@ -4,76 +4,97 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO">
-        <id column="id" property="id" />
-        <result column="tenant_id" property="tenantId" />
-        <result column="user_id" property="userId" />
-        <result column="order_number" property="orderNumber" />
-        <result column="name" property="name" />
-        <result column="order_status" property="orderStatus" />
-        <result column="amount" property="amount" />
-        <result column="product_type" property="productType" />
-        <result column="product_code" property="productCode" />
-        <result column="type" property="type" />
-        <result column="category" property="category" />
-        <result column="source" property="source" />
-        <result column="details" property="details" />
-        <result column="partner_order_number" property="partnerOrderNumber" />
-        <result column="remark" property="remark" />
-        <result column="revenue" property="revenue" />
-        <result column="pay_time" property="payTime" />
-        <result column="create_time" property="createTime" />
-        <result column="create_user" property="createUser" />
-        <result column="update_user" property="updateUser" />
-        <result column="status" property="status" />
-        <result column="update_time" property="updateTime" />
-        <result column="pay_type" property="payType" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="is_share_benefit" property="isShareBenefit" />
-        <result column="account_type" property="accountType" />
-        <result column="benefit_account" property="benefitAccount" />
-        <result column="pay_url" property="payUrl" />
-        <result column="share_money" property="shareMoney" />
-        <result column="transaction_id" property="transactionId" />
-        <result column="extra_info" property="extraInfo" />
-        <result column="is_center_cashier" property="isCenterCashier" />
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="name" property="name"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="amount" property="amount"/>
+        <result column="product_type" property="productType"/>
+        <result column="product_code" property="productCode"/>
+        <result column="type" property="type"/>
+        <result column="category" property="category"/>
+        <result column="source" property="source"/>
+        <result column="details" property="details"/>
+        <result column="partner_order_number" property="partnerOrderNumber"/>
+        <result column="remark" property="remark"/>
+        <result column="revenue" property="revenue"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="status" property="status"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="pay_type" property="payType"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="is_share_benefit" property="isShareBenefit"/>
+        <result column="account_type" property="accountType"/>
+        <result column="benefit_account" property="benefitAccount"/>
+        <result column="pay_url" property="payUrl"/>
+        <result column="share_money" property="shareMoney"/>
+        <result column="transaction_id" property="transactionId"/>
+        <result column="extra_info" property="extraInfo"/>
+        <result column="is_center_cashier" property="isCenterCashier"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        `id`,`tenant_id`,`user_id`,`order_number`,`name`,`order_status`,`amount`,`product_type`,`product_code`,`type`,`category`,`source`,`details`,`partner_order_number`,`remark`,`revenue`,`pay_time`,`create_time`,`create_user`,`update_user`,`status`,`update_time`,`pay_type`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`pay_url`,`share_money`,`transaction_id`,`extra_info`,`is_center_cashier`
+        `id`
+        ,`tenant_id`,`user_id`,`order_number`,`name`,`order_status`,`amount`,`product_type`,`product_code`,`type`,`category`,`source`,`details`,`partner_order_number`,`remark`,`revenue`,`pay_time`,`create_time`,`create_user`,`update_user`,`status`,`update_time`,`pay_type`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`pay_url`,`share_money`,`transaction_id`,`extra_info`,`is_center_cashier`
     </sql>
-    <!--批量添加-->
-    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
-        INSERT INTO `tb_order_order` (`id`,`tenant_id`,`user_id`,`order_number`,`name`,`order_status`,`amount`,`product_type`,`product_code`,`type`,`category`,`source`,`details`,`partner_order_number`,`remark`,`revenue`,`pay_time`,`create_time`,`create_user`,`update_user`,`status`,`update_time`,`pay_type`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`pay_url`,`share_money`,`transaction_id`,`extra_info`,`is_center_cashier`)
-        VALUES
-        <foreach collection="list" item="item" separator=",">
-                (#{item.id},#{item.tenantId},#{item.userId},#{item.orderNumber},#{item.name},#{item.orderStatus},#{item.amount},#{item.productType},#{item.productCode},#{item.type},#{item.category},#{item.source},#{item.details},#{item.partnerOrderNumber},#{item.remark},#{item.revenue},#{item.payTime},#{item.createTime},#{item.createUser},#{item.updateUser},#{item.status},#{item.updateTime},#{item.payType},#{item.isDeleted},#{item.isShareBenefit},#{item.accountType},#{item.benefitAccount},#{item.payUrl},#{item.shareMoney},#{item.transactionId},#{item.extraInfo},#{item.isCenterCashier})
-        </foreach>
-    </insert>
-    <!--添加一条数据-->
-    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
-        insert into `tb_order_order`(`id`,`tenant_id`,`user_id`,`order_number`,`name`,`order_status`,`amount`,`product_type`,`product_code`,`type`,`category`,`source`,`details`,`partner_order_number`,`remark`,`revenue`,`pay_time`,`create_time`,`create_user`,`update_user`,`status`,`update_time`,`pay_type`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`pay_url`,`share_money`,`transaction_id`,`extra_info`,`is_center_cashier`)
-        values(#{id},#{tenantId},#{userId},#{orderNumber},#{name},#{orderStatus},#{amount},#{productType},#{productCode},#{type},#{category},#{source},#{details},#{partnerOrderNumber},#{remark},#{revenue},#{payTime},#{createTime},#{createUser},#{updateUser},#{status},#{updateTime},#{payType},#{isDeleted},#{isShareBenefit},#{accountType},#{benefitAccount},#{payUrl},#{shareMoney},#{transactionId},#{extraInfo},#{isCenterCashier})
-    </insert>
 
     <!--根据id修改-->
     <update id="updateById">
-        update `tb_order_order` set
-        tenant_id=#{tenantId},user_id=#{userId},order_number=#{orderNumber},name=#{name},order_status=#{orderStatus},amount=#{amount},product_type=#{productType},product_code=#{productCode},type=#{type},category=#{category},source=#{source},details=#{details},partner_order_number=#{partnerOrderNumber},remark=#{remark},revenue=#{revenue},pay_time=#{payTime},create_time=#{createTime},create_user=#{createUser},update_user=#{updateUser},status=#{status},update_time=#{updateTime},pay_type=#{payType},is_deleted=#{isDeleted},is_share_benefit=#{isShareBenefit},account_type=#{accountType},benefit_account=#{benefitAccount},pay_url=#{payUrl},share_money=#{shareMoney},transaction_id=#{transactionId},extra_info=#{extraInfo},is_center_cashier=#{isCenterCashier}
-        where `id`=#{id}
+        update `tb_order_order`
+        set tenant_id=#{tenantId},
+            user_id=#{userId},
+            order_number=#{orderNumber},
+            name=#{name},
+            order_status=#{orderStatus},
+            amount=#{amount},
+            product_type=#{productType},
+            product_code=#{productCode},
+            type=#{type},
+            category=#{category},
+            source=#{source},
+            details=#{details},
+            partner_order_number=#{partnerOrderNumber},
+            remark=#{remark},
+            revenue=#{revenue},
+            pay_time=#{payTime},
+            create_time=#{createTime},
+            create_user=#{createUser},
+            update_user=#{updateUser},
+            status=#{status},
+            update_time=#{updateTime},
+            pay_type=#{payType},
+            is_deleted=#{isDeleted},
+            is_share_benefit=#{isShareBenefit},
+            account_type=#{accountType},
+            benefit_account=#{benefitAccount},
+            pay_url=#{payUrl},
+            share_money=#{shareMoney},
+            transaction_id=#{transactionId},
+            extra_info=#{extraInfo},
+            is_center_cashier=#{isCenterCashier}
+        where `id` = #{id}
     </update>
 
     <!--根据id删除-->
     <delete id="deleteById">
-        delete from `tb_order_order`
-        where `id`=#{id}
+        delete
+        from `tb_order_order`
+        where `id` = #{id}
     </delete>
 
-    <!--根据id查询对象-->
-    <select id="getOrderOrderDOById" resultMap="BaseResultMap">
-        SELECT
+
+    <select id="getUnpaidOrder"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO">
+        select
         <include refid="Base_Column_List"/>
-        FROM `tb_order_order`
-        WHERE `id`=#{id}
+        from tb_order_order
+        where product_type=#{productType} and
+        product_code=#{productCode} and type=#{type} and is_deleted=0;
     </select>
 </mapper>
