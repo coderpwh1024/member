@@ -1,6 +1,7 @@
 package com.coderpwh.member.application.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 
 /**
@@ -16,5 +17,14 @@ public interface MemberService {
      * @return
      */
     MemberSaveVO saveMember(MemberJoinCommand command);
+
+
+    /***
+     * 会员注销
+     * @param command
+     * @return
+     */
+    String refundMember(MemberRefundCommand command);
+
 
 }

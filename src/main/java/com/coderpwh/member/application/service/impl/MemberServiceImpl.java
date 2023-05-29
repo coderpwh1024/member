@@ -2,6 +2,7 @@ package com.coderpwh.member.application.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.application.vo.MemberSaveVO;
@@ -51,12 +52,22 @@ public class MemberServiceImpl implements MemberService {
         memberSpecification.isMemberPackage(Long.valueOf(memberUser.getTenantId()), command.getProductCode());
 
 
-
         // 领域层
         DomainMemberService domainMemberService = new DomainMemberService();
         MemberSaveVO memberSaveVO = domainMemberService.saveMember(command);
 
         return memberSaveVO;
+    }
+
+
+    /***
+     * 注销会员
+     * @param command
+     * @return
+     */
+    @Override
+    public String refundMember(MemberRefundCommand command) {
+        return null;
     }
 
 }

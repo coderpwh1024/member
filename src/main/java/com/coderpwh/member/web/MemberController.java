@@ -1,6 +1,7 @@
 package com.coderpwh.member.web;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.common.util.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,17 @@ public class MemberController {
     @RequestMapping(value = "/saveMember", method = RequestMethod.POST)
     public Result saveMember(@RequestBody MemberJoinCommand command) {
         return Result.ok(memberService.saveMember(command));
+    }
+
+
+    /***
+     * 会员注销与退款
+     * @param command
+     * @return
+     */
+    @RequestMapping(value = "/refund", method = RequestMethod.POST)
+    public Result refundMember(@RequestBody MemberRefundCommand command) {
+        return Result.ok(memberService.refundMember(command));
     }
 
 
