@@ -6,6 +6,8 @@ import com.coderpwh.member.common.util.enums.DddEnum;
 import com.coderpwh.member.common.util.enums.SysReturnCode;
 import com.coderpwh.member.common.util.exception.BusinessException;
 import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberCardDO;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,9 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
 
 
     private OrderOrderRepository orderOrderRepository;
+
+
+    private MemberCardRepository memberCardRepository;
 
 
     public MemberSpecification(MemberPackageRepository memberPackageRepository, MemberPackageBenefitRelRepository memberPackageBenefitRelRepository) {
@@ -155,6 +160,20 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
         }
 
         return true;
+    }
+
+
+    /***
+     * 会员退款校验过期规则退款
+     * @return
+     */
+    public boolean isMemberRefundByExpirationTime(String orderNumber, Long tenantId) {
+
+        MemberCard MemberCard = memberCardRepository.selectByOrderNumber(orderNumber);
+
+        // TODO   还未校验完
+        return true;
+
     }
 
 

@@ -35,4 +35,12 @@ public interface MemberCardMapper extends BaseMapper<MemberCardDO> {
      */
     MemberCardDO selectByUserIdAndTenantId(@Param("userId") Long userId, @Param("tenantId") String tenantId);
 
+
+    /***
+     * 通过订单号查询
+     * @param orderNumber
+     * @return
+     */
+    MemberCardDO selectByOrderNumber(String orderNumber);
+
 }

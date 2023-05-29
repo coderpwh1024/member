@@ -115,5 +115,11 @@ public class MemberCardRepositoryImpl extends ServiceImpl<MemberCardMapper, Memb
         return memberCardConverter.toEntity(memberCardDO);
     }
 
+    @Override
+    public MemberCard selectByOrderNumber(String orderNumber) {
+        MemberCardDO memberCardDO = baseMapper.selectByOrderNumber(orderNumber);
+        return memberCardConverter.toEntity(memberCardDO);
+    }
+
 
 }

@@ -102,4 +102,11 @@ public interface MemberCardRepository extends IService<MemberCardDO> {
     MemberCard selectByUserIdAndTenantId(Long userId, String tenantId);
 
 
+    /***
+     * 通过订单号查询卡
+     * @param orderNumber
+     * @return
+     */
+    MemberCard selectByOrderNumber(String orderNumber);
+
 }
