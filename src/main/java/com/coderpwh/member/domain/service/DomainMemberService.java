@@ -59,7 +59,6 @@ public class DomainMemberService {
 
         MemberPackage memberPackage = memberPackageRepository.selectByAgentNumberAndCode(command.getAgentNumber(), command.getProductType());
 
-
         return null;
 
     }

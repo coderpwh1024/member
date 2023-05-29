@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
         MemberSpecification memberSpecification = new MemberSpecification(memberPackageRepository, memberPackageBenefitRelRepository);
         memberSpecification.isUserLogin(memberUser);
         memberSpecification.isMemberPackage(Long.valueOf(memberUser.getTenantId()), command.getProductCode());
-//        memberSpecification.isPaymentAndPayRule()
+
 
 
         // 领域层

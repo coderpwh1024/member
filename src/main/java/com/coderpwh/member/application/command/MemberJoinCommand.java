@@ -65,7 +65,6 @@ public class MemberJoinCommand implements Serializable {
     @NotBlank(message = "时间戳不能为空")
     private String timestamp;
 
-
     /***
      * 签名
      */
