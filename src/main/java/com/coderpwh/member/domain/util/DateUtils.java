@@ -116,4 +116,15 @@ public class DateUtils {
         return 10000;
     }
 
+
+    /***
+     *  与当前时间比较，查看是否过期
+     * @param expirationTime
+     * @return
+     */
+    public static Boolean checkExpirationTime(Date expirationTime) {
+        return new Date().after(expirationTime);
+    }
+
+
 }

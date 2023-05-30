@@ -5,10 +5,7 @@ import com.coderpwh.member.common.ddd.AbstractSpecification;
 import com.coderpwh.member.common.util.enums.DddEnum;
 import com.coderpwh.member.common.util.enums.SysReturnCode;
 import com.coderpwh.member.common.util.exception.BusinessException;
-import com.coderpwh.member.domain.model.MemberCard;
-import com.coderpwh.member.domain.model.MemberCardRepository;
-import com.coderpwh.member.domain.model.OrderOrder;
-import com.coderpwh.member.domain.model.OrderOrderRepository;
+import com.coderpwh.member.domain.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,6 +23,9 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
 
 
     private MemberCardRepository memberCardRepository;
+
+
+    private MemberTenantRepository memberTenantRepository;
 
 
     public MemberRefundSpecification(OrderOrderRepository orderOrderRepository, MemberCardRepository memberCardRepository) {
@@ -95,9 +95,12 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
      * 会员退款校验过期规则退款
      * @return
      */
-    public boolean isMemberRefundByExpirationTime(String orderNumber, Long tenantId) {
+    public boolean isMemberRefundByExpirationTime(String orderNumber, Long tenantId, String agentNumber) {
 
         MemberCard MemberCard = memberCardRepository.selectByOrderNumber(orderNumber);
+
+        MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(agentNumber);
+
 
         // TODO   还未校验完
         return true;

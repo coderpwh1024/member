@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * @author coderpwh
@@ -33,7 +34,7 @@ public class MemberController {
      * @return
      */
     @RequestMapping(value = "/saveMember", method = RequestMethod.POST)
-    public Result saveMember(@RequestBody MemberJoinCommand command) {
+    public Result saveMember(@RequestBody @Valid MemberJoinCommand command) {
         return Result.ok(memberService.saveMember(command));
     }
 
@@ -44,7 +45,7 @@ public class MemberController {
      * @return
      */
     @RequestMapping(value = "/refund", method = RequestMethod.POST)
-    public Result refundMember(@RequestBody MemberRefundCommand command) {
+    public Result refundMember(@RequestBody @Valid MemberRefundCommand command) {
         return Result.ok(memberService.refundMember(command));
     }
 
