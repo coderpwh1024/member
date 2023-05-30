@@ -6,6 +6,7 @@ import com.coderpwh.member.common.util.enums.DddEnum;
 import com.coderpwh.member.common.util.enums.SysReturnCode;
 import com.coderpwh.member.common.util.exception.BusinessException;
 import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.domain.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -96,10 +97,15 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
      * @return
      */
     public boolean isMemberRefundByExpirationTime(String orderNumber, Long tenantId, String agentNumber) {
-
-        MemberCard MemberCard = memberCardRepository.selectByOrderNumber(orderNumber);
-
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(agentNumber);
+        if (Objects.isNull(memberTenant)) {
+            log.error("会员退款校验过期退款时租户信息为空,租户代理号为:{},订单号为:{}", agentNumber, orderNumber);
+            throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "代理号不存在");
+        }
+
+        MemberCard memberCard = memberCardRepository.selectByOrderNumber(orderNumber);
+
+        Boolean expirationTimeFlag = DateUtils.checkExpirationTime(memberCard.getExpirationTime());
 
 
         // TODO   还未校验完
