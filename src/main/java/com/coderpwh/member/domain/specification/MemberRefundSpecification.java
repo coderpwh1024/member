@@ -1,15 +1,19 @@
 package com.coderpwh.member.domain.specification;
 
 import com.coderpwh.member.application.dto.MemberUserDTO;
+import com.coderpwh.member.application.dto.TenantPropertyDTO;
 import com.coderpwh.member.common.ddd.AbstractSpecification;
 import com.coderpwh.member.common.util.enums.DddEnum;
 import com.coderpwh.member.common.util.enums.SysReturnCode;
 import com.coderpwh.member.common.util.exception.BusinessException;
+import com.coderpwh.member.domain.enums.TenantPropertyKeyConstant;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.util.DateUtils;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberTenantExtraInfoDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -27,6 +31,9 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
 
 
     private MemberTenantRepository memberTenantRepository;
+
+
+    private MemberTenantExtraInfoRepository memberTenantExtraInfoRepository;
 
 
     public MemberRefundSpecification(OrderOrderRepository orderOrderRepository, MemberCardRepository memberCardRepository) {
@@ -96,7 +103,7 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
      * 会员退款校验过期规则退款
      * @return
      */
-    public boolean isMemberRefundByExpirationTime(String orderNumber, Long tenantId, String agentNumber) {
+    public boolean isMemberRefundByExpirationTime(String orderNumber, String agentNumber) {
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(agentNumber);
         if (Objects.isNull(memberTenant)) {
             log.error("会员退款校验过期退款时租户信息为空,租户代理号为:{},订单号为:{}", agentNumber, orderNumber);
@@ -106,6 +113,9 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
         MemberCard memberCard = memberCardRepository.selectByOrderNumber(orderNumber);
 
         Boolean expirationTimeFlag = DateUtils.checkExpirationTime(memberCard.getExpirationTime());
+
+
+        List<TenantPropertyDTO> tenantExtraInfoList = memberTenantExtraInfoRepository.selectByTenantId(memberTenant.getId(), TenantPropertyKeyConstant.OVERDUE_REFUND__KEY);
 
 
         // TODO   还未校验完

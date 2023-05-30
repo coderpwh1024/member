@@ -1,7 +1,10 @@
 package com.coderpwh.member.infrastructure.persistence.mapper;
 
 import com.coderpwh.member.application.command.MemberTenantExtraInfoQuery;
+
 import java.util.List;
+
+import com.coderpwh.member.application.dto.TenantPropertyDTO;
 import org.apache.ibatis.annotations.Param;
 import com.coderpwh.member.domain.model.MemberTenantExtraInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -20,11 +23,21 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberTenantExtraInfoMapper extends BaseMapper<MemberTenantExtraInfoDO> {
 
     /**
-    * 根据 实体不为空的数据查询
-    *
-    * @param query 查询对象
-    * @return 检索后的集合
-    */
+     * 根据 实体不为空的数据查询
+     *
+     * @param query 查询对象
+     * @return 检索后的集合
+     */
     List<MemberTenantExtraInfo> findListByEntity(MemberTenantExtraInfoQuery query);
+
+
+    /***
+     * 通过租户id和属性key查询
+     * @param tenantId
+     * @param overdueRefundKey
+     * @return
+     */
+    List<TenantPropertyDTO> selectByTenantId(@Param("tenantId") Long tenantId, @Param("overdueRefundKey") String overdueRefundKey);
+
 
 }

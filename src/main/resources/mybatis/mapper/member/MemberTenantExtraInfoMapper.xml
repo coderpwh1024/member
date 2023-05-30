@@ -4,54 +4,63 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.MemberTenantExtraInfoDO">
-        <id column="id" property="id" />
-        <result column="extra_property_id" property="extraPropertyId" />
-        <result column="tenant_id" property="tenantId" />
-        <result column="property_value" property="propertyValue" />
-        <result column="create_time" property="createTime" />
-        <result column="create_user" property="createUser" />
-        <result column="update_time" property="updateTime" />
-        <result column="update_user" property="updateUser" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="remark" property="remark" />
+        <id column="id" property="id"/>
+        <result column="extra_property_id" property="extraPropertyId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="property_value" property="propertyValue"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="remark" property="remark"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        `id`,`extra_property_id`,`tenant_id`,`property_value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`,`remark`
+        `id`
+        ,`extra_property_id`,`tenant_id`,`property_value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`,`remark`
     </sql>
-    <!--批量添加-->
-    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
-        INSERT INTO `tb_member_tenant_extra_info` (`id`,`extra_property_id`,`tenant_id`,`property_value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`,`remark`)
-        VALUES
-        <foreach collection="list" item="item" separator=",">
-                (#{item.id},#{item.extraPropertyId},#{item.tenantId},#{item.propertyValue},#{item.createTime},#{item.createUser},#{item.updateTime},#{item.updateUser},#{item.isDeleted},#{item.remark})
-        </foreach>
-    </insert>
-    <!--添加一条数据-->
-    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
-        insert into `tb_member_tenant_extra_info`(`id`,`extra_property_id`,`tenant_id`,`property_value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`,`remark`)
-        values(#{id},#{extraPropertyId},#{tenantId},#{propertyValue},#{createTime},#{createUser},#{updateTime},#{updateUser},#{isDeleted},#{remark})
-    </insert>
+
 
     <!--根据id修改-->
     <update id="updateById">
-        update `tb_member_tenant_extra_info` set
-        extra_property_id=#{extraPropertyId},tenant_id=#{tenantId},property_value=#{propertyValue},create_time=#{createTime},create_user=#{createUser},update_time=#{updateTime},update_user=#{updateUser},is_deleted=#{isDeleted},remark=#{remark}
-        where `id`=#{id}
+        update `tb_member_tenant_extra_info`
+        set extra_property_id=#{extraPropertyId},
+            tenant_id=#{tenantId},
+            property_value=#{propertyValue},
+            create_time=#{createTime},
+            create_user=#{createUser},
+            update_time=#{updateTime},
+            update_user=#{updateUser},
+            is_deleted=#{isDeleted},
+            remark=#{remark}
+        where `id` = #{id}
     </update>
 
     <!--根据id删除-->
     <delete id="deleteById">
-        delete from `tb_member_tenant_extra_info`
-        where `id`=#{id}
+        delete
+        from `tb_member_tenant_extra_info`
+        where `id` = #{id}
     </delete>
 
-    <!--根据id查询对象-->
-    <select id="getMemberTenantExtraInfoDOById" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM `tb_member_tenant_extra_info`
-        WHERE `id`=#{id}
+    <select id="selectByTenantId"
+            resultType="com.coderpwh.member.application.dto.TenantPropertyDTO">
+        select txi.code as codeKey,
+        tep.property_value as propertyValue
+        from tb_member_tenant_extra_info txi
+        left join tb_member_tenant_extra_property tep on txi.extra_proper_id = tep.id
+        where txi.is_deleted = 0
+        and tep.is_deleted = 0
+        <if test=" tenantId!=null and tenantId!=''">
+            and txi.tenant_id=#{tenantId}
+        </if>
+        <if test="overdueRefundKey!=null and overdueRefundKey!=''">
+            and tep.`code`=#{overdueRefundKey}
+        </if>
+
     </select>
+
+
 </mapper>
