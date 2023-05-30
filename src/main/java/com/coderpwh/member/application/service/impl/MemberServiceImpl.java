@@ -7,10 +7,12 @@ import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
+import com.coderpwh.member.domain.model.MemberCardRepository;
 import com.coderpwh.member.domain.model.MemberPackageBenefitRelRepository;
 import com.coderpwh.member.domain.model.MemberPackageRepository;
 import com.coderpwh.member.domain.model.OrderOrderRepository;
 import com.coderpwh.member.domain.service.DomainMemberService;
+import com.coderpwh.member.domain.specification.MemberRefundSpecification;
 import com.coderpwh.member.domain.specification.MemberSpecification;
 import com.coderpwh.member.domain.util.LoginUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +36,11 @@ public class MemberServiceImpl implements MemberService {
     @Resource
     private MemberPackageBenefitRelRepository memberPackageBenefitRelRepository;
 
-
     @Resource
     private OrderOrderRepository orderOrderRepository;
+
+    @Resource
+    private MemberCardRepository memberCardRepository;
 
 
     /***
@@ -76,10 +80,10 @@ public class MemberServiceImpl implements MemberService {
         // 获取登录用户
         MemberUserDTO memberUser = LoginUtil.loginUser();
 
-        // 校验用户登录与参数
-        MemberSpecification memberSpecification = new MemberSpecification(orderOrderRepository);
-        memberSpecification.isUserLogin(memberUser);
-        memberSpecification.isMemberRefund(command.getOrderNumber(), command.getPartnerOrderNumber());
+        // 校验层
+        MemberRefundSpecification memberRefundSpecification = new MemberRefundSpecification(orderOrderRepository, memberCardRepository);
+        memberRefundSpecification.isUserLogin(memberUser);
+        memberRefundSpecification.isMemberRefund(command.getOrderNumber(), command.getPartnerOrderNumber());
 
         // 领域层
         DomainMemberService domainMemberService = new DomainMemberService();
