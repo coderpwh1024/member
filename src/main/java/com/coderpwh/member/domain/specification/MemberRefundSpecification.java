@@ -109,6 +109,7 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
      */
     public boolean isMemberRefundByExpirationTime(String orderNumber, String agentNumber) {
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(agentNumber);
+
         if (Objects.isNull(memberTenant)) {
             log.error("会员退款校验过期退款时租户信息为空,租户代理号为:{},订单号为:{}", agentNumber, orderNumber);
             throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "代理号不存在");
@@ -135,7 +136,7 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
      * 会员校验乱序退款
      * @return
      */
-    public boolean isMemberRefundByOutOf(String orderNumber, String agentNumber) {
+    public boolean isMemberRefundByOutOf(String orderNumber) {
         MemberCard memberCard = memberCardRepository.selectByOrderNumber(orderNumber);
 
         if (Objects.isNull(memberCard)) {
