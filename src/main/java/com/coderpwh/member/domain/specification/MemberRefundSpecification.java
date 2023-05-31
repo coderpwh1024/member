@@ -1,5 +1,6 @@
 package com.coderpwh.member.domain.specification;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.dto.TenantPropertyDTO;
 import com.coderpwh.member.common.ddd.AbstractSpecification;
@@ -141,11 +142,22 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
             log.error("会员乱序退款校验时--当前卡信息不存在,订单号为:{}", orderNumber);
             throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前的订单卡信息不存在");
         }
-
-
-        Boolean expirationTimeFlag = DateUtils.checkExpirationTime(memberCard.getExpirationTime());
         List<MemberCardHistory> cardHistoryList = memberCardHistoryRepository.getLastOrder(memberCard.getUserId(), orderNumber);
 
+        if (CollectionUtil.isEmpty(cardHistoryList)) {
+
+            List<TenantPropertyDTO> tenantExtraInfoList = memberTenantExtraInfoRepository.selectByTenantId(Long.valueOf(memberCard.getTenantId()), TenantPropertyKeyConstant.OUT_OF_ORDER_REFUND__KEY);
+            if (CollectionUtil.isEmpty(tenantExtraInfoList)) {
+                log.error("当前租户:{},订单号:{},尚未配置乱序退款", memberCard.getTenantId(), orderNumber);
+                throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "尚未配置乱序退款");
+            } else {
+                TenantPropertyDTO tenantPropertyDTO = tenantExtraInfoList.get(0);
+                if ("false".equals(tenantPropertyDTO.getPropertyValue())) {
+                    log.error("当前租户:{},订单号:{}不允许乱序退款", memberCard.getTenantId(), orderNumber);
+                    throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前不允许乱序退款");
+                }
+            }
+        }
         return true;
     }
 
