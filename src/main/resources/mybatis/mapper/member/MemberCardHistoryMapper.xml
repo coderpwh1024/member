@@ -28,6 +28,14 @@
         `id`
         ,`card_id`,`tenant_id`,`user_id`,`status`,`order_number`,`partner_order_number`,`card_type`,`card_type_cn`,`effective_time`,`expiration_time`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`operation_description`
     </sql>
+    <select id="getValidOrderByUserId"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_card_history
+        where user_id=#{userId} and is_deleted=0 and `status` in (1,2)
+        order by expiration_time asc;
+    </select>
 
 
 </mapper>

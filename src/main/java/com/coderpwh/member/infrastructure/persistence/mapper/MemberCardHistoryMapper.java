@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
 
+import java.util.List;
+
 
 /**
  * <p>
@@ -18,6 +20,11 @@ import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO
 public interface MemberCardHistoryMapper extends BaseMapper<MemberCardHistoryDO> {
 
 
-
+    /***
+     * 通过user_id查询
+     * @param userId
+     * @return
+     */
+    List<MemberCardHistoryDO> getValidOrderByUserId(Long userId);
 
 }

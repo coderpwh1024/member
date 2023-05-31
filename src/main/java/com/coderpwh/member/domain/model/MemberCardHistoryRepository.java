@@ -84,5 +84,11 @@ public interface MemberCardHistoryRepository extends IService<MemberCardHistoryD
     List<MemberCardHistory> getByIds(List<Integer> ids);
 
 
-
+    /***
+     * 通过userId查询
+     * @param userId
+     * @param orderNumber
+     * @return
+     */
+    List<MemberCardHistory> getLastOrder(Long userId, String orderNumber);
 }

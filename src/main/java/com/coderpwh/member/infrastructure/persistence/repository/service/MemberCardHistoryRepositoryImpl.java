@@ -1,6 +1,7 @@
 package com.coderpwh.member.infrastructure.persistence.repository.service;
 
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.coderpwh.member.common.database.PageTransformUtil;
@@ -86,13 +87,30 @@ public class MemberCardHistoryRepositoryImpl extends ServiceImpl<MemberCardHisto
 
     @Override
     public List<MemberCardHistory> getByIds(List<Integer> ids) {
-        List<MemberCardHistoryDO> entityList = this.list(Wrappers.<MemberCardHistoryDO>lambdaQuery()
-                .in(MemberCardHistoryDO::getId, ids));
+        List<MemberCardHistoryDO> entityList = this.list(Wrappers.<MemberCardHistoryDO>lambdaQuery().in(MemberCardHistoryDO::getId, ids));
         return memberCardHistoryConverter.toEntity(entityList);
     }
 
 
-
+    /**
+     * 通过userId查询
+     *
+     * @param userId
+     * @param orderNumber
+     * @return
+     */
+    @Override
+    public List<MemberCardHistory> getLastOrder(Long userId, String orderNumber) {
+        List<MemberCardHistoryDO> entityList = baseMapper.getValidOrderByUserId(userId);
+        List<MemberCardHistory> list = memberCardHistoryConverter.toEntity(entityList);
+        if (CollectionUtils.isNotEmpty(list)) {
+            MemberCardHistory memberCardHistory = list.get(list.size() - 1);
+            if (memberCardHistory.getOrderNumber().equals(orderNumber)) {
+                return list;
+            }
+        }
+        return null;
+    }
 
 
 }

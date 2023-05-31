@@ -36,6 +36,9 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
     private MemberTenantExtraInfoRepository memberTenantExtraInfoRepository;
 
 
+    private MemberCardHistoryRepository memberCardHistoryRepository;
+
+
     public MemberRefundSpecification(OrderOrderRepository orderOrderRepository, MemberCardRepository memberCardRepository) {
         this.orderOrderRepository = orderOrderRepository;
         this.memberCardRepository = memberCardRepository;
@@ -110,17 +113,40 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
             throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "代理号不存在");
         }
 
-        MemberCard memberCard = memberCardRepository.selectByOrderNumber(orderNumber);
-
-        Boolean expirationTimeFlag = DateUtils.checkExpirationTime(memberCard.getExpirationTime());
-
-
         List<TenantPropertyDTO> tenantExtraInfoList = memberTenantExtraInfoRepository.selectByTenantId(memberTenant.getId(), TenantPropertyKeyConstant.OVERDUE_REFUND__KEY);
 
+        if (tenantExtraInfoList != null && tenantExtraInfoList.size() > 0) {
+            String propertyValue = tenantExtraInfoList.get(0).getPropertyValue();
+            if ("false".equals(propertyValue)) {
+                log.error("会员退款校验过期退款时--当前租户不允许过期失败退款,租户代理号为:{},订单号为:{}", agentNumber, orderNumber);
+                throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "不允许过期失败退款");
+            } else {
+                return true;
+            }
+        } else {
+            log.error("会员退款校验过期退款时--过期退款规则未配置,租户代理号为:{},订单号为:{}", agentNumber, orderNumber);
+            throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "过期失败规则未配置");
+        }
+    }
 
-        // TODO   还未校验完
+
+    /***
+     * 会员校验乱序退款
+     * @return
+     */
+    public boolean isMemberRefundByOutOf(String orderNumber, String agentNumber) {
+        MemberCard memberCard = memberCardRepository.selectByOrderNumber(orderNumber);
+
+        if (Objects.isNull(memberCard)) {
+            log.error("会员乱序退款校验时--当前卡信息不存在,订单号为:{}", orderNumber);
+            throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前的订单卡信息不存在");
+        }
+
+
+        Boolean expirationTimeFlag = DateUtils.checkExpirationTime(memberCard.getExpirationTime());
+        List<MemberCardHistory> cardHistoryList = memberCardHistoryRepository.getLastOrder(memberCard.getUserId(), orderNumber);
+
         return true;
-
     }
 
 
