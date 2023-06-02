@@ -146,7 +146,6 @@ public class MemberRefundSpecification extends AbstractSpecification<Integer> {
         List<MemberCardHistory> cardHistoryList = memberCardHistoryRepository.getLastOrder(memberCard.getUserId(), orderNumber);
 
         if (CollectionUtil.isEmpty(cardHistoryList)) {
-
             List<TenantPropertyDTO> tenantExtraInfoList = memberTenantExtraInfoRepository.selectByTenantId(Long.valueOf(memberCard.getTenantId()), TenantPropertyKeyConstant.OUT_OF_ORDER_REFUND__KEY);
             if (CollectionUtil.isEmpty(tenantExtraInfoList)) {
                 log.error("当前租户:{},订单号:{},尚未配置乱序退款", memberCard.getTenantId(), orderNumber);
