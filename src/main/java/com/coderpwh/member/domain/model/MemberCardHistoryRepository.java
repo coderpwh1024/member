@@ -91,4 +91,6 @@ public interface MemberCardHistoryRepository extends IService<MemberCardHistoryD
      * @return
      */
     List<MemberCardHistory> getLastOrder(Long userId, String orderNumber);
+
+    MemberCardHistory selectByOrderNumber(String orderNumber);
 }

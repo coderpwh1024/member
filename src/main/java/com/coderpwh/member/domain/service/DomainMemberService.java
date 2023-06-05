@@ -1,5 +1,6 @@
 package com.coderpwh.member.domain.service;
 
+import com.alibaba.fastjson.JSON;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberSharePriceDTO;
@@ -9,6 +10,7 @@ import com.coderpwh.member.domain.enums.CashierTypeEnum;
 import com.coderpwh.member.domain.enums.MemberSettlementRuleEnum;
 import com.coderpwh.member.domain.enums.OrderTypeEnum;
 import com.coderpwh.member.domain.model.*;
+import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPaymentRouterRuleDO;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberSettlementRuleDO;
@@ -42,6 +44,8 @@ public class DomainMemberService {
 
 
     private MemberPaymentRepository memberPaymentRepository;
+
+    private MemberCardHistoryRepository memberCardHistoryRepository;
 
 
     public DomainMemberService() {
@@ -143,8 +147,13 @@ public class DomainMemberService {
      * @return
      */
     public MemberRefundVO refundMember(MemberRefundCommand command) {
+        log.info("注销会员入参为:{}", JSON.toJSONString(command));
+
+
+        MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumber(command.getOrderNumber());
 
         return null;
     }
+
 
 }
