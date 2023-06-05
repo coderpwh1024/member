@@ -149,7 +149,6 @@ public class DomainMemberService {
     public MemberRefundVO refundMember(MemberRefundCommand command) {
         log.info("注销会员入参为:{}", JSON.toJSONString(command));
 
-
         MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumber(command.getOrderNumber());
 
         return null;

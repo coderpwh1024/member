@@ -27,4 +27,11 @@ public interface MemberCardHistoryMapper extends BaseMapper<MemberCardHistoryDO>
      */
     List<MemberCardHistoryDO> getValidOrderByUserId(Long userId);
 
+
+    /***
+     * 通过订单号查询卡历史
+     * @param orderNumber
+     * @return
+     */
+    MemberCardHistoryDO selectByOrderNumber(String orderNumber);
 }

@@ -113,4 +113,16 @@ public class MemberCardHistoryRepositoryImpl extends ServiceImpl<MemberCardHisto
     }
 
 
+    /***
+     * 通过订单号查询卡历史
+     * @param orderNumber
+     * @return
+     */
+    @Override
+    public MemberCardHistory selectByOrderNumber(String orderNumber) {
+        MemberCardHistoryDO memberCardHistoryDO = baseMapper.selectByOrderNumber(orderNumber);
+        return memberCardHistoryConverter.toEntity(memberCardHistoryDO);
+    }
+
+
 }
