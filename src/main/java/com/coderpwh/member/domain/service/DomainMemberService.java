@@ -8,6 +8,7 @@ import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.enums.CashierTypeEnum;
 import com.coderpwh.member.domain.enums.MemberSettlementRuleEnum;
+import com.coderpwh.member.domain.enums.OrderExtraKeyConstant;
 import com.coderpwh.member.domain.enums.OrderTypeEnum;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
@@ -46,6 +47,9 @@ public class DomainMemberService {
     private MemberPaymentRepository memberPaymentRepository;
 
     private MemberCardHistoryRepository memberCardHistoryRepository;
+
+
+    private OrderOrderExtraInfoRepository orderOrderExtraInfoRepository;
 
 
     public DomainMemberService() {
@@ -149,9 +153,23 @@ public class DomainMemberService {
     public MemberRefundVO refundMember(MemberRefundCommand command) {
         log.info("注销会员入参为:{}", JSON.toJSONString(command));
 
-        MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumber(command.getOrderNumber());
 
         return null;
+    }
+
+
+    /***
+     * 保存会员订单
+     */
+    public void saveMemberRefund(String orderNumber, String notifyUrl) {
+        MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumber(orderNumber);
+
+        if (StringUtils.isNotBlank(notifyUrl) && StringUtils.isNotBlank(orderNumber)) {
+
+            OrderOrderExtraInfo orderExtraInfo = orderOrderExtraInfoRepository.selectByOrderNumberAndKey(orderNumber, OrderExtraKeyConstant.REFUND_URL_KEY);
+        }
+
+
     }
 
 

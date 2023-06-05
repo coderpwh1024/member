@@ -4,54 +4,53 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.OrderOrderExtraInfoDO">
-        <id column="id" property="id" />
-        <result column="order_number" property="orderNumber" />
-        <result column="partner_order_number" property="partnerOrderNumber" />
-        <result column="key" property="key" />
-        <result column="value" property="value" />
-        <result column="create_time" property="createTime" />
-        <result column="create_user" property="createUser" />
-        <result column="update_time" property="updateTime" />
-        <result column="update_user" property="updateUser" />
-        <result column="is_deleted" property="isDeleted" />
+        <id column="id" property="id"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="partner_order_number" property="partnerOrderNumber"/>
+        <result column="key" property="key"/>
+        <result column="value" property="value"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="is_deleted" property="isDeleted"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        `id`,`order_number`,`partner_order_number`,`key`,`value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`
+        `id`
+        ,`order_number`,`partner_order_number`,`key`,`value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`
     </sql>
-    <!--批量添加-->
-    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
-        INSERT INTO `tb_order_order_extra_info` (`id`,`order_number`,`partner_order_number`,`key`,`value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`)
-        VALUES
-        <foreach collection="list" item="item" separator=",">
-                (#{item.id},#{item.orderNumber},#{item.partnerOrderNumber},#{item.key},#{item.value},#{item.createTime},#{item.createUser},#{item.updateTime},#{item.updateUser},#{item.isDeleted})
-        </foreach>
-    </insert>
-    <!--添加一条数据-->
-    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
-        insert into `tb_order_order_extra_info`(`id`,`order_number`,`partner_order_number`,`key`,`value`,`create_time`,`create_user`,`update_time`,`update_user`,`is_deleted`)
-        values(#{id},#{orderNumber},#{partnerOrderNumber},#{key},#{value},#{createTime},#{createUser},#{updateTime},#{updateUser},#{isDeleted})
-    </insert>
+
 
     <!--根据id修改-->
     <update id="updateById">
-        update `tb_order_order_extra_info` set
-        order_number=#{orderNumber},partner_order_number=#{partnerOrderNumber},key=#{key},value=#{value},create_time=#{createTime},create_user=#{createUser},update_time=#{updateTime},update_user=#{updateUser},is_deleted=#{isDeleted}
-        where `id`=#{id}
+        update `tb_order_order_extra_info`
+        set order_number=#{orderNumber},
+            partner_order_number=#{partnerOrderNumber},
+            key=#{key},
+            value=#{value},
+            create_time=#{createTime},
+            create_user=#{createUser},
+            update_time=#{updateTime},
+            update_user=#{updateUser},
+            is_deleted=#{isDeleted}
+        where `id` = #{id}
     </update>
 
     <!--根据id删除-->
     <delete id="deleteById">
-        delete from `tb_order_order_extra_info`
-        where `id`=#{id}
+        delete
+        from `tb_order_order_extra_info`
+        where `id` = #{id}
     </delete>
 
-    <!--根据id查询对象-->
-    <select id="getOrderOrderExtraInfoDOById" resultMap="BaseResultMap">
-        SELECT
+
+    <select id="selectByOrderNumberAndKey"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.OrderOrderExtraInfoDO">
+        select
         <include refid="Base_Column_List"/>
-        FROM `tb_order_order_extra_info`
-        WHERE `id`=#{id}
+        from tb_order_order_extra_info
+        where order_number=#{orderNumber} and `key`=#{key} and is_deleted=0;
     </select>
 </mapper>
