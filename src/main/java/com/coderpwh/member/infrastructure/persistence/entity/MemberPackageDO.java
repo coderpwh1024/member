@@ -3,12 +3,15 @@ package com.coderpwh.member.infrastructure.persistence.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import lombok.experimental.Accessors;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -50,7 +53,7 @@ public class MemberPackageDO implements Serializable {
      * 有效期计算方式：1-叠加固定 2-按自然月算法 3-固定日期
      */
     @TableField("expiration_method")
-    private Boolean expirationMethod;
+    private Integer expirationMethod;
 
     /**
      * 套餐固定天数/固定天数

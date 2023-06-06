@@ -1,6 +1,7 @@
 package com.coderpwh.member.application.command;
 
 import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -35,7 +36,7 @@ public class MemberPackageCommand {
     /**
      * 有效期计算方式：1-叠加固定 2-按自然月算法 3-固定日期
      */
-    private Boolean expirationMethod;
+    private Integer expirationMethod;
 
     /**
      * 套餐固定天数/固定天数
