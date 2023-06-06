@@ -1,6 +1,7 @@
 package com.coderpwh.member.web;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.common.util.result.Result;
@@ -47,6 +48,16 @@ public class MemberController {
     @RequestMapping(value = "/refund", method = RequestMethod.POST)
     public Result refundMember(@RequestBody @Valid MemberRefundCommand command) {
         return Result.ok(memberService.refundMember(command));
+    }
+
+
+    /***
+     *  查询会员权益包
+     * @return
+     */
+    @RequestMapping(value = "/package/detail", method = RequestMethod.POST)
+    public Result getPackageDetail(@RequestBody @Valid MemberPackageDetailQuery query) {
+        return Result.ok(memberService.getPackageDetail(query));
     }
 
 

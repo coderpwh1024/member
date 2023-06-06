@@ -2,6 +2,7 @@ package com.coderpwh.member.application.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.MemberService;
@@ -94,5 +95,17 @@ public class MemberServiceImpl implements MemberService {
 
         return memberRefundVO;
     }
+
+
+    /***
+     * 查询会员权益包
+     * @param query
+     * @return
+     */
+    @Override
+    public String getPackageDetail(MemberPackageDetailQuery query) {
+        return null;
+    }
+
 
 }
