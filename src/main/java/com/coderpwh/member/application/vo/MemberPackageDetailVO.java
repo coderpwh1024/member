@@ -26,12 +26,6 @@ public class MemberPackageDetailVO implements Serializable {
 
 
     /***
-     * 租户名称
-     */
-    private String tenantName;
-
-
-    /***
      * 权益包名称
      */
     private String name;
@@ -69,16 +63,6 @@ public class MemberPackageDetailVO implements Serializable {
      */
     private String faceValue;
 
-    /***
-     * 权益充值账号
-     */
-    private String account;
-
-
-    /**
-     * 订单类型
-     */
-    private String category;
 
     /***
      * 权益信息

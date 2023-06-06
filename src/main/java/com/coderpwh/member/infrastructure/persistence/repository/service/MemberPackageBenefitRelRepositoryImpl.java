@@ -3,6 +3,7 @@ package com.coderpwh.member.infrastructure.persistence.repository.service;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.coderpwh.member.application.dto.BenefitDTO;
 import com.coderpwh.member.common.database.PageTransformUtil;
 import com.coderpwh.member.common.database.PageUtils;
 import com.coderpwh.member.domain.model.MemberPackageBenefitRel;
@@ -110,6 +111,11 @@ public class MemberPackageBenefitRelRepositoryImpl extends ServiceImpl<MemberPac
     }
 
 
+    @Override
+    public List<BenefitDTO> getByTenantIdAndPackageId(Long tenantId, Long packageId) {
+        List<BenefitDTO> list = baseMapper.getByTenantIdAndPackageId(tenantId, packageId);
+        return list;
+    }
 
 
 }

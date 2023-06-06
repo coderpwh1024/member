@@ -1,6 +1,9 @@
 package com.coderpwh.member.application.service.impl;
 
 import com.alibaba.fastjson2.JSON;
+import com.coderpwh.member.application.assembler.domain.BenefitDTOAssembler;
+import com.coderpwh.member.application.assembler.domain.MemberPackageDTOAssembler;
+import com.coderpwh.member.application.assembler.vo.MemberPackageDetailVOAssembler;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
@@ -30,6 +33,15 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+
+    @Resource
+    private BenefitDTOAssembler benefitDTOAssembler;
+
+    @Resource
+    private MemberPackageDetailVOAssembler memberPackageDetailVOAssembler;
+
+    @Resource
+    private MemberPackageDTOAssembler memberPackageDTOAssembler;
 
     @Resource
     private MemberPackageRepository memberPackageRepository;
@@ -115,7 +127,7 @@ public class MemberServiceImpl implements MemberService {
         specification.isMemberPackageDetail(query.getAgentNumber());
 
         //  领域层
-        DomainMemberService domainMemberService = new DomainMemberService();
+        DomainMemberService domainMemberService = new DomainMemberService(memberTenantRepository, memberPackageRepository, memberPackageBenefitRelRepository, memberPackageDTOAssembler, memberPackageDetailVOAssembler, benefitDTOAssembler);
         List<MemberPackageDetailVO> list = domainMemberService.getPackageDetail(query);
 
         return list;

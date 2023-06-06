@@ -1,5 +1,6 @@
 package com.coderpwh.member.infrastructure.persistence.mapper;
 
+import com.coderpwh.member.application.dto.BenefitDTO;
 import com.coderpwh.member.domain.model.MemberPackageBenefitRel;
 
 import java.util.List;
@@ -39,6 +40,12 @@ public interface MemberPackageBenefitRelMapper extends BaseMapper<MemberPackageB
     List<MemberPackageBenefitRelDO> selectByTenantIdAndPackageId(@Param("tenantId") Long tenantId, @Param("packageId") Long packageId);
 
 
+    /***
+     *  通过tenantId查询和packageId查询
+     * @param tenantId
+     * @param packageId
+     * @return
+     */
 
-
+    List<BenefitDTO> getByTenantIdAndPackageId(@Param("tenantId") Long tenantId, @Param("packageId") Long packageId);
 }

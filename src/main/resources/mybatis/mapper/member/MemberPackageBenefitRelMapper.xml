@@ -35,5 +35,16 @@
         where is_deleted=0 and tenant_id=#{tenantId} and package_id=#{packageId}
     </select>
 
+    <select id="getByTenantIdAndPackageId" resultType="com.coderpwh.member.application.dto.BenefitDTO">
+        select benefit.name                               as benefitName,
+               benefit.code                               as benefitCode,
+               rel.reserved_points + rel.available_points as totalPoints
+        from tb_member_package_benefit_rel as rel
+                 left join tb_member_benefit benefit on rel.benefit_id = benefit.id and benefit.is_deleted = 0
+        where rel.is_deleted = 0
+          and rel.tenant_id = #{tenantId}
+          and rel.package_id = #{packageId}
+    </select>
+
 
 </mapper>

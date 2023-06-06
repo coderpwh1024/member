@@ -3,6 +3,7 @@ package com.coderpwh.member.domain.model;
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.coderpwh.member.application.dto.BenefitDTO;
 import com.coderpwh.member.common.database.PageUtils;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberPackageBenefitRelDO;
 import com.coderpwh.member.application.command.MemberPackageBenefitRelQuery;
@@ -92,5 +93,14 @@ public interface MemberPackageBenefitRelRepository extends IService<MemberPackag
      */
     List<MemberPackageBenefitRel> selectByTenantIdAndPackageId(Long tenantId, Long packageId);
 
+
+    /**
+     * tenantId和packageId查询
+     *
+     * @param tenantId
+     * @param packageId
+     * @return
+     */
+    List<BenefitDTO> getByTenantIdAndPackageId(Long tenantId, Long packageId);
 
 }

@@ -71,6 +71,28 @@ public class DomainMemberService {
     private MemberPackageBenefitRelRepository memberPackageBenefitRelRepository;
 
 
+    /***
+     *
+     *  查询会员权益包
+     * @param memberTenantRepository
+     * @param memberPackageRepository
+     * @param memberPackageBenefitRelRepository
+     * @param memberPackageDTOAssembler
+     * @param memberPackageDetailVOAssembler
+     * @param benefitDTOAssembler
+     */
+    public DomainMemberService(MemberTenantRepository memberTenantRepository, MemberPackageRepository memberPackageRepository,
+                               MemberPackageBenefitRelRepository memberPackageBenefitRelRepository, MemberPackageDTOAssembler memberPackageDTOAssembler,
+                               MemberPackageDetailVOAssembler memberPackageDetailVOAssembler, BenefitDTOAssembler benefitDTOAssembler) {
+        this.memberTenantRepository = memberTenantRepository;
+        this.memberPackageRepository = memberPackageRepository;
+        this.memberPackageBenefitRelRepository = memberPackageBenefitRelRepository;
+        this.memberPackageDTOAssembler = memberPackageDTOAssembler;
+        this.memberPackageDetailVOAssembler = memberPackageDetailVOAssembler;
+        this.benefitDTOAssembler = benefitDTOAssembler;
+    }
+
+
     public DomainMemberService() {
 
     }
@@ -210,10 +232,8 @@ public class DomainMemberService {
 
         if (CollectionUtils.isNotEmpty(list)) {
             for (MemberPackageDetailVO detail : list) {
-                List<MemberPackageBenefitRel> benefitRelList = memberPackageBenefitRelRepository.selectByTenantIdAndPackageId(memberTenant.getId(), detail.getPackageId());
-                List<BenefitDTO> benefitDTOList = benefitDTOAssembler.toDTO(benefitRelList);
-                detail.setBenefitDTOList(benefitDTOList);
-
+                List<BenefitDTO> benefitRelList = memberPackageBenefitRelRepository.getByTenantIdAndPackageId(memberTenant.getId(), detail.getPackageId());
+                detail.setBenefitDTOList(benefitRelList);
             }
         }
         return list;
