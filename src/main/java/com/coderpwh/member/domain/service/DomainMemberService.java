@@ -2,11 +2,13 @@ package com.coderpwh.member.domain.service;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.coderpwh.member.application.assembler.domain.BenefitDTOAssembler;
 import com.coderpwh.member.application.assembler.domain.MemberPackageDTOAssembler;
 import com.coderpwh.member.application.assembler.vo.MemberPackageDetailVOAssembler;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
+import com.coderpwh.member.application.dto.BenefitDTO;
 import com.coderpwh.member.application.dto.MemberPackageDTO;
 import com.coderpwh.member.application.dto.MemberSharePriceDTO;
 import com.coderpwh.member.application.vo.MemberPackageDetailVO;
@@ -38,6 +40,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class DomainMemberService {
 
+
+    private BenefitDTOAssembler benefitDTOAssembler;
 
     private MemberPackageDetailVOAssembler memberPackageDetailVOAssembler;
 
@@ -207,9 +211,11 @@ public class DomainMemberService {
         if (CollectionUtils.isNotEmpty(list)) {
             for (MemberPackageDetailVO detail : list) {
                 List<MemberPackageBenefitRel> benefitRelList = memberPackageBenefitRelRepository.selectByTenantIdAndPackageId(memberTenant.getId(), detail.getPackageId());
-            }
+                List<BenefitDTO> benefitDTOList = benefitDTOAssembler.toDTO(benefitRelList);
+                detail.setBenefitDTOList(benefitDTOList);
 
+            }
         }
-        return null;
+        return list;
     }
 }
