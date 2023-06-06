@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author coderpwh
@@ -106,7 +107,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
-    public MemberPackageDetailVO getPackageDetail(MemberPackageDetailQuery query) {
+    public List<MemberPackageDetailVO> getPackageDetail(MemberPackageDetailQuery query) {
         log.info("查询会员权益包入参为:{}", JSON.toJSONString(query));
 
         // 数据校验
@@ -115,9 +116,9 @@ public class MemberServiceImpl implements MemberService {
 
         //  领域层
         DomainMemberService domainMemberService = new DomainMemberService();
-        MemberPackageDetailVO memberPackageDetailVO = domainMemberService.getPackageDetail(query);
+        List<MemberPackageDetailVO> list = domainMemberService.getPackageDetail(query);
 
-        return memberPackageDetailVO;
+        return list;
     }
 
 

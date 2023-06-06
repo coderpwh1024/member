@@ -7,6 +7,8 @@ import com.coderpwh.member.application.vo.MemberPackageDetailVO;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 
+import java.util.List;
+
 /**
  * @author coderpwh
  * @date 2023/5/22 11:32
@@ -36,6 +38,6 @@ public interface MemberService {
      * @return
      */
 
-    MemberPackageDetailVO getPackageDetail(MemberPackageDetailQuery query);
+    List<MemberPackageDetailVO> getPackageDetail(MemberPackageDetailQuery query);
 
 }

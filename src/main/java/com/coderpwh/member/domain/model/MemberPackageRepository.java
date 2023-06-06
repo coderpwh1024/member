@@ -103,4 +103,12 @@ public interface MemberPackageRepository extends IService<MemberPackageDO> {
     MemberPackage selectByAgentNumberAndCode(String agentNumber, String productType);
 
 
+    /***
+     *  通过编码与租户id查询
+     * @param tenantId
+     * @param packageCode
+     * @return
+     */
+    List<MemberPackage> selectByTeantIdAndPackageCode(Long tenantId, String packageCode);
+
 }

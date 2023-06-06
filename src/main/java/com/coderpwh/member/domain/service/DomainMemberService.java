@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class DomainMemberService {
 
-
+    
     private MemberPackageRepository memberPackageRepository;
 
 
@@ -53,6 +53,9 @@ public class DomainMemberService {
 
 
     private OrderOrderExtraInfoRepository orderOrderExtraInfoRepository;
+
+
+    private MemberPackageBenefitRelRepository memberPackageBenefitRelRepository;
 
 
     public DomainMemberService() {
@@ -183,7 +186,15 @@ public class DomainMemberService {
      * @param query
      * @return
      */
-    public MemberPackageDetailVO getPackageDetail(MemberPackageDetailQuery query) {
+    public List<MemberPackageDetailVO> getPackageDetail(MemberPackageDetailQuery query) {
+
+        MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(query.getAgentNumber());
+
+
+        List<MemberPackage> packageList = memberPackageRepository.selectByTeantIdAndPackageCode(memberTenant.getId(), query.getPackageCode());
+
+
+//        memberPackageBenefitRelRepository.selectByTenantIdAndPackageId(memberTenant.getId(), )
 
 
         return null;

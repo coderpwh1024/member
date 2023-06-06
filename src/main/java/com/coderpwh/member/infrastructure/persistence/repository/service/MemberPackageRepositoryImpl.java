@@ -115,5 +115,11 @@ public class MemberPackageRepositoryImpl extends ServiceImpl<MemberPackageMapper
         return memberPackageConverter.toEntity(memberPackageDO);
     }
 
+    @Override
+    public List<MemberPackage> selectByTeantIdAndPackageCode(Long tenantId, String packageCode) {
+        List<MemberPackageDO> entityList = baseMapper.selectByTeantIdAndPackageCode(tenantId, packageCode);
+        return memberPackageConverter.toEntity(entityList);
+    }
+
 
 }

@@ -45,7 +45,20 @@
             </if>
             and package.is_deleted=0
         </where>
-
-
     </select>
+
+    <select id="selectByTeantIdAndPackageCode"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberPackageDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_package
+        <where>
+            1=1 and tenant_id=#{tenantId} and is_deleted=0
+            <if test="packageCode!=null and package!=''">
+                and `code`=#{packageCode}
+            </if>
+        </where>
+        order by create_time desc;
+    </select>
+
 </mapper>
