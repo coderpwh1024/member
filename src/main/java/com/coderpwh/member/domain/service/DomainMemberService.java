@@ -1,9 +1,13 @@
 package com.coderpwh.member.domain.service;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.coderpwh.member.application.assembler.domain.MemberPackageDTOAssembler;
+import com.coderpwh.member.application.assembler.vo.MemberPackageDetailVOAssembler;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
+import com.coderpwh.member.application.dto.MemberPackageDTO;
 import com.coderpwh.member.application.dto.MemberSharePriceDTO;
 import com.coderpwh.member.application.vo.MemberPackageDetailVO;
 import com.coderpwh.member.application.vo.MemberRefundVO;
@@ -34,7 +38,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class DomainMemberService {
 
-    
+
+    private MemberPackageDetailVOAssembler memberPackageDetailVOAssembler;
+
+    private MemberPackageDTOAssembler memberPackageDTOAssembler;
+
+
     private MemberPackageRepository memberPackageRepository;
 
 
@@ -190,13 +199,17 @@ public class DomainMemberService {
 
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(query.getAgentNumber());
 
-
         List<MemberPackage> packageList = memberPackageRepository.selectByTeantIdAndPackageCode(memberTenant.getId(), query.getPackageCode());
 
+        List<MemberPackageDTO> packageDTOList = memberPackageDTOAssembler.toDTO(packageList);
+        List<MemberPackageDetailVO> list = memberPackageDetailVOAssembler.toDTO(packageDTOList);
 
-//        memberPackageBenefitRelRepository.selectByTenantIdAndPackageId(memberTenant.getId(), )
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (MemberPackageDetailVO detail : list) {
+                List<MemberPackageBenefitRel> benefitRelList = memberPackageBenefitRelRepository.selectByTenantIdAndPackageId(memberTenant.getId(), detail.getPackageId());
+            }
 
-
+        }
         return null;
     }
 }

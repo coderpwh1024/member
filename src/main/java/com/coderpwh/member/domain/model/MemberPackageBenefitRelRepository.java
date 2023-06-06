@@ -92,4 +92,5 @@ public interface MemberPackageBenefitRelRepository extends IService<MemberPackag
      */
     List<MemberPackageBenefitRel> selectByTenantIdAndPackageId(Long tenantId, Long packageId);
 
+
 }

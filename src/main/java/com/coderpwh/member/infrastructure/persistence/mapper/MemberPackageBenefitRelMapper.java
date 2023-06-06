@@ -38,4 +38,7 @@ public interface MemberPackageBenefitRelMapper extends BaseMapper<MemberPackageB
      */
     List<MemberPackageBenefitRelDO> selectByTenantIdAndPackageId(@Param("tenantId") Long tenantId, @Param("packageId") Long packageId);
 
+
+
+
 }

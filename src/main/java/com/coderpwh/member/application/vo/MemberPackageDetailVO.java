@@ -15,6 +15,11 @@ public class MemberPackageDetailVO implements Serializable {
 
 
     /**
+     * 权益包id
+     */
+    private Long packageId;
+
+    /**
      * 租户id
      */
     private String tenantId;

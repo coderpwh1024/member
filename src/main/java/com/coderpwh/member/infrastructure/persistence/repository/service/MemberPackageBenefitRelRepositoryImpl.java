@@ -1,5 +1,6 @@
 package com.coderpwh.member.infrastructure.persistence.repository.service;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.coderpwh.member.common.database.PageTransformUtil;
@@ -85,8 +86,7 @@ public class MemberPackageBenefitRelRepositoryImpl extends ServiceImpl<MemberPac
 
     @Override
     public List<MemberPackageBenefitRel> getByIds(List<Integer> ids) {
-        List<MemberPackageBenefitRelDO> entityList = this.list(Wrappers.<MemberPackageBenefitRelDO>lambdaQuery()
-                .in(MemberPackageBenefitRelDO::getId, ids));
+        List<MemberPackageBenefitRelDO> entityList = this.list(Wrappers.<MemberPackageBenefitRelDO>lambdaQuery().in(MemberPackageBenefitRelDO::getId, ids));
         return memberPackageBenefitRelConverter.toEntity(entityList);
     }
 
@@ -108,6 +108,8 @@ public class MemberPackageBenefitRelRepositoryImpl extends ServiceImpl<MemberPac
             return null;
         }
     }
+
+
 
 
 }
