@@ -3,6 +3,7 @@ package com.coderpwh.member.application.service;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
+import com.coderpwh.member.application.vo.MemberPackageDetailVO;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 
@@ -35,6 +36,6 @@ public interface MemberService {
      * @return
      */
 
-    String getPackageDetail(MemberPackageDetailQuery query);
+    MemberPackageDetailVO getPackageDetail(MemberPackageDetailQuery query);
 
 }

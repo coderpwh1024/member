@@ -6,6 +6,7 @@ import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.MemberService;
+import com.coderpwh.member.application.vo.MemberPackageDetailVO;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.model.*;
@@ -105,15 +106,18 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
-    public String getPackageDetail(MemberPackageDetailQuery query) {
+    public MemberPackageDetailVO getPackageDetail(MemberPackageDetailQuery query) {
         log.info("查询会员权益包入参为:{}", JSON.toJSONString(query));
 
         // 数据校验
         MemberPackageDetailSpecification specification = new MemberPackageDetailSpecification(memberTenantRepository);
         specification.isMemberPackageDetail(query.getAgentNumber());
 
+        //  领域层
+        DomainMemberService domainMemberService = new DomainMemberService();
+        MemberPackageDetailVO memberPackageDetailVO = domainMemberService.getPackageDetail(query);
 
-        return null;
+        return memberPackageDetailVO;
     }
 
 

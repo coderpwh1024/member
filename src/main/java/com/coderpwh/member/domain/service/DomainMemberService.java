@@ -2,8 +2,10 @@ package com.coderpwh.member.domain.service;
 
 import com.alibaba.fastjson.JSON;
 import com.coderpwh.member.application.command.MemberJoinCommand;
+import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.MemberSharePriceDTO;
+import com.coderpwh.member.application.vo.MemberPackageDetailVO;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.enums.CashierTypeEnum;
@@ -176,4 +178,14 @@ public class DomainMemberService {
     }
 
 
+    /***
+     *  获取会员权益包
+     * @param query
+     * @return
+     */
+    public MemberPackageDetailVO getPackageDetail(MemberPackageDetailQuery query) {
+
+
+        return null;
+    }
 }
