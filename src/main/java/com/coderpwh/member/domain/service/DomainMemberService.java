@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 会员领域层
@@ -165,11 +166,13 @@ public class DomainMemberService {
         MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumber(orderNumber);
 
         if (StringUtils.isNotBlank(notifyUrl) && StringUtils.isNotBlank(orderNumber)) {
-
             OrderOrderExtraInfo orderExtraInfo = orderOrderExtraInfoRepository.selectByOrderNumberAndKey(orderNumber, OrderExtraKeyConstant.REFUND_URL_KEY);
+            if (Objects.nonNull(orderExtraInfo)) {
+                ConcurrentHashMap<String, Object> concurrentHashMap = new ConcurrentHashMap();
+                concurrentHashMap.put(OrderExtraKeyConstant.REFUND_URL_KEY, notifyUrl);
+                orderOrderExtraInfoRepository.saveByMap(orderNumber, concurrentHashMap);
+            }
         }
-
-
     }
 
 

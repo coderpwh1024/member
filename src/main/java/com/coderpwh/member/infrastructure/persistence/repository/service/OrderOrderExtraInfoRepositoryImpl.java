@@ -1,5 +1,6 @@
 package com.coderpwh.member.infrastructure.persistence.repository.service;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.coderpwh.member.common.database.PageTransformUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -13,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Service;
 import com.coderpwh.member.infrastructure.persistence.mapper.OrderOrderExtraInfoMapper;
@@ -101,6 +103,28 @@ public class OrderOrderExtraInfoRepositoryImpl extends ServiceImpl<OrderOrderExt
     public OrderOrderExtraInfo selectByOrderNumberAndKey(String orderNumber, String refundUrlKey) {
         OrderOrderExtraInfoDO orderOrderExtraInfoDO = baseMapper.selectByOrderNumberAndKey(orderNumber, refundUrlKey);
         return orderOrderExtraInfoConverter.toEntity(orderOrderExtraInfoDO);
+    }
+
+
+    /***
+     * 保存订单额外信息
+     * @param orderNumber
+     * @param concurrentHashMap
+     * @return
+     */
+    @Override
+    public Integer saveByMap(String orderNumber, ConcurrentHashMap<String, Object> concurrentHashMap) {
+
+        if (CollectionUtils.isNotEmpty(concurrentHashMap)) {
+            for (String str : concurrentHashMap.keySet()) {
+                OrderOrderExtraInfoDO orderOrderExtraInfoDO = new OrderOrderExtraInfoDO();
+                orderOrderExtraInfoDO.setOrderNumber(orderNumber);
+                orderOrderExtraInfoDO.setKey(str);
+                orderOrderExtraInfoDO.setValue(String.valueOf(concurrentHashMap.get(str)));
+                baseMapper.insert(orderOrderExtraInfoDO);
+            }
+        }
+        return 1;
     }
 
 

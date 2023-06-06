@@ -1,6 +1,7 @@
 package com.coderpwh.member.domain.model;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.coderpwh.member.application.command.OrderOrderExtraInfoQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -91,5 +92,14 @@ public interface OrderOrderExtraInfoRepository extends IService<OrderOrderExtraI
      * @return
      */
     OrderOrderExtraInfo selectByOrderNumberAndKey(String orderNumber, String refundUrlKey);
+
+
+    /***
+     * 通过订单号保存额外信息
+     * @param orderNumber
+     * @param concurrentHashMap
+     * @return
+     */
+    Integer saveByMap(String orderNumber, ConcurrentHashMap<String, Object> concurrentHashMap);
 
 }
