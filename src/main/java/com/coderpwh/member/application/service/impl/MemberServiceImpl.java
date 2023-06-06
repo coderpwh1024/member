@@ -8,11 +8,9 @@ import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
-import com.coderpwh.member.domain.model.MemberCardRepository;
-import com.coderpwh.member.domain.model.MemberPackageBenefitRelRepository;
-import com.coderpwh.member.domain.model.MemberPackageRepository;
-import com.coderpwh.member.domain.model.OrderOrderRepository;
+import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.service.DomainMemberService;
+import com.coderpwh.member.domain.specification.MemberPackageDetailSpecification;
 import com.coderpwh.member.domain.specification.MemberRefundSpecification;
 import com.coderpwh.member.domain.specification.MemberSpecification;
 import com.coderpwh.member.domain.util.LoginUtil;
@@ -42,6 +40,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     private MemberCardRepository memberCardRepository;
+
+
+    @Resource
+    private MemberTenantRepository memberTenantRepository;
 
 
     /***
@@ -104,6 +106,13 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public String getPackageDetail(MemberPackageDetailQuery query) {
+        log.info("查询会员权益包入参为:{}", JSON.toJSONString(query));
+
+        // 数据校验
+        MemberPackageDetailSpecification specification = new MemberPackageDetailSpecification(memberTenantRepository);
+        specification.isMemberPackageDetail(query.getAgentNumber());
+
+
         return null;
     }
 
