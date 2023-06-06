@@ -224,7 +224,6 @@ public class DomainMemberService {
     public List<MemberPackageDetailVO> getPackageDetail(MemberPackageDetailQuery query) {
 
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(query.getAgentNumber());
-
         List<MemberPackage> packageList = memberPackageRepository.selectByTeantIdAndPackageCode(memberTenant.getId(), query.getPackageCode());
 
         List<MemberPackageDTO> packageDTOList = memberPackageDTOAssembler.toDTO(packageList);
