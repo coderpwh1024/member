@@ -9,7 +9,6 @@ import com.coderpwh.member.domain.model.MemberTenant;
 import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.model.OrderOrder;
 import com.coderpwh.member.domain.model.OrderOrderRepository;
-import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
