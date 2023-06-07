@@ -248,7 +248,6 @@ public class DomainMemberService {
 
         MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumberOrPatnerOrderNumber(query.getOrderNumber(), query.getPartnerOrderNumber());
 
-
-
+        return null;
     }
 }

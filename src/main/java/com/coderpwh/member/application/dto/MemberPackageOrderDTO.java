@@ -1,14 +1,15 @@
-package com.coderpwh.member.application.vo;
+package com.coderpwh.member.application.dto;
+
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * @author coderpwh
- * @date 2023/6/7 10:32
+ * @date 2023/6/7 13:44
  */
-public class MemberPackageOrderVO implements Serializable {
-
-
+@Data
+public class MemberPackageOrderDTO implements Serializable {
     /***
      * 用户id
      */
