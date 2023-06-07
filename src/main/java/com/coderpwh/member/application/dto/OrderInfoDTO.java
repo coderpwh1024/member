@@ -30,12 +30,12 @@ public class OrderInfoDTO implements Serializable {
     /***
      *  订单金额
      */
-    private String money;
+    private String amount;
 
     /***
      * 订单状态
      */
-    private String status;
+    private String orderStatus;
 
     /***
      * 商品编码

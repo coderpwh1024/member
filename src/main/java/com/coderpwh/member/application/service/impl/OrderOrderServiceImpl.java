@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import javax.annotation.Resource;
 
+import com.coderpwh.member.application.assembler.vo.OrderInfoAssembler;
 import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.command.OrderOrderQuery;
 import com.coderpwh.member.application.dto.OrderOrderDTO;
 import com.coderpwh.member.application.service.OrderOrderService;
 import com.coderpwh.member.application.vo.OrderInfoVO;
 import com.coderpwh.member.common.database.PageUtils;
+import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.service.DomainOrderService;
 import com.coderpwh.member.domain.specification.OrderInfoSpecification;
 import com.coderpwh.member.infrastructure.persistence.mapper.OrderOrderMapper;
@@ -39,12 +41,19 @@ import com.coderpwh.member.application.assembler.domain.OrderOrderDTOAssembler;
 @Service
 public class OrderOrderServiceImpl extends ServiceImpl<OrderOrderMapper, OrderOrderDO> implements OrderOrderService {
 
+
+    @Resource
+    private MemberTenantRepository memberTenantRepository;
+
     @Resource
     private OrderOrderRepository orderOrderRepository;
     @Resource
     private OrderOrderAssembler orderOrderAssembler;
     @Resource
     private OrderOrderDTOAssembler orderOrderDTOAssembler;
+
+    @Resource
+    private OrderInfoAssembler orderInfoAssembler;
 
 
     @Override
@@ -114,7 +123,7 @@ public class OrderOrderServiceImpl extends ServiceImpl<OrderOrderMapper, OrderOr
         specification.isOrderInfoSpecification(query.getOrderNumber(), query.getPartnerOrderNumber());
 
         // 领域层
-        DomainOrderService domainOrderService = new DomainOrderService();
+        DomainOrderService domainOrderService = new DomainOrderService(memberTenantRepository, orderOrderRepository, orderInfoAssembler);
         OrderInfoVO orderInfoVO = domainOrderService.getOrderInfo(query);
 
         return orderInfoVO;

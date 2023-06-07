@@ -113,20 +113,21 @@
     </select>
 
     <select id="getOrderInfo" resultType="com.coderpwh.member.application.dto.OrderInfoDTO">
-        select t.* ,refund.money as refundMoney ,refund.refund_time as refundTime ,refund.wh_costs as refundBenefitMoeny
+        select t.* ,refund.money as refundMoney ,refund.refund_time as refundTime ,refund.wh_costs as refundBenefitMoney
         from tb_order_order t left join tb_order_refund_order refund on t.order_number=refund.payment_order_number
         <where>
             1=1 and t.is_deleted=0 and refund.is_deleted=0
             <if test="tenantId!=null">
-                t.tenant_id=#{tenantId}
+                and t.tenant_id=#{tenantId}
             </if>
             <if test="orderNumber!=null and orderNumber!=''">
-                t.order_number=#{orderNumber}
+                and t.order_number=#{orderNumber}
             </if>
             <if test="partnerOrderNumber!=null and partnerOrderNumber!=''">
-                t.partner_order_number=#{partnerOrderNumber}
+                and t.partner_order_number=#{partnerOrderNumber}
             </if>
         </where>
+        order by t.create_time desc limit 1;
     </select>
 
 </mapper>

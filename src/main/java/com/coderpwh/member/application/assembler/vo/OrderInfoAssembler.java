@@ -1,11 +1,10 @@
 package com.coderpwh.member.application.assembler.vo;
 
-import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.dto.OrderInfoDTO;
-import com.coderpwh.member.application.vo.MemberUserVO;
 import com.coderpwh.member.application.vo.OrderInfoVO;
 import com.coderpwh.member.common.util.mapstruct.MapStructConverter;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 /**
@@ -14,4 +13,11 @@ import org.mapstruct.ReportingPolicy;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderInfoAssembler extends MapStructConverter<OrderInfoVO, OrderInfoDTO> {
+
+
+    @Override
+    @Mapping(source = "amount", target = "money")
+    @Mapping(source = "name", target = "orderName")
+    @Mapping(source = "orderStatus", target = "status")
+    OrderInfoVO toDTO(OrderInfoDTO orderInfoDTO);
 }

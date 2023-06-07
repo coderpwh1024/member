@@ -1,5 +1,6 @@
 package com.coderpwh.member.domain.service;
 
+import com.coderpwh.member.application.assembler.vo.OrderInfoAssembler;
 import com.coderpwh.member.application.command.MemberOrderCommand;
 import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.dto.OrderInfoDTO;
@@ -23,11 +24,19 @@ import java.util.List;
 public class DomainOrderService {
 
 
+    private OrderInfoAssembler orderInfoAssembler;
+
     private OrderOrderRepository orderOrderRepository;
 
 
     private MemberTenantRepository memberTenantRepository;
 
+    public DomainOrderService(MemberTenantRepository memberTenantRepository, OrderOrderRepository orderOrderRepository, OrderInfoAssembler orderInfoAssembler) {
+        this.memberTenantRepository = memberTenantRepository;
+        this.orderOrderRepository = orderOrderRepository;
+        this.orderInfoAssembler = orderInfoAssembler;
+
+    }
 
     /***
      * 会员下单
@@ -55,11 +64,13 @@ public class DomainOrderService {
      * @return
      */
     public OrderInfoVO getOrderInfo(OrderInfoQuery query) {
-
         MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(query.getAgentNumber());
 
         OrderInfoDTO orderInfoDTO = orderOrderRepository.getOrderInfo(memberTenant.getId(), query.getOrderNumber(), query.getPartnerOrderNumber());
+        OrderInfoVO orderInfoVO = orderInfoAssembler.toDTO(orderInfoDTO);
 
-        return null;
+        return orderInfoVO;
     }
+
+
 }
