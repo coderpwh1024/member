@@ -3,6 +3,7 @@ package com.coderpwh.member.application.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author coderpwh
@@ -43,5 +44,7 @@ public class MemberPackageOrderDTO implements Serializable {
      * 会员套餐失效时间
      */
     private String expirationTime;
+
+
 
 }

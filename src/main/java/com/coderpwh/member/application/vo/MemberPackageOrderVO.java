@@ -1,11 +1,15 @@
 package com.coderpwh.member.application.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author coderpwh
  * @date 2023/6/7 10:32
  */
+@Data
 public class MemberPackageOrderVO implements Serializable {
 
 
@@ -42,5 +46,6 @@ public class MemberPackageOrderVO implements Serializable {
      * 会员套餐失效时间
      */
     private String expirationTime;
+
 
 }

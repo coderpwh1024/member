@@ -13,6 +13,7 @@ import com.coderpwh.member.application.command.MemberPackageOrderQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.dto.BenefitDTO;
 import com.coderpwh.member.application.dto.MemberPackageDTO;
+import com.coderpwh.member.application.dto.MemberPackageOrderDTO;
 import com.coderpwh.member.application.dto.MemberSharePriceDTO;
 import com.coderpwh.member.application.vo.MemberPackageDetailVO;
 import com.coderpwh.member.application.vo.MemberPackageOrderVO;
@@ -267,8 +268,8 @@ public class DomainMemberService {
 
         MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumberOrPatnerOrderNumber(query.getOrderNumber(), query.getPartnerOrderNumber());
 
-        MemberPackageDTO memberPackageDTO = memberPackageOrderDTOAssembler.toDTO(memberCardHistory);
-        MemberPackageOrderVO memberPackageOrderVO = memberPackageOrderVOAssembler.toDTO(memberPackageDTO);
+        MemberPackageOrderDTO memberPackageOrderDTO = memberPackageOrderDTOAssembler.toDTO(memberCardHistory);
+        MemberPackageOrderVO memberPackageOrderVO = memberPackageOrderVOAssembler.toDTO(memberPackageOrderDTO);
 
         return memberPackageOrderVO;
     }
