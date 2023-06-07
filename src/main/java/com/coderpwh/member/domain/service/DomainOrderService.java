@@ -1,7 +1,9 @@
 package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberOrderCommand;
+import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.vo.MemberOrderVO;
+import com.coderpwh.member.application.vo.OrderInfoVO;
 import com.coderpwh.member.domain.model.OrderOrder;
 import com.coderpwh.member.domain.model.OrderOrderRepository;
 import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
@@ -42,4 +44,12 @@ public class DomainOrderService {
     }
 
 
+    /***
+     * 订单查询
+     * @param query
+     * @return
+     */
+    public OrderInfoVO getOrderInfo(OrderInfoQuery query) {
+        return null;
+    }
 }
