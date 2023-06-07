@@ -3,7 +3,9 @@ package com.coderpwh.member.application.service.impl;
 import com.alibaba.fastjson2.JSON;
 import com.coderpwh.member.application.assembler.domain.BenefitDTOAssembler;
 import com.coderpwh.member.application.assembler.domain.MemberPackageDTOAssembler;
+import com.coderpwh.member.application.assembler.domain.MemberPackageOrderDTOAssembler;
 import com.coderpwh.member.application.assembler.vo.MemberPackageDetailVOAssembler;
+import com.coderpwh.member.application.assembler.vo.MemberPackageOrderVOAssembler;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberPackageOrderQuery;
@@ -38,6 +40,11 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Resource
+    private MemberPackageOrderVOAssembler memberPackageOrderVOAssembler;
+
+    @Resource
+    private MemberPackageOrderDTOAssembler memberPackageOrderDTOAssembler;
+    @Resource
     private BenefitDTOAssembler benefitDTOAssembler;
 
     @Resource
@@ -61,6 +68,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     private MemberTenantRepository memberTenantRepository;
+
+
+    @Resource
+    private MemberCardHistoryRepository memberCardHistoryRepository;
 
 
     /***
@@ -155,7 +166,7 @@ public class MemberServiceImpl implements MemberService {
         specifucation.isOrderNumberAndPartnerNumber(query.getOrderNumber(), query.getPartnerOrderNumber());
 
         // 领域层
-        DomainMemberService domainMemberService = new DomainMemberService();
+        DomainMemberService domainMemberService = new DomainMemberService(memberCardHistoryRepository, memberPackageOrderVOAssembler, memberPackageOrderDTOAssembler);
         MemberPackageOrderVO memberPackageOrderVO = domainMemberService.getParckageOrder(query);
         return memberPackageOrderVO;
     }

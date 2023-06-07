@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.coderpwh.member.application.assembler.domain.BenefitDTOAssembler;
 import com.coderpwh.member.application.assembler.domain.MemberPackageDTOAssembler;
+import com.coderpwh.member.application.assembler.domain.MemberPackageOrderDTOAssembler;
 import com.coderpwh.member.application.assembler.vo.MemberPackageDetailVOAssembler;
+import com.coderpwh.member.application.assembler.vo.MemberPackageOrderVOAssembler;
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
 import com.coderpwh.member.application.command.MemberPackageOrderQuery;
@@ -43,6 +45,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DomainMemberService {
 
 
+    private MemberPackageOrderVOAssembler memberPackageOrderVOAssembler;
+
+    private MemberPackageOrderDTOAssembler memberPackageOrderDTOAssembler;
+
     private BenefitDTOAssembler benefitDTOAssembler;
 
     private MemberPackageDetailVOAssembler memberPackageDetailVOAssembler;
@@ -71,6 +77,19 @@ public class DomainMemberService {
 
 
     private MemberPackageBenefitRelRepository memberPackageBenefitRelRepository;
+
+
+    /***
+     *  查询会员套餐订单--构造函数
+     * @param memberCardHistoryRepository
+     * @param memberPackageOrderVOAssembler
+     * @param memberPackageOrderDTOAssembler
+     */
+    public DomainMemberService(MemberCardHistoryRepository memberCardHistoryRepository, MemberPackageOrderVOAssembler memberPackageOrderVOAssembler, MemberPackageOrderDTOAssembler memberPackageOrderDTOAssembler) {
+        this.memberCardHistoryRepository = memberCardHistoryRepository;
+        this.memberPackageOrderVOAssembler = memberPackageOrderVOAssembler;
+        this.memberPackageOrderDTOAssembler = memberPackageOrderDTOAssembler;
+    }
 
 
     /***
@@ -248,6 +267,11 @@ public class DomainMemberService {
 
         MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumberOrPatnerOrderNumber(query.getOrderNumber(), query.getPartnerOrderNumber());
 
-        return null;
+        MemberPackageDTO memberPackageDTO = memberPackageOrderDTOAssembler.toDTO(memberCardHistory);
+        MemberPackageOrderVO memberPackageOrderVO = memberPackageOrderVOAssembler.toDTO(memberPackageDTO);
+
+        return memberPackageOrderVO;
     }
+
+
 }
