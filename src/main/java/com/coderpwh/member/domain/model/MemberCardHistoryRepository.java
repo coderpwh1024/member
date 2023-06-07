@@ -92,5 +92,21 @@ public interface MemberCardHistoryRepository extends IService<MemberCardHistoryD
      */
     List<MemberCardHistory> getLastOrder(Long userId, String orderNumber);
 
+
+    /***
+     * 通过订单号查询
+     * @param orderNumber
+     * @return
+     */
     MemberCardHistory selectByOrderNumber(String orderNumber);
+
+    /***
+     * 通过订单号或合作方订单号查询
+     * @param orderNumber
+     * @param partnerOrderNumber
+     * @return
+     */
+    MemberCardHistory selectByOrderNumberOrPatnerOrderNumber(String orderNumber, String partnerOrderNumber);
+
+
 }

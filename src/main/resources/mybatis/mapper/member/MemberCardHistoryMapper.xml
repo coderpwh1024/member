@@ -43,6 +43,21 @@
         from tb_member_card_history
         where order_number=#{orderNumber} and is_deleted=0;
     </select>
+    <select id="selectByOrderNumberOrPatnerOrderNumber"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_card_history
+        <where>
+            1=1 and is_deleted=0
+            <if test="orderNumber!null and orderNumber!=''">
+                and order_number=#{orderNumber}
+            </if>
+            <if test="partnerOrderNumber!=null and partnerOrderNumber!=''">
+                and partner_order_number=#{partnerOrderNumber}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

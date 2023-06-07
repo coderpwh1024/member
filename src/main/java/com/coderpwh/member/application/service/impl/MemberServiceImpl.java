@@ -17,6 +17,7 @@ import com.coderpwh.member.application.vo.MemberSaveVO;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.service.DomainMemberService;
 import com.coderpwh.member.domain.specification.MemberPackageDetailSpecification;
+import com.coderpwh.member.domain.specification.MemberPackageOrderSpecifucation;
 import com.coderpwh.member.domain.specification.MemberRefundSpecification;
 import com.coderpwh.member.domain.specification.MemberSpecification;
 import com.coderpwh.member.domain.util.LoginUtil;
@@ -143,7 +144,20 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public MemberPackageOrderVO getParckageOrder(MemberPackageOrderQuery query) {
-        return null;
+        log.info("获取会员套餐订单入参为:{}", JSON.toJSONString(query));
+
+        // 获取登录用户
+        MemberUserDTO memberUser = LoginUtil.loginUser();
+
+        // 校验
+        MemberPackageOrderSpecifucation specifucation = new MemberPackageOrderSpecifucation();
+        specifucation.isUserLogin(memberUser);
+        specifucation.isOrderNumberAndPartnerNumber(query.getOrderNumber(), query.getPartnerOrderNumber());
+
+        // 领域层
+        DomainMemberService domainMemberService = new DomainMemberService();
+        MemberPackageOrderVO memberPackageOrderVO = domainMemberService.getParckageOrder(query);
+        return memberPackageOrderVO;
     }
 
 

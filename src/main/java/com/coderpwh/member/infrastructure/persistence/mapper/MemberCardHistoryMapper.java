@@ -4,6 +4,7 @@ package com.coderpwh.member.infrastructure.persistence.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,4 +35,7 @@ public interface MemberCardHistoryMapper extends BaseMapper<MemberCardHistoryDO>
      * @return
      */
     MemberCardHistoryDO selectByOrderNumber(String orderNumber);
+
+    MemberCardHistoryDO selectByOrderNumberOrPatnerOrderNumber(@Param("orderNumber") String orderNumber, @Param("partnerOrderNumber") String partnerOrderNumber);
+
 }
