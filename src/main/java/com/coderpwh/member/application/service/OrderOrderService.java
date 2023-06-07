@@ -1,8 +1,10 @@
 package com.coderpwh.member.application.service;
 
+import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.command.OrderOrderQuery;
 import com.coderpwh.member.application.dto.OrderOrderDTO;
 import com.coderpwh.member.application.command.OrderOrderCommand;
+import com.coderpwh.member.application.vo.OrderInfoVO;
 import com.coderpwh.member.common.database.PageUtils;
 
 /**
@@ -56,5 +58,7 @@ public interface OrderOrderService {
       */
     OrderOrderDTO getById(Integer id);
 
+
+    OrderInfoVO getOrderInfo(OrderInfoQuery query);
 
 }
