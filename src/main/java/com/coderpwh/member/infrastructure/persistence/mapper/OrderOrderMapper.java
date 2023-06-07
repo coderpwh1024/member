@@ -2,6 +2,7 @@ package com.coderpwh.member.infrastructure.persistence.mapper;
 
 import java.util.List;
 
+import com.coderpwh.member.application.dto.OrderInfoDTO;
 import org.apache.ibatis.annotations.Param;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -53,5 +54,15 @@ public interface OrderOrderMapper extends BaseMapper<OrderOrderDO> {
      * @return
      */
     OrderOrderDO selectByOrderNumber(@Param("orderNumber") String orderNumber);
+
+
+    /***
+     * 获取订单信息
+     * @param tenantId
+     * @param orderNumber
+     * @param partnerOrderNumber
+     * @return
+     */
+    OrderInfoDTO getOrderInfo(@Param("tenantId") Long tenantId, @Param("orderNumber") String orderNumber, @Param("partnerOrderNumber") String partnerOrderNumber);
 
 }

@@ -2,8 +2,11 @@ package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.command.MemberOrderCommand;
 import com.coderpwh.member.application.command.OrderInfoQuery;
+import com.coderpwh.member.application.dto.OrderInfoDTO;
 import com.coderpwh.member.application.vo.MemberOrderVO;
 import com.coderpwh.member.application.vo.OrderInfoVO;
+import com.coderpwh.member.domain.model.MemberTenant;
+import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.model.OrderOrder;
 import com.coderpwh.member.domain.model.OrderOrderRepository;
 import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
@@ -22,6 +25,9 @@ public class DomainOrderService {
 
 
     private OrderOrderRepository orderOrderRepository;
+
+
+    private MemberTenantRepository memberTenantRepository;
 
 
     /***
@@ -50,6 +56,11 @@ public class DomainOrderService {
      * @return
      */
     public OrderInfoVO getOrderInfo(OrderInfoQuery query) {
+
+        MemberTenant memberTenant = memberTenantRepository.selectByAgentNumber(query.getAgentNumber());
+
+        OrderInfoDTO orderInfoDTO = orderOrderRepository.getOrderInfo(memberTenant.getId(), query.getOrderNumber(), query.getPartnerOrderNumber());
+
         return null;
     }
 }

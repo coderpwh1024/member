@@ -6,6 +6,7 @@ import com.coderpwh.member.application.command.OrderOrderQuery;
 
 import javax.annotation.Resource;
 
+import com.coderpwh.member.application.dto.OrderInfoDTO;
 import com.coderpwh.member.common.database.PageTransformUtil;
 import com.coderpwh.member.common.database.PageUtils;
 import com.github.pagehelper.PageHelper;
@@ -118,6 +119,20 @@ public class OrderOrderRepositoryImpl extends ServiceImpl<OrderOrderMapper, Orde
     public OrderOrder selectByOrderNumber(String orderNumber) {
         OrderOrderDO orderOrderDO = baseMapper.selectByOrderNumber(orderNumber);
         return orderOrderConverter.toEntity(orderOrderDO);
+    }
+
+
+    /***
+     * 通过tenantId与orderNumber或partnerOrderNumber查询
+     * @param tenantId
+     * @param orderNumber
+     * @param partnerOrderNumber
+     * @return
+     */
+    @Override
+    public OrderInfoDTO getOrderInfo(Long tenantId, String orderNumber, String partnerOrderNumber) {
+        OrderInfoDTO orderInfoDTO = baseMapper.getOrderInfo(tenantId, orderNumber, partnerOrderNumber);
+        return orderInfoDTO;
     }
 
 

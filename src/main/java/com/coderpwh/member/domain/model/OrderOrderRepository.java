@@ -2,6 +2,7 @@ package com.coderpwh.member.domain.model;
 
 import java.util.List;
 
+import com.coderpwh.member.application.dto.OrderInfoDTO;
 import com.coderpwh.member.common.database.PageUtils;
 import com.coderpwh.member.infrastructure.persistence.entity.OrderOrderDO;
 import com.coderpwh.member.application.command.OrderOrderQuery;
@@ -101,5 +102,16 @@ public interface OrderOrderRepository extends IService<OrderOrderDO> {
      * @return
      */
     OrderOrder selectByOrderNumber(String orderNumber);
+
+
+    /***
+     * 通过tenantId查询
+     * @param tenantId
+     * @param orderNumber
+     * @param partnerOrderNumber
+     * @return
+     */
+    OrderInfoDTO getOrderInfo(Long tenantId, String orderNumber, String partnerOrderNumber);
+
 
 }
