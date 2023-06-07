@@ -2,6 +2,7 @@ package com.coderpwh.member.application.command;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -51,12 +52,12 @@ public class MemberSettlementRuleCommand {
     /**
      * 是否分润：0-不分润(默认) 1-分润
      */
-    private Boolean isShareBenefit;
+    private Integer isShareBenefit;
 
     /**
      * 账号类型：1-个人 2-商户(默认)
      */
-    private Boolean accountType;
+    private Integer accountType;
 
     /**
      * 账号

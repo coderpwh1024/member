@@ -136,12 +136,12 @@ public class OrderOrderCommand {
     /**
      * 是否分润(0-否 1-是)
      */
-    private Boolean isShareBenefit;
+    private Integer isShareBenefit;
 
     /**
      * 分润账号类型：1-个人 2-商户(默认)
      */
-    private Boolean accountType;
+    private Integer accountType;
 
     /**
      * 分润账户

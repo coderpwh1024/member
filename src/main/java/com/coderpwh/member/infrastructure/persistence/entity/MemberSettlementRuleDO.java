@@ -69,13 +69,13 @@ public class MemberSettlementRuleDO implements Serializable {
      * 是否分润：0-不分润(默认) 1-分润
      */
     @TableField("is_share_benefit")
-    private Boolean isShareBenefit;
+    private Integer isShareBenefit;
 
     /**
      * 账号类型：1-个人 2-商户(默认)
      */
     @TableField("account_type")
-    private Boolean accountType;
+    private Integer accountType;
 
     /**
      * 账号
