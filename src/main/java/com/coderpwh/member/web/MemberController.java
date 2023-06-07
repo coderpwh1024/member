@@ -2,6 +2,7 @@ package com.coderpwh.member.web;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
+import com.coderpwh.member.application.command.MemberPackageOrderQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.service.MemberService;
 import com.coderpwh.member.common.util.result.Result;
@@ -58,6 +59,16 @@ public class MemberController {
     @RequestMapping(value = "/package/detail", method = RequestMethod.POST)
     public Result getPackageDetail(@RequestBody @Valid MemberPackageDetailQuery query) {
         return Result.ok(memberService.getPackageDetail(query));
+    }
+
+
+    /***
+     *会员套餐订单查询
+     * @return
+     */
+    @RequestMapping(value = "/package/order", method = RequestMethod.POST)
+    public Result getParckageOrder(@RequestBody @Valid MemberPackageOrderQuery query) {
+        return Result.ok(memberService.getParckageOrder(query));
     }
 
 

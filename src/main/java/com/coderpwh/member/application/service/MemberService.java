@@ -2,8 +2,10 @@ package com.coderpwh.member.application.service;
 
 import com.coderpwh.member.application.command.MemberJoinCommand;
 import com.coderpwh.member.application.command.MemberPackageDetailQuery;
+import com.coderpwh.member.application.command.MemberPackageOrderQuery;
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.vo.MemberPackageDetailVO;
+import com.coderpwh.member.application.vo.MemberPackageOrderVO;
 import com.coderpwh.member.application.vo.MemberRefundVO;
 import com.coderpwh.member.application.vo.MemberSaveVO;
 
@@ -40,4 +42,5 @@ public interface MemberService {
 
     List<MemberPackageDetailVO> getPackageDetail(MemberPackageDetailQuery query);
 
+    MemberPackageOrderVO getParckageOrder(MemberPackageOrderQuery query);
 }
