@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.OrderRefundOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.OrderRefundOrderDO">
+        <id column="id" property="id" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="user_id" property="userId" />
+        <result column="order_number" property="orderNumber" />
+        <result column="payment_order_number" property="paymentOrderNumber" />
+        <result column="partner_order_number" property="partnerOrderNumber" />
+        <result column="name" property="name" />
+        <result column="refund_status" property="refundStatus" />
+        <result column="record" property="record" />
+        <result column="product_type" property="productType" />
+        <result column="product_code" property="productCode" />
+        <result column="money" property="money" />
+        <result column="refund_money" property="refundMoney" />
+        <result column="reason" property="reason" />
+        <result column="all_costs" property="allCosts" />
+        <result column="type" property="type" />
+        <result column="pay_type" property="payType" />
+        <result column="category" property="category" />
+        <result column="refund_time" property="refundTime" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="is_share_benefit" property="isShareBenefit" />
+        <result column="account_type" property="accountType" />
+        <result column="benefit_account" property="benefitAccount" />
+        <result column="share_money" property="shareMoney" />
+        <result column="wh_costs" property="whCosts" />
+        <result column="transaction_id" property="transactionId" />
+        <result column="failure_reason" property="failureReason" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`,`tenant_id`,`user_id`,`order_number`,`payment_order_number`,`partner_order_number`,`name`,`refund_status`,`record`,`product_type`,`product_code`,`money`,`refund_money`,`reason`,`all_costs`,`type`,`pay_type`,`category`,`refund_time`,`remark`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`share_money`,`wh_costs`,`transaction_id`,`failure_reason`
+    </sql>
+    <!--批量添加-->
+    <insert id="saveBatch" keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        INSERT INTO `tb_order_refund_order` (`id`,`tenant_id`,`user_id`,`order_number`,`payment_order_number`,`partner_order_number`,`name`,`refund_status`,`record`,`product_type`,`product_code`,`money`,`refund_money`,`reason`,`all_costs`,`type`,`pay_type`,`category`,`refund_time`,`remark`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`share_money`,`wh_costs`,`transaction_id`,`failure_reason`)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+                (#{item.id},#{item.tenantId},#{item.userId},#{item.orderNumber},#{item.paymentOrderNumber},#{item.partnerOrderNumber},#{item.name},#{item.refundStatus},#{item.record},#{item.productType},#{item.productCode},#{item.money},#{item.refundMoney},#{item.reason},#{item.allCosts},#{item.type},#{item.payType},#{item.category},#{item.refundTime},#{item.remark},#{item.createTime},#{item.createUser},#{item.updateUser},#{item.updateTime},#{item.isDeleted},#{item.isShareBenefit},#{item.accountType},#{item.benefitAccount},#{item.shareMoney},#{item.whCosts},#{item.transactionId},#{item.failureReason})
+        </foreach>
+    </insert>
+    <!--添加一条数据-->
+    <insert id="save"   keyColumn="id" useGeneratedKeys="true"  keyProperty="id">
+        insert into `tb_order_refund_order`(`id`,`tenant_id`,`user_id`,`order_number`,`payment_order_number`,`partner_order_number`,`name`,`refund_status`,`record`,`product_type`,`product_code`,`money`,`refund_money`,`reason`,`all_costs`,`type`,`pay_type`,`category`,`refund_time`,`remark`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`share_money`,`wh_costs`,`transaction_id`,`failure_reason`)
+        values(#{id},#{tenantId},#{userId},#{orderNumber},#{paymentOrderNumber},#{partnerOrderNumber},#{name},#{refundStatus},#{record},#{productType},#{productCode},#{money},#{refundMoney},#{reason},#{allCosts},#{type},#{payType},#{category},#{refundTime},#{remark},#{createTime},#{createUser},#{updateUser},#{updateTime},#{isDeleted},#{isShareBenefit},#{accountType},#{benefitAccount},#{shareMoney},#{whCosts},#{transactionId},#{failureReason})
+    </insert>
+
+    <!--根据id修改-->
+    <update id="updateById">
+        update `tb_order_refund_order` set
+        tenant_id=#{tenantId},user_id=#{userId},order_number=#{orderNumber},payment_order_number=#{paymentOrderNumber},partner_order_number=#{partnerOrderNumber},name=#{name},refund_status=#{refundStatus},record=#{record},product_type=#{productType},product_code=#{productCode},money=#{money},refund_money=#{refundMoney},reason=#{reason},all_costs=#{allCosts},type=#{type},pay_type=#{payType},category=#{category},refund_time=#{refundTime},remark=#{remark},create_time=#{createTime},create_user=#{createUser},update_user=#{updateUser},update_time=#{updateTime},is_deleted=#{isDeleted},is_share_benefit=#{isShareBenefit},account_type=#{accountType},benefit_account=#{benefitAccount},share_money=#{shareMoney},wh_costs=#{whCosts},transaction_id=#{transactionId},failure_reason=#{failureReason}
+        where `id`=#{id}
+    </update>
+
+    <!--根据id删除-->
+    <delete id="deleteById">
+        delete from `tb_order_refund_order`
+        where `id`=#{id}
+    </delete>
+
+    <!--根据id查询对象-->
+    <select id="getOrderRefundOrderDOById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `tb_order_refund_order`
+        WHERE `id`=#{id}
+    </select>
+</mapper>

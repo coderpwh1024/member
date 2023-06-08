@@ -2,6 +2,7 @@ package com.coderpwh.member.application.command;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -61,7 +62,7 @@ public class OrderOrderCommand {
     /**
      * 订单类型 1-api 2-收银台 3-兑换码
      */
-    private Boolean type;
+    private Integer type;
 
     /**
      * 订单类别：member-会员订单 benefit-权益订单
@@ -124,7 +125,7 @@ public class OrderOrderCommand {
     private Date updateTime;
 
     /**
-     *  支付方式:1、微信H5 2、支付宝H5 3、银行卡快捷 4、微信内支付 5、微信小程序支付 6、api 7、兑换码 8、自动续费	
+     * 支付方式:1、微信H5 2、支付宝H5 3、银行卡快捷 4、微信内支付 5、微信小程序支付 6、api 7、兑换码 8、自动续费
      */
     private Integer payType;
 

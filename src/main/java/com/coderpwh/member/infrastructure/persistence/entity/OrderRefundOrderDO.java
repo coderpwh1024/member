@@ -1,28 +1,33 @@
 package com.coderpwh.member.infrastructure.persistence.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import lombok.experimental.Accessors;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 订单表
+ * 退款订单表
  * </p>
  *
  * @author coderpwh
- * @since 2023-05-23
+ * @since 2023-06-08
  */
 @Data
-@TableName("tb_order_order")
-public class OrderOrderDO implements Serializable {
+@TableName("tb_order_refund_order")
+public class OrderRefundOrderDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,22 +53,34 @@ public class OrderOrderDO implements Serializable {
     private String orderNumber;
 
     /**
+     * 支付订单号
+     */
+    @TableField("payment_order_number")
+    private String paymentOrderNumber;
+
+    /**
+     * 合作方订单号
+     */
+    @TableField("partner_order_number")
+    private String partnerOrderNumber;
+
+    /**
      * 订单名称
      */
     @TableField("name")
     private String name;
 
     /**
-     * 支付状态 unpaid-待支付 canceled-已取消 pending-处理中 confirming-确认中 success-成功 failed-失败 refund-退款 closed-关闭
+     * 退款状态 pending-处理中 refunding 退款中 refund 已退款 failed 退款失败 closed 退款关闭
      */
-    @TableField("order_status")
-    private String orderStatus;
+    @TableField("refund_status")
+    private String refundStatus;
 
     /**
-     * 金额
+     * 处理记录 会员（正在注销会员、注销会员失败，请重新确认订单信息、注销会员成功，无需退款、注销会员成功，已退款、注销会员成功，退款失败、注销会员成功，退款关闭） ,权益 （正在注销权益、注销权益失败，注销权益成功，无需退款、注销权益成功，退款中、注销权益成功，已退款、注销权益成功，退款失败、注销权益成功，退款关闭）
      */
-    @TableField("amount")
-    private Integer amount;
+    @TableField("record")
+    private String record;
 
     /**
      * 商品类型
@@ -78,10 +95,37 @@ public class OrderOrderDO implements Serializable {
     private String productCode;
 
     /**
-     * 订单类型 1-api 2-收银台 3-兑换码
+     * 支付金额 分
+     */
+    @TableField("money")
+    private Integer money;
+
+    /**
+     * 退款金额 分
+     */
+    @TableField("refund_money")
+    private Integer refundMoney;
+
+    @TableField("reason")
+    private String reason;
+
+    /**
+     * 所有成本 分
+     */
+    @TableField("all_costs")
+    private Integer allCosts;
+
+    /**
+     * 类型 1-api 2-收银台 3-兑换码
      */
     @TableField("type")
     private Integer type;
+
+    /**
+     * 支付方式：1(微信 H5 支付)、2(支付宝 H5 支付)
+     */
+    @TableField("pay_type")
+    private Integer payType;
 
     /**
      * 订单类别：member-会员订单 benefit-权益订单
@@ -90,40 +134,16 @@ public class OrderOrderDO implements Serializable {
     private String category;
 
     /**
-     * 下单渠道
+     * 退款时间
      */
-    @TableField("source")
-    private String source;
-
-    /**
-     * 订单详情
-     */
-    @TableField("details")
-    private String details;
-
-    /**
-     * 合作方订单号
-     */
-    @TableField("partner_order_number")
-    private String partnerOrderNumber;
+    @TableField("refund_time")
+    private Date refundTime;
 
     /**
      * 备注
      */
     @TableField("remark")
     private String remark;
-
-    /**
-     * 收入
-     */
-    @TableField("revenue")
-    private Integer revenue;
-
-    /**
-     * 支付时间
-     */
-    @TableField("pay_time")
-    private Date payTime;
 
     /**
      * 创建时间
@@ -144,22 +164,10 @@ public class OrderOrderDO implements Serializable {
     private Long updateUser;
 
     /**
-     * 业务状态
-     */
-    @TableField("status")
-    private String status;
-
-    /**
      * 修改时间
      */
     @TableField("update_time")
     private Date updateTime;
-
-    /**
-     *  支付方式:1、微信H5 2、支付宝H5 3、银行卡快捷 4、微信内支付 5、微信小程序支付 6、api 7、兑换码 8、自动续费	
-     */
-    @TableField("pay_type")
-    private Integer payType;
 
     /**
      * 是否已删除(0-否 1-是)
@@ -186,34 +194,28 @@ public class OrderOrderDO implements Serializable {
     private String benefitAccount;
 
     /**
-     * 支付链接
-     */
-    @TableField("pay_url")
-    private String payUrl;
-
-    /**
-     * 分润金额 单位分
+     * 分润金额
      */
     @TableField("share_money")
     private BigDecimal shareMoney;
 
     /**
-     * 支付流水号
+     * 万恒成本
+     */
+    @TableField("wh_costs")
+    private Integer whCosts;
+
+    /**
+     * 退款流水号
      */
     @TableField("transaction_id")
     private String transactionId;
 
     /**
-     * 额外信息
+     * 失败原因
      */
-    @TableField("extra_info")
-    private String extraInfo;
-
-    /**
-     * 是否开启支付中台(1:开启,0:不开启)
-     */
-    @TableField("is_center_cashier")
-    private Boolean isCenterCashier;
+    @TableField("failure_reason")
+    private String failureReason;
 
 
 }
