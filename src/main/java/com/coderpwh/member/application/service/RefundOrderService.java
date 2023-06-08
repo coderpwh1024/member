@@ -1,6 +1,8 @@
 package com.coderpwh.member.application.service;
 
+import com.coderpwh.member.application.command.RefundOrderQuery;
 import com.coderpwh.member.application.dto.RefundOrderDTO;
+import com.coderpwh.member.application.vo.RefundOrderVO;
 
 /**
  * <p>
@@ -10,8 +12,7 @@ import com.coderpwh.member.application.dto.RefundOrderDTO;
  * @author coderpwh
  * @since 2023-06-08
  */
-public interface OrderRefundOrderService {
-
+public interface RefundOrderService {
 
 
     /**
@@ -29,13 +30,20 @@ public interface OrderRefundOrderService {
      * @return 是否执行成功
      */
 
-     /**
-      * 根据id查询对象
-      *
-      * @param id id
-      * @return 查询后的对象
-      */
+    /**
+     * 根据id查询对象
+     *
+     * @param id id
+     * @return 查询后的对象
+     */
     RefundOrderDTO getById(Integer id);
 
+
+    /***
+     * 查询退款订单信息
+     * @param query
+     * @return
+     */
+    RefundOrderVO getRefundOrderInfo(RefundOrderQuery query);
 
 }

@@ -3,17 +3,18 @@ package com.coderpwh.member.application.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.coderpwh.member.application.assembler.command.RefundOrderAssembler;
 import com.coderpwh.member.application.assembler.domain.RefundOrderDTOAssembler;
+import com.coderpwh.member.application.command.RefundOrderQuery;
 import com.coderpwh.member.application.dto.RefundOrderDTO;
-import com.coderpwh.member.application.service.OrderRefundOrderService;
 
 import javax.annotation.Resource;
 
+import com.coderpwh.member.application.service.RefundOrderService;
+import com.coderpwh.member.application.vo.RefundOrderVO;
 import com.coderpwh.member.domain.model.RefundOrder;
 import com.coderpwh.member.domain.model.RefundOrderRepository;
 import com.coderpwh.member.infrastructure.persistence.entity.RefundOrderDO;
 import com.coderpwh.member.infrastructure.persistence.mapper.RefundOrderMapper;
 import org.springframework.stereotype.Service;
-import com.coderpwh.member.common.database.PageUtils;
 
 /**
  * <p>
@@ -24,7 +25,7 @@ import com.coderpwh.member.common.database.PageUtils;
  * @since 2023-06-08
  */
 @Service
-public class OrderRefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, RefundOrderDO> implements OrderRefundOrderService {
+public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, RefundOrderDO> implements RefundOrderService {
 
     @Resource
     private RefundOrderRepository orderRefundOrderRepository;
@@ -55,4 +56,17 @@ public class OrderRefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, 
         RefundOrder domain = orderRefundOrderRepository.getById(id);
         return refundOrderDTOAssembler.toDTO(domain);
     }
+
+
+    /***
+     * 查询退款信息
+     * @param query
+     * @return
+     */
+    @Override
+    public RefundOrderVO getRefundOrderInfo(RefundOrderQuery query) {
+        return null;
+    }
+
+
 }
