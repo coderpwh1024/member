@@ -13,7 +13,7 @@ import lombok.Data;
  * @since 2023-06-08
  */
 @Data
-public class OrderRefundOrder {
+public class RefundOrder {
 
 
     private Long id;

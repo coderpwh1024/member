@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderpwh.member.infrastructure.persistence.mapper.RefundOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.coderpwh.member.infrastructure.persistence.entity.RefundOrderDO">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="payment_order_number" property="paymentOrderNumber"/>
+        <result column="partner_order_number" property="partnerOrderNumber"/>
+        <result column="name" property="name"/>
+        <result column="refund_status" property="refundStatus"/>
+        <result column="record" property="record"/>
+        <result column="product_type" property="productType"/>
+        <result column="product_code" property="productCode"/>
+        <result column="money" property="money"/>
+        <result column="refund_money" property="refundMoney"/>
+        <result column="reason" property="reason"/>
+        <result column="all_costs" property="allCosts"/>
+        <result column="type" property="type"/>
+        <result column="pay_type" property="payType"/>
+        <result column="category" property="category"/>
+        <result column="refund_time" property="refundTime"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="is_share_benefit" property="isShareBenefit"/>
+        <result column="account_type" property="accountType"/>
+        <result column="benefit_account" property="benefitAccount"/>
+        <result column="share_money" property="shareMoney"/>
+        <result column="wh_costs" property="whCosts"/>
+        <result column="transaction_id" property="transactionId"/>
+        <result column="failure_reason" property="failureReason"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        `id`
+        ,`tenant_id`,`user_id`,`order_number`,`payment_order_number`,`partner_order_number`,`name`,`refund_status`,`record`,`product_type`,`product_code`,`money`,`refund_money`,`reason`,`all_costs`,`type`,`pay_type`,`category`,`refund_time`,`remark`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`share_money`,`wh_costs`,`transaction_id`,`failure_reason`
+    </sql>
+
+</mapper>

@@ -27,7 +27,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("tb_order_refund_order")
-public class OrderRefundOrderDO implements Serializable {
+public class RefundOrderDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

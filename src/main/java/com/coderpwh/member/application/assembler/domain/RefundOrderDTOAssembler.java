@@ -1,10 +1,10 @@
 package com.coderpwh.member.application.assembler.domain;
 
+import com.coderpwh.member.application.dto.RefundOrderDTO;
+import com.coderpwh.member.domain.model.RefundOrder;
 import org.mapstruct.Mapper;
-import com.coderpwh.member.application.dto.OrderRefundOrderDTO;
 import com.coderpwh.member.common.util.mapstruct.MapStructConverter;
 import org.mapstruct.ReportingPolicy;
-import com.coderpwh.member.domain.model.OrderRefundOrder;
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import com.coderpwh.member.domain.model.OrderRefundOrder;
  * @since 2023-06-08
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface OrderRefundOrderDTOAssembler extends MapStructConverter<OrderRefundOrderDTO,OrderRefundOrder> {
+public interface RefundOrderDTOAssembler extends MapStructConverter<RefundOrderDTO, RefundOrder> {
 
 
 }

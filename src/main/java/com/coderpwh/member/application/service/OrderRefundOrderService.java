@@ -1,9 +1,6 @@
 package com.coderpwh.member.application.service;
 
-import com.coderpwh.member.application.dto.OrderRefundOrderDTO;
-import com.coderpwh.member.application.command.OrderRefundOrderCommand;
-import com.coderpwh.member.application.command.OrderRefundOrderQuery;
-import com.coderpwh.member.common.database.PageUtils;
+import com.coderpwh.member.application.dto.RefundOrderDTO;
 
 /**
  * <p>
@@ -15,22 +12,7 @@ import com.coderpwh.member.common.database.PageUtils;
  */
 public interface OrderRefundOrderService {
 
-    /**
-    * 根据传入的command作为检索条件 进行分页查询
-    *
-    * @param query 查询对象
-    * @return PageUtils 分页结果
-    */
-    public PageUtils queryPage(OrderRefundOrderQuery query);
 
-
-    /**
-     * 添加一条数据
-     *
-     * @param orderRefundOrderCommand 数据对象
-     * @return 是否执行成功
-     */
-    boolean save(OrderRefundOrderCommand orderRefundOrderCommand);
 
     /**
      * 根据id删除
@@ -46,7 +28,6 @@ public interface OrderRefundOrderService {
      * @param orderRefundOrderCommand 实体对象
      * @return 是否执行成功
      */
-    boolean updateById(OrderRefundOrderCommand orderRefundOrderCommand);
 
      /**
       * 根据id查询对象
@@ -54,7 +35,7 @@ public interface OrderRefundOrderService {
       * @param id id
       * @return 查询后的对象
       */
-    OrderRefundOrderDTO getById(Integer id);
+    RefundOrderDTO getById(Integer id);
 
 
 }
