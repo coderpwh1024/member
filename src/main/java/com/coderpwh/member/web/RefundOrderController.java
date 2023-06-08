@@ -26,8 +26,9 @@ public class RefundOrderController {
     @Resource
     private RefundOrderService refundOrderService;
 
+
     /***
-     * 获取订单信息
+     * 获取退款订单查询
      * @param query
      * @return
      */

@@ -28,43 +28,36 @@ import org.springframework.stereotype.Service;
 public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, RefundOrderDO> implements RefundOrderService {
 
     @Resource
-    private RefundOrderRepository orderRefundOrderRepository;
+    private RefundOrderRepository refundOrderRepository;
+
     @Resource
     private RefundOrderAssembler orderRefundOrderAssembler;
+
     @Resource
     private RefundOrderDTOAssembler refundOrderDTOAssembler;
 
 
     @Override
     public boolean deleteById(Integer id) {
-        // 如果id为null 为了安全考虑，则不执行，返回提示
-        if (id == null) {
-            //根据需要改成抛出BusinessException异常
-//            throw new Exception("Id不能为空!");
-        }
-        return orderRefundOrderRepository.deleteById(id);
+        return refundOrderRepository.deleteById(id);
     }
 
 
     @Override
     public RefundOrderDTO getById(Integer id) {
-        // 如果id为null 为了安全考虑，则不执行，返回提示
-        if (id == null) {
-            //根据需要改成抛出BusinessException异常
-//            throw new Exception("Id不能为空!");
-        }
-        RefundOrder domain = orderRefundOrderRepository.getById(id);
+        RefundOrder domain = refundOrderRepository.getById(id);
         return refundOrderDTOAssembler.toDTO(domain);
     }
 
 
     /***
-     * 查询退款信息
+     *查询退款信息
      * @param query
      * @return
      */
     @Override
     public RefundOrderVO getRefundOrderInfo(RefundOrderQuery query) {
+
         return null;
     }
 
