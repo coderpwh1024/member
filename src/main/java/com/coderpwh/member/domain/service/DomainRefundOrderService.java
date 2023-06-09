@@ -43,7 +43,6 @@ public class DomainRefundOrderService {
 
         RefundOrderDTO refundOrderDTO = refundOrderDTOAssembler.toDTO(refundOrder);
         RefundOrderVO refundOrderVO = refundOrderVOAssebler.toDTO(refundOrderDTO);
-        refundOrderVO.setRefundTime(DateUtils.getStringByDate(refundOrderDTO.getRefundTime()));
         return refundOrderVO;
     }
 
