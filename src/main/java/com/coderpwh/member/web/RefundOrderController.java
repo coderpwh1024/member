@@ -1,6 +1,5 @@
 package com.coderpwh.member.web;
 
-import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.command.RefundOrderQuery;
 import com.coderpwh.member.application.service.RefundOrderService;
 import com.coderpwh.member.common.util.result.Result;
