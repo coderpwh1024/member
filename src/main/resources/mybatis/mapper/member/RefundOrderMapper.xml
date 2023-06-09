@@ -43,5 +43,12 @@
         `id`
         ,`tenant_id`,`user_id`,`order_number`,`payment_order_number`,`partner_order_number`,`name`,`refund_status`,`record`,`product_type`,`product_code`,`money`,`refund_money`,`reason`,`all_costs`,`type`,`pay_type`,`category`,`refund_time`,`remark`,`create_time`,`create_user`,`update_user`,`update_time`,`is_deleted`,`is_share_benefit`,`account_type`,`benefit_account`,`share_money`,`wh_costs`,`transaction_id`,`failure_reason`
     </sql>
+    <select id="getRefundOrderInfo"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.RefundOrderDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_order_refund_order
+        where partner_order_number =#{partnerOrderNumber}
+    </select>
 
 </mapper>

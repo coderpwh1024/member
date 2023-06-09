@@ -4,6 +4,7 @@ import com.coderpwh.member.application.dto.RefundOrderDTO;
 import com.coderpwh.member.application.vo.RefundOrderVO;
 import com.coderpwh.member.common.util.mapstruct.MapStructConverter;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 /**
@@ -15,4 +16,7 @@ import org.mapstruct.ReportingPolicy;
 public interface RefundOrderVOAssebler extends MapStructConverter<RefundOrderVO, RefundOrderDTO> {
 
 
+    @Override
+    @Mapping(source = "refundStatus", target = "status")
+    RefundOrderVO toDTO(RefundOrderDTO refundOrderDTO);
 }

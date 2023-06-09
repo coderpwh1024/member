@@ -32,7 +32,7 @@ public class RefundOrderVO implements Serializable {
     /***
      * 退款状态
      */
-    private String stauts;
+    private String status;
 
 
     /***
@@ -55,19 +55,19 @@ public class RefundOrderVO implements Serializable {
     /***
      * 支付金额(单位:分)
      */
-    private String money;
+    private Integer money;
 
 
     /***
      * 所有成本(单位:分)
      */
-    private String allCosts;
+    private Integer allCosts;
 
 
     /**
      * 退款金额(单位:分)
      */
-    private String refundMoeny;
+    private Integer refundMoney;
 
 
     /***

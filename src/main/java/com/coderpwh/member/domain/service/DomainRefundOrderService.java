@@ -6,6 +6,7 @@ import com.coderpwh.member.application.dto.RefundOrderDTO;
 import com.coderpwh.member.application.vo.RefundOrderVO;
 import com.coderpwh.member.domain.model.RefundOrder;
 import com.coderpwh.member.domain.model.RefundOrderRepository;
+import com.coderpwh.member.domain.util.DateUtils;
 import com.coderpwh.member.infrastructure.persistence.entity.RefundOrderDO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +43,7 @@ public class DomainRefundOrderService {
 
         RefundOrderDTO refundOrderDTO = refundOrderDTOAssembler.toDTO(refundOrder);
         RefundOrderVO refundOrderVO = refundOrderVOAssebler.toDTO(refundOrderDTO);
+        refundOrderVO.setRefundTime(DateUtils.getStringByDate(refundOrderDTO.getRefundTime()));
         return refundOrderVO;
     }
 
