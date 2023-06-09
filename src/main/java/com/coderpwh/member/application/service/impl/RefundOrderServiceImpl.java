@@ -46,8 +46,6 @@ public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, Refun
     @Override
     public RefundOrderVO getRefundOrderInfo(RefundOrderQuery query) {
 
-
-        Long tenantId = 1L;
         DomainRefundOrderService domain = new DomainRefundOrderService();
         RefundOrderVO refundOrderVO = domain.getRefundOrderInfo(query.getPartnerOrderNumber());
 
