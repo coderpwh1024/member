@@ -12,6 +12,7 @@ import com.coderpwh.member.application.service.RefundOrderService;
 import com.coderpwh.member.application.vo.RefundOrderVO;
 import com.coderpwh.member.domain.model.RefundOrder;
 import com.coderpwh.member.domain.model.RefundOrderRepository;
+import com.coderpwh.member.domain.service.DomainRefundOrderService;
 import com.coderpwh.member.infrastructure.persistence.entity.RefundOrderDO;
 import com.coderpwh.member.infrastructure.persistence.mapper.RefundOrderMapper;
 import org.springframework.stereotype.Service;
@@ -37,19 +38,6 @@ public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, Refun
     private RefundOrderDTOAssembler refundOrderDTOAssembler;
 
 
-    @Override
-    public boolean deleteById(Integer id) {
-        return refundOrderRepository.deleteById(id);
-    }
-
-
-    @Override
-    public RefundOrderDTO getById(Integer id) {
-        RefundOrder domain = refundOrderRepository.getById(id);
-        return refundOrderDTOAssembler.toDTO(domain);
-    }
-
-
     /***
      *查询退款信息
      * @param query
@@ -58,7 +46,13 @@ public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, Refun
     @Override
     public RefundOrderVO getRefundOrderInfo(RefundOrderQuery query) {
 
-        return null;
+
+        Long tenantId = 1L;
+        DomainRefundOrderService domain = new DomainRefundOrderService();
+        RefundOrderVO refundOrderVO = domain.getRefundOrderInfo(query.getPartnerOrderNumber());
+
+
+        return refundOrderVO;
     }
 
 

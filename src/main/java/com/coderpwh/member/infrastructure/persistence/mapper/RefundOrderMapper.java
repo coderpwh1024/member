@@ -27,4 +27,13 @@ public interface RefundOrderMapper extends BaseMapper<RefundOrderDO> {
     */
     List<RefundOrder> findListByEntity(RefundOrderQuery query);
 
+
+    /***
+     *
+     * @param partnerOrderNumber
+     * @return
+     */
+    RefundOrderDO getRefundOrderInfo(String partnerOrderNumber);
+
+
 }

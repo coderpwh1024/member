@@ -71,4 +71,17 @@ public class RefundOrderRepositoryImpl extends ServiceImpl<RefundOrderMapper, Re
         return refundOrderConverter.toEntity(entityList);
     }
 
+
+    /***
+     * 通过合作方订单号查询
+     * @param partnerOrderNumber
+     * @return
+     */
+    @Override
+    public RefundOrder getRefundOrderInfo(String partnerOrderNumber) {
+        RefundOrderDO refundOrderDO = baseMapper.getRefundOrderInfo(partnerOrderNumber);
+        return refundOrderConverter.toEntity(refundOrderDO);
+    }
+
+
 }

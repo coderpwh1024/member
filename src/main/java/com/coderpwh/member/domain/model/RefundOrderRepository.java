@@ -18,56 +18,60 @@ import com.coderpwh.member.infrastructure.persistence.entity.RefundOrderDO;
 public interface RefundOrderRepository extends IService<RefundOrderDO> {
 
 
-
-
-
     /**
-    * 批量添加
-    *
-    * @param list 领域对象集合
-    * @return 是否执行成功
-    */
+     * 批量添加
+     *
+     * @param list 领域对象集合
+     * @return 是否执行成功
+     */
     boolean saveBatch(List<RefundOrder> list);
 
     /**
-    * 添加一条数据
-    *
-    * @param orderRefundOrder 领域对象
-    * @return 是否执行成功
-    */
+     * 添加一条数据
+     *
+     * @param orderRefundOrder 领域对象
+     * @return 是否执行成功
+     */
     boolean save(RefundOrder orderRefundOrder);
 
     /**
-    * 根据id删除
-    *
-    * @param id id
-    * @return 是否执行成功
-    */
+     * 根据id删除
+     *
+     * @param id id
+     * @return 是否执行成功
+     */
     boolean deleteById(Integer id);
 
     /**
-    * 根据id修改
-    *
-    * @param orderRefundOrder 实体对象
-    * @return 是否执行成功
-    */
+     * 根据id修改
+     *
+     * @param orderRefundOrder 实体对象
+     * @return 是否执行成功
+     */
     boolean updateById(RefundOrder orderRefundOrder);
 
     /**
-    * 根据id查询对象
-    *
-    * @param id id
-    * @return 查询后的对象
-    */
+     * 根据id查询对象
+     *
+     * @param id id
+     * @return 查询后的对象
+     */
     RefundOrder getById(Integer id);
 
     /**
-    * 根据ids查询对象集合
-    *
-    * @param ids ids
-    * @return 查询后的对象集合
-    */
+     * 根据ids查询对象集合
+     *
+     * @param ids ids
+     * @return 查询后的对象集合
+     */
     List<RefundOrder> getByIds(List<Integer> ids);
 
+
+    /***
+     * 通过合作方订单号查询
+     * @param partnerOrderNumber
+     * @return
+     */
+    RefundOrder getRefundOrderInfo(String partnerOrderNumber);
 
 }
