@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * @author coderpwh
