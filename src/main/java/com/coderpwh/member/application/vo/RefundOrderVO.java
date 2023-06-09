@@ -36,6 +36,12 @@ public class RefundOrderVO implements Serializable {
 
 
     /***
+     * 退款状态描述
+     */
+    private String statusDesc;
+
+
+    /***
      *处理记录
      */
     private String record;
