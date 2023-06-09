@@ -3,6 +3,7 @@ package com.coderpwh.member.application.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.coderpwh.member.application.assembler.command.RefundOrderAssembler;
 import com.coderpwh.member.application.assembler.domain.RefundOrderDTOAssembler;
+import com.coderpwh.member.application.assembler.vo.RefundOrderVOAssebler;
 import com.coderpwh.member.application.command.RefundOrderQuery;
 import com.coderpwh.member.application.dto.RefundOrderDTO;
 
@@ -30,12 +31,11 @@ public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, Refun
 
     @Resource
     private RefundOrderRepository refundOrderRepository;
-
-    @Resource
-    private RefundOrderAssembler orderRefundOrderAssembler;
-
     @Resource
     private RefundOrderDTOAssembler refundOrderDTOAssembler;
+
+    @Resource
+    private RefundOrderVOAssebler refundOrderVOAssebler;
 
 
     /***
@@ -45,11 +45,8 @@ public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, Refun
      */
     @Override
     public RefundOrderVO getRefundOrderInfo(RefundOrderQuery query) {
-
-        DomainRefundOrderService domain = new DomainRefundOrderService();
+        DomainRefundOrderService domain = new DomainRefundOrderService(refundOrderRepository, refundOrderDTOAssembler, refundOrderVOAssebler);
         RefundOrderVO refundOrderVO = domain.getRefundOrderInfo(query.getPartnerOrderNumber());
-
-
         return refundOrderVO;
     }
 

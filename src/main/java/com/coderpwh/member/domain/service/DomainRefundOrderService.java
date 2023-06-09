@@ -1,6 +1,7 @@
 package com.coderpwh.member.domain.service;
 
 import com.coderpwh.member.application.assembler.domain.RefundOrderDTOAssembler;
+import com.coderpwh.member.application.assembler.vo.RefundOrderVOAssebler;
 import com.coderpwh.member.application.dto.RefundOrderDTO;
 import com.coderpwh.member.application.vo.RefundOrderVO;
 import com.coderpwh.member.domain.model.RefundOrder;
@@ -21,6 +22,14 @@ public class DomainRefundOrderService {
     private RefundOrderDTOAssembler refundOrderDTOAssembler;
 
 
+    private RefundOrderVOAssebler refundOrderVOAssebler;
+
+
+    public DomainRefundOrderService(RefundOrderRepository refundOrderRepository, RefundOrderDTOAssembler refundOrderDTOAssembler, RefundOrderVOAssebler refundOrderVOAssebler) {
+        this.refundOrderRepository = refundOrderRepository;
+        this.refundOrderDTOAssembler = refundOrderDTOAssembler;
+        this.refundOrderVOAssebler = refundOrderVOAssebler;
+    }
 
 
     /***
@@ -32,10 +41,8 @@ public class DomainRefundOrderService {
         RefundOrder refundOrder = refundOrderRepository.getRefundOrderInfo(partnerOrderNumber);
 
         RefundOrderDTO refundOrderDTO = refundOrderDTOAssembler.toDTO(refundOrder);
-
-
-
-        return null;
+        RefundOrderVO refundOrderVO = refundOrderVOAssebler.toDTO(refundOrderDTO);
+        return refundOrderVO;
     }
 
 }
