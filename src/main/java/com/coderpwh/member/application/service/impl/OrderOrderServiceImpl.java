@@ -2,9 +2,7 @@ package com.coderpwh.member.application.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
 import javax.annotation.Resource;
-
 import com.coderpwh.member.application.assembler.vo.OrderInfoAssembler;
 import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.command.OrderOrderQuery;
@@ -16,9 +14,7 @@ import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.service.DomainOrderService;
 import com.coderpwh.member.domain.specification.OrderInfoSpecification;
 import com.coderpwh.member.infrastructure.persistence.mapper.OrderOrderMapper;
-
 import java.util.List;
-
 import cn.hutool.core.collection.CollUtil;
 import com.coderpwh.member.application.assembler.command.OrderOrderAssembler;
 import lombok.extern.slf4j.Slf4j;
@@ -78,32 +74,17 @@ public class OrderOrderServiceImpl extends ServiceImpl<OrderOrderMapper, OrderOr
 
     @Override
     public boolean deleteById(Integer id) {
-        // 如果id为null 为了安全考虑，则不执行，返回提示
-        if (id == null) {
-            //根据需要改成抛出BusinessException异常
-//            throw new Exception("Id不能为空!");
-        }
         return orderOrderRepository.deleteById(id);
     }
 
     @Override
     public boolean updateById(OrderOrderCommand orderOrderCommand) {
-        // 如果id为null 为了安全考虑，则不执行，返回提示
-        if (orderOrderCommand.getId() == null) {
-            //根据需要改成抛出BusinessException异常
-//            throw new Exception("Id不能为空!");
-        }
         OrderOrder domain = orderOrderAssembler.toEntity(orderOrderCommand);
         return orderOrderRepository.updateById(domain);
     }
 
     @Override
     public OrderOrderDTO getById(Integer id) {
-        // 如果id为null 为了安全考虑，则不执行，返回提示
-        if (id == null) {
-            //根据需要改成抛出BusinessException异常
-//            throw new Exception("Id不能为空!");
-        }
         OrderOrder domain = orderOrderRepository.getById(id);
         return orderOrderDTOAssembler.toDTO(domain);
     }
