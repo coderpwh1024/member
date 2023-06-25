@@ -1,5 +1,6 @@
 package com.coderpwh.member.application.vo;
 
+import com.coderpwh.member.domain.enums.RefundStatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -86,5 +87,13 @@ public class RefundOrderVO implements Serializable {
      * 交易流水号
      */
     private String transactionId;
+
+
+    /***
+     * 枚举转换
+     */
+    public void transformEnumDesc() {
+        this.setStatusDesc(RefundStatusEnum.getStatusDesc(this.status));
+    }
 
 }

@@ -47,6 +47,8 @@ public class RefundOrderServiceImpl extends ServiceImpl<RefundOrderMapper, Refun
     public RefundOrderVO getRefundOrderInfo(RefundOrderQuery query) {
         DomainRefundOrderService domain = new DomainRefundOrderService(refundOrderRepository, refundOrderDTOAssembler, refundOrderVOAssebler);
         RefundOrderVO refundOrderVO = domain.getRefundOrderInfo(query.getPartnerOrderNumber());
+        // 枚举转换
+        refundOrderVO.transformEnumDesc();
         return refundOrderVO;
     }
 

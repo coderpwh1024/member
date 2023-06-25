@@ -40,18 +40,6 @@ public interface RefundOrderVOAssebler extends MapStructConverter<RefundOrderVO,
         return null;
     }
 
-    /***
-     * 状态扭转
-     * @param refundStatus
-     * @return
-     */
-    default String getStatusDesc(String refundStatus) {
-        System.out.println("转态:" + refundStatus);
-        if (StringUtils.isNotBlank(refundStatus)) {
-            return RefundStatusEnum.getStatusDesc(refundStatus);
-        } else {
-            return refundStatus;
-        }
-    }
+
 
 }
