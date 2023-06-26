@@ -27,20 +27,17 @@ public interface MemberService {
 
 
     /***
-     * 会员注销
-     * @param command
-     * @return
-     */
-    MemberRefundVO refundMember(MemberRefundCommand command);
-
-
-    /***
      * 查询会员权益包
      * @param query
      * @return
      */
-
     List<MemberPackageDetailVO> getPackageDetail(MemberPackageDetailQuery query);
 
+
+    /***
+     * 查询会员权益包订单
+     * @param query
+     * @return
+     */
     MemberPackageOrderVO getParckageOrder(MemberPackageOrderQuery query);
 }

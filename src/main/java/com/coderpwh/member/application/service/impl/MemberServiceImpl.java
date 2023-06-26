@@ -101,30 +101,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
-    /***
-     * 注销会员
-     * @param command
-     * @return
-     */
-    @Override
-    public MemberRefundVO refundMember(MemberRefundCommand command) {
-        // 获取登录用户
-        MemberUserDTO memberUser = LoginUtil.loginUser();
-
-        // 校验层
-        MemberRefundSpecification memberRefundSpecification = new MemberRefundSpecification(orderOrderRepository, memberCardRepository);
-        memberRefundSpecification.isUserLogin(memberUser);
-        memberRefundSpecification.isMemberRefund(command.getOrderNumber(), command.getPartnerOrderNumber());
-        memberRefundSpecification.isMemberRefundByExpirationTime(command.getOrderNumber(), command.getAgentNumber());
-        memberRefundSpecification.isMemberRefundByOutOf(command.getOrderNumber());
-
-
-        // 领域层
-        DomainMemberService domainMemberService = new DomainMemberService();
-        MemberRefundVO memberRefundVO = domainMemberService.refundMember(command);
-
-        return memberRefundVO;
-    }
 
 
     /***

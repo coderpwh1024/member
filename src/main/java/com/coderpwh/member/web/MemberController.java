@@ -45,10 +45,12 @@ public class MemberController {
      * @param command
      * @return
      */
+/*
     @RequestMapping(value = "/refund", method = RequestMethod.POST)
     public Result refundMember(@RequestBody @Valid MemberRefundCommand command) {
         return Result.ok(memberService.refundMember(command));
     }
+*/
 
 
     /***

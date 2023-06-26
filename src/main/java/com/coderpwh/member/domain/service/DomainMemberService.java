@@ -202,21 +202,8 @@ public class DomainMemberService {
         if (Objects.isNull(memberPayment)) {
         }
 
-
     }
 
-
-    /***
-     * 会员注销
-     * @param command
-     * @return
-     */
-    public MemberRefundVO refundMember(MemberRefundCommand command) {
-        log.info("注销会员入参为:{}", JSON.toJSONString(command));
-
-
-        return null;
-    }
 
 
     /***
