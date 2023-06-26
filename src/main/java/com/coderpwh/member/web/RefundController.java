@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequestMapping("/refund")
-public class RefundOrderController {
+public class RefundController {
 
 
     @Resource
@@ -35,6 +35,9 @@ public class RefundOrderController {
     public Result getRefundOrderInfo(@RequestBody @Valid RefundOrderQuery query) {
         return Result.ok(refundOrderService.getRefundOrderInfo(query));
     }
+
+
+
 
 
 }
