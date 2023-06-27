@@ -2,6 +2,7 @@ package com.coderpwh.member.application.service.impl;
 
 import com.coderpwh.member.application.command.MemberRefundCommand;
 import com.coderpwh.member.application.service.RefundService;
+import com.coderpwh.member.application.vo.MemberRefundVO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Service;
 public class RefundServiceImpl implements RefundService {
 
     @Override
-    public String saveRefund(MemberRefundCommand command) {
-        return "";
+    public MemberRefundVO saveRefund(MemberRefundCommand command) {
+        return null;
     }
 
 

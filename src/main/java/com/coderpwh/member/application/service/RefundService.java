@@ -1,6 +1,7 @@
 package com.coderpwh.member.application.service;
 
 import com.coderpwh.member.application.command.MemberRefundCommand;
+import com.coderpwh.member.application.vo.MemberRefundVO;
 
 /**
  * @author coderpwh
@@ -8,7 +9,11 @@ import com.coderpwh.member.application.command.MemberRefundCommand;
  */
 public interface RefundService {
 
-
-    String saveRefund(MemberRefundCommand command);
+    /***
+     * 退款
+     * @param command
+     * @return
+     */
+    MemberRefundVO saveRefund(MemberRefundCommand command);
 
 }
