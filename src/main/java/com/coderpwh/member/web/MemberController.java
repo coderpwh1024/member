@@ -40,17 +40,6 @@ public class MemberController {
     }
 
 
-    /***
-     * 会员注销与退款
-     * @param command
-     * @return
-     */
-/*
-    @RequestMapping(value = "/refund", method = RequestMethod.POST)
-    public Result refundMember(@RequestBody @Valid MemberRefundCommand command) {
-        return Result.ok(memberService.refundMember(command));
-    }
-*/
 
 
     /***
