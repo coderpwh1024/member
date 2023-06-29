@@ -16,12 +16,9 @@ public class MemberRefundCommand implements Serializable {
     /***
      * 订单号
      */
+    @NotBlank(message = "订单号不能为空")
     private String orderNumber;
 
-    /***
-     * 合作方订单号
-     */
-    private String partnerOrderNumber;
 
     /***
      * 理由
