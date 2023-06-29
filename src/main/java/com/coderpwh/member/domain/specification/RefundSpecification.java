@@ -34,6 +34,12 @@ public class RefundSpecification extends AbstractSpecification<Integer> {
     private MemberTenantExtraInfoRepository memberTenantExtraInfoRepository;
 
 
+    public RefundSpecification(MemberCardHistoryRepository memberCardHistoryRepository, MemberTenantExtraInfoRepository memberTenantExtraInfoRepository) {
+        this.memberCardHistoryRepository = memberCardHistoryRepository;
+        this.memberTenantExtraInfoRepository = memberTenantExtraInfoRepository;
+    }
+
+
     @Override
     public boolean isSatisfiedBy(Integer integer) {
         return false;
