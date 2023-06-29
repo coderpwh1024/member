@@ -45,12 +45,11 @@ public class RefundSpecification extends AbstractSpecification<Integer> {
             log.error("当前用户尚未登录");
             throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前用户尚未登录");
         }
-
         MemberCardHistory memberCardHistory = memberCardHistoryRepository.selectByOrderNumber(command.getOrderNumber());
-
         // 过期退款
-        boolean expireRefund = isExpireRefund(memberUser);
-
+        isExpireRefund(memberUser);
+        // 乱序退款
+        isOutOfOrderRefund(memberUser, command.getOrderNumber());
         return true;
     }
 
@@ -81,7 +80,24 @@ public class RefundSpecification extends AbstractSpecification<Integer> {
      * 倒序退款
      * @return
      */
-    public boolean isOutOfOrderRefund() {
+    public boolean isOutOfOrderRefund(MemberUserDTO memberUser, String orderNumber) {
+        List<MemberCardHistory> record = memberCardHistoryRepository.getLastOrder(memberUser.getId(), orderNumber);
+
+        if (ObjectUtils.isEmpty(record)) {
+            Long tenantId = Long.valueOf(memberUser.getTenantId());
+            List<TenantPropertyDTO> list = memberTenantExtraInfoRepository.selectByTenantId(tenantId, TenantPropertyKeyConstant.OUT_OF_ORDER_REFUND__KEY);
+
+            if (ObjectUtils.isEmpty(list)) {
+                log.error("当前租户:{},尚未配置乱序退款", tenantId);
+                throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前租户尚未配置乱序退款");
+            }
+
+            String outOfOrderFlag = list.get(0).getPropertyValue();
+            if ("false".equals(outOfOrderFlag)) {
+                log.error("当前租户:{},不支持乱序退款", tenantId);
+                throw new BusinessException(SysReturnCode.CarGo, DddEnum.APPLICATIN, "当前租户不支持乱序退款");
+            }
+        }
         return true;
     }
 

@@ -109,4 +109,10 @@ public interface MemberCardHistoryRepository extends IService<MemberCardHistoryD
     MemberCardHistory selectByOrderNumberOrPatnerOrderNumber(String orderNumber, String partnerOrderNumber);
 
 
+    /***
+     * 通过userId查询
+     * @param userId
+     * @return
+     */
+    List<MemberCardHistory> selectByUserId(Long userId);
 }

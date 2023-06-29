@@ -58,6 +58,13 @@
             </if>
         </where>
     </select>
+    <select id="selectByUserId"
+            resultType="com.coderpwh.member.infrastructure.persistence.entity.MemberCardHistoryDO">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_member_card_history where user_id=#{userId} and is_deleted=0 and `status` in (1,2)
+        order by create_time desc
+    </select>
 
 
 </mapper>

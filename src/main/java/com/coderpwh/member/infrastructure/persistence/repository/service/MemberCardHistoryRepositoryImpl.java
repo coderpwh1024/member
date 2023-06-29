@@ -138,4 +138,16 @@ public class MemberCardHistoryRepositoryImpl extends ServiceImpl<MemberCardHisto
     }
 
 
+    /***
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<MemberCardHistory> selectByUserId(Long userId) {
+        List<MemberCardHistoryDO> entityList = baseMapper.selectByUserId(userId);
+        return memberCardHistoryConverter.toEntity(entityList);
+    }
+
+
 }

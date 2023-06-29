@@ -38,4 +38,12 @@ public interface MemberCardHistoryMapper extends BaseMapper<MemberCardHistoryDO>
 
     MemberCardHistoryDO selectByOrderNumberOrPatnerOrderNumber(@Param("orderNumber") String orderNumber, @Param("partnerOrderNumber") String partnerOrderNumber);
 
+
+    /***
+     * 通过用户id查询卡历史信息
+     * @param userId
+     * @return
+     */
+    List<MemberCardHistoryDO> selectByUserId(Long userId);
+
 }
