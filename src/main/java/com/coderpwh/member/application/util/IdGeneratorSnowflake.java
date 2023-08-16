@@ -23,7 +23,12 @@ public class IdGeneratorSnowflake {
     private long datacenterId = 1;
     private Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
 
-    @PostConstruct  //构造后开始执行，加载初始化工作
+    /***
+     * 构造后开始执行，加载初始化工作
+     *
+     */
+    @PostConstruct
+
     public void init() {
         try {
             //获取本机的ip地址编码
