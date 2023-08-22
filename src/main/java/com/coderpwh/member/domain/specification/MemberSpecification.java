@@ -92,6 +92,13 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
         }
     }
 
+
+    /****
+     * 会员套餐比为空校验
+     * @param tenantId
+     * @param packageId
+     * @return
+     */
     public boolean isMemberPackageBenefitRel(Long tenantId, Long packageId) {
         List<MemberPackageBenefitRel> list = memberPackageBenefitRelRepository.selectByTenantIdAndPackageId(tenantId, packageId);
         if (list != null && list.size() > 0) {
@@ -125,11 +132,6 @@ public class MemberSpecification extends AbstractSpecification<Integer> {
             return true;
         }
     }
-
-
-
-
-
 
 
 }

@@ -97,10 +97,9 @@ public class MemberServiceImpl implements MemberService {
         DomainMemberService domainMemberService = new DomainMemberService();
         MemberSaveVO memberSaveVO = domainMemberService.saveMember(command);
 
+
         return memberSaveVO;
     }
-
-
 
 
     /***
