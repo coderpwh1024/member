@@ -2,19 +2,26 @@ package com.coderpwh.member.application.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
 import javax.annotation.Resource;
+
 import com.coderpwh.member.application.assembler.vo.OrderInfoAssembler;
 import com.coderpwh.member.application.command.OrderInfoQuery;
 import com.coderpwh.member.application.command.OrderOrderQuery;
 import com.coderpwh.member.application.dto.OrderOrderDTO;
 import com.coderpwh.member.application.service.OrderOrderService;
+import com.coderpwh.member.application.util.IdGeneratorSnowflake;
 import com.coderpwh.member.application.vo.OrderInfoVO;
 import com.coderpwh.member.common.database.PageUtils;
 import com.coderpwh.member.domain.model.MemberTenantRepository;
 import com.coderpwh.member.domain.service.DomainOrderService;
 import com.coderpwh.member.domain.specification.OrderInfoSpecification;
 import com.coderpwh.member.infrastructure.persistence.mapper.OrderOrderMapper;
+
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import cn.hutool.core.collection.CollUtil;
 import com.coderpwh.member.application.assembler.command.OrderOrderAssembler;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +57,9 @@ public class OrderOrderServiceImpl extends ServiceImpl<OrderOrderMapper, OrderOr
 
     @Resource
     private OrderInfoAssembler orderInfoAssembler;
+
+    @Resource
+    private IdGeneratorSnowflake idGenerator;
 
 
     @Override
@@ -108,6 +118,26 @@ public class OrderOrderServiceImpl extends ServiceImpl<OrderOrderMapper, OrderOr
         OrderInfoVO orderInfoVO = domainOrderService.getOrderInfo(query);
 
         return orderInfoVO;
+    }
+
+
+    /***
+     * 生成主键id
+     * @return
+     */
+    @Override
+    public String getIDBySnowFlake() {
+        /***
+         *新建线程池（5个线程）
+         */
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        for (int i = 1; i <= 20; i++) {
+            threadPool.submit(() -> {
+                System.out.println(idGenerator.snowflakeId());
+            });
+        }
+        threadPool.shutdown();
+        return "hello snowflake";
     }
 
 

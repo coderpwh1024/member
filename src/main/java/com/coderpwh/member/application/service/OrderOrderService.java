@@ -18,11 +18,11 @@ import com.coderpwh.member.common.database.PageUtils;
 public interface OrderOrderService {
 
     /**
-    * 根据传入的command作为检索条件 进行分页查询
-    *
-    * @param query 查询对象
-    * @return PageUtils 分页结果
-    */
+     * 根据传入的command作为检索条件 进行分页查询
+     *
+     * @param query 查询对象
+     * @return PageUtils 分页结果
+     */
     public PageUtils queryPage(OrderOrderQuery query);
 
 
@@ -50,15 +50,22 @@ public interface OrderOrderService {
      */
     boolean updateById(OrderOrderCommand orderOrderCommand);
 
-     /**
-      * 根据id查询对象
-      *
-      * @param id id
-      * @return 查询后的对象
-      */
+    /**
+     * 根据id查询对象
+     *
+     * @param id id
+     * @return 查询后的对象
+     */
     OrderOrderDTO getById(Integer id);
 
 
     OrderInfoVO getOrderInfo(OrderInfoQuery query);
+
+
+    /***
+     * 主键id
+     * @return
+     */
+    String getIDBySnowFlake();
 
 }

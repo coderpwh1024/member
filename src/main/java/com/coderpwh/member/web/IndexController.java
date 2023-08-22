@@ -1,5 +1,6 @@
 package com.coderpwh.member.web;
 
+import com.coderpwh.member.application.service.OrderOrderService;
 import com.coderpwh.member.common.util.result.Result;
 import com.coderpwh.member.domain.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,10 @@ import java.util.Map;
 public class IndexController {
 
 
+    @Resource
+    private OrderOrderService orderService;
+
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public Result health() {
         Map<String, Object> map = new HashMap<>();
@@ -28,5 +34,12 @@ public class IndexController {
         map.put("contenxt", "当前系统运行正常!");
         return Result.ok(map);
     }
+
+
+    @RequestMapping("/snowflake")
+    public String index() {
+        return orderService.getIDBySnowFlake();
+    }
+
 
 }
