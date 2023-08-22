@@ -28,7 +28,6 @@ public class IdGeneratorSnowflake {
      *
      */
     @PostConstruct
-
     public void init() {
         try {
             //获取本机的ip地址编码
@@ -55,8 +54,16 @@ public class IdGeneratorSnowflake {
      * @param args
      */
     public static void main(String[] args) {
-        //1277896081711169536
+
         System.out.println(new IdGeneratorSnowflake().snowflakeId());
+        System.out.println(new IdGeneratorSnowflake().snowflakeId());
+
+        //1277896081711169536
+      /*  for (int i = 0; i <= 1000; i++) {
+            System.out.println(new IdGeneratorSnowflake().snowflakeId());
+        }
+*/
+
     }
 
 
