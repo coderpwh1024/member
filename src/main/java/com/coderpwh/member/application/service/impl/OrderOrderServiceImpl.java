@@ -130,18 +130,13 @@ public class OrderOrderServiceImpl extends ServiceImpl<OrderOrderMapper, OrderOr
         /***
          *新建线程池（5个线程）
          */
-       /* ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
         for (int i = 1; i <= 20; i++) {
             threadPool.submit(() -> {
                 System.out.println(idGenerator.snowflakeId());
             });
         }
-        threadPool.shutdown();*/
-
-        for (int i = 0; i <= 20; i++) {
-            System.out.println(idGenerator.snowflakeId());
-        }
-
+        threadPool.shutdown();
         return "hello snowflake";
     }
 
