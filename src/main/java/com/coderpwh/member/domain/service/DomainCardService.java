@@ -27,7 +27,7 @@ public class DomainCardService {
         String url = "";
         Map<String, String> map = getSign(orderNumber, countNumber, product, token, notifyUrl, key);
         String result = restTemplate.postForObject(url, map, String.class);
-        log.info("请求结果为:{}",result);
+        log.info("请求结果为:{}", result);
         return false;
     }
 
@@ -43,6 +43,7 @@ public class DomainCardService {
         paramMap.put("count", String.valueOf(count));
         paramMap.put("notifyUrl", notifyUrl);
         paramMap.put("sign", MD5.encode(signStr));
+        return paramMap;
     }
 
 
