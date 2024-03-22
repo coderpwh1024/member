@@ -9,7 +9,6 @@ import com.coderpwh.member.application.dto.MemberUserDTO;
 import com.coderpwh.member.application.service.UserService;
 import com.coderpwh.member.application.vo.MemberCheckRenewalVO;
 import com.coderpwh.member.application.vo.MemberInfoVO;
-import com.coderpwh.member.application.vo.MemberUserVO;
 import com.coderpwh.member.application.vo.UserLoginVO;
 import com.coderpwh.member.domain.model.*;
 import com.coderpwh.member.domain.service.DomainUserService;

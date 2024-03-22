@@ -2,10 +2,13 @@ package com.coderpwh.member;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
 
 /**
  * @author coderpwh
  */
+@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {"com.coderpwh"})
 public class MemberApplication {
 
